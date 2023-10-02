@@ -3,17 +3,20 @@ import CategoryGridTile from '../components/CategoryGridTile';
 
 import { CATEGORIES } from '../data/dummydata';
 
-function CategoriesScreen({navigation}) {
+function CategoriesScreen({ navigation }) {
     function renderCategoryItem(itemData) {
         function pressHandler() {
-            navigation.navigate('MealsDetail', {
+            navigation.navigate('CategoryDetailScreen', {
                 categoryId: itemData.item.id,
             });
         }
+
         return (
             <CategoryGridTile
                 title={itemData.item.title}
-                onPress={pressHandler}/>
+                color={itemData.item.color}
+                onPress={pressHandler}
+            />
         );
     }
 
