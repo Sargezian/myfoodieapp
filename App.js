@@ -8,6 +8,8 @@ import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'
+import FavoritesScreen from "./screens/FavoritesScreen";
+import MyFoodieScreen from "./screens/MyFoodieScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,7 +40,7 @@ function BottomTabNavigator() {
 
             <Tab.Screen
                 name="MyFoodie"
-                component={CategoriesScreen}
+                component={MyFoodieScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="fast-food-outline" color={color} size={size} />
@@ -48,7 +50,7 @@ function BottomTabNavigator() {
             />
             <Tab.Screen
                 name="Favorites"
-                component={CategoriesScreen}
+                component={FavoritesScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart-outline" color={color} size={size} />
@@ -82,6 +84,25 @@ export default function App() {
                                       headerShown: false
                                   }}
                     />
+
+                    <Stack.Screen
+                        name="MyFoodieScreen" component={BottomTabNavigator}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+
+                    <Stack.Screen
+                        name="FavoritesScreen" component={BottomTabNavigator}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+
+
+
+
+
                     <Stack.Screen
                         name="CategoryDetailScreen"
                         component={CategoryDetailScreen}
