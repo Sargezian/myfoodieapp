@@ -1,22 +1,24 @@
 import {StatusBar} from 'expo-status-bar';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Colors from "./constants/colors";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Ionicons} from '@expo/vector-icons'
 import FavoritesScreen from "./screens/FavoritesScreen";
 import MyFoodieScreen from "./screens/MyFoodieScreen";
 import SearchScreen from "./screens/SearchScreen";
 import MealPlanScreen from "./screens/MealPlanScreen";
 import SignupScreen from "./screens/SignupScreen";
 import LoginScreen from "./screens/LoginScreen";
-import AuthContextProvider, { AuthContext } from './store/auth-context';
-import {useContext} from "react";
+import AuthContextProvider, {AuthContext} from './store/auth-context';
+import {useContext, useEffect, useState} from "react";
 import IconButton from "./components/ui/IconButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SplashScreen from 'expo-splash-screen'; // Make sure to use the correct import path for your project
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -176,14 +178,42 @@ function Navigation() {
     );
 }
 
+function Root() {
+    const [isTryingLogin, setIsTryingLogin] = useState(true);
+
+    const authCtx = useContext(AuthContext);
+
+    useEffect(() => {
+        async function fetchToken() {
+            const storedToken = await AsyncStorage.getItem('token');
+
+            if (storedToken) {
+                authCtx.authenticate(storedToken);
+            }
+
+            setIsTryingLogin(false);
+            await SplashScreen.preventAutoHideAsync(); // Call it here
+        }
+
+        fetchToken();
+    }, []);
+
+    if (isTryingLogin) {
+
+        return null;
+    }
+
+    return <Navigation />;
+}
+
 export default function App() {
+
     return (
 
         <>
             <StatusBar style="Dark" />
             <AuthContextProvider>
-
-            <Navigation />
+            <Root/>
             </AuthContextProvider>
         </>
     );
