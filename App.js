@@ -14,11 +14,16 @@ import SearchScreen from "./screens/SearchScreen";
 import MealPlanScreen from "./screens/MealPlanScreen";
 import SignupScreen from "./screens/SignupScreen";
 import LoginScreen from "./screens/LoginScreen";
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import {useContext} from "react";
+import IconButton from "./components/ui/IconButton";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
+    const AuthCxt = useContext(AuthContext);
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -58,6 +63,14 @@ function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="fast-food-outline" color={color} size={size} />
+                    ),
+                    headerRight: ({ tintColor}) => (
+                        <IconButton
+                            icon="exit"
+                            color= {tintColor}
+                            size={24}
+                            onPress={AuthCxt.logout}
+                        />
                     ),
                 }}
 
@@ -124,7 +137,7 @@ function AuthenticatedStack() {
                     name="MyFoodieScreen"
                     component={BottomTabNavigator}
                     options={{
-                        headerShown: false
+                        headerShown: false,
                     }}
                 />
 
@@ -152,10 +165,14 @@ function AuthenticatedStack() {
 
 
 function Navigation() {
+
+    const authContext = useContext(AuthContext);
+
     return (
-        <NavigationContainer>
-            <AuthStack/>
-        </NavigationContainer>
+            <NavigationContainer>
+                { !authContext.isAuthenticated && <AuthStack/> }
+                {authContext.isAuthenticated && <AuthenticatedStack/>}
+            </NavigationContainer>
     );
 }
 
@@ -164,8 +181,10 @@ export default function App() {
 
         <>
             <StatusBar style="Dark" />
+            <AuthContextProvider>
 
             <Navigation />
+            </AuthContextProvider>
         </>
     );
 }
