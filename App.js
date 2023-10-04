@@ -10,10 +10,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'
 import FavoritesScreen from "./screens/FavoritesScreen";
 import MyFoodieScreen from "./screens/MyFoodieScreen";
+import SearchScreen from "./screens/SearchScreen";
+import MealPlanScreen from "./screens/MealPlanScreen";
+import SignupScreen from "./screens/SignupScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 function BottomTabNavigator() {
     return (
@@ -21,9 +24,9 @@ function BottomTabNavigator() {
             screenOptions={{
                 headerStyle: { backgroundColor: Colors.HEADERColor },
                 headerTintColor: 'white',
-                tabBarStyle: { backgroundColor: Colors.BGColor },
+                tabBarStyle: { backgroundColor: Colors.HEADERColor },
                 tabBarActiveTintColor: 'black'
-            }}
+            }} initialRouteName="MyFoodie"
             sceneContainerStyle={{backgroundColor: Colors.BGColor}}
 
         >
@@ -32,11 +35,22 @@ function BottomTabNavigator() {
             component={CategoriesScreen}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="search-outline" color={color} size={size} />
+                    <Ionicons name="earth-outline" color={color} size={size} />
                 ),
             }}
 
         />
+
+            <Tab.Screen
+                name="Search"
+                component={SearchScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="search-outline" color={color} size={size} />
+                    ),
+                }}
+
+            />
 
             <Tab.Screen
                 name="MyFoodie"
@@ -58,58 +72,100 @@ function BottomTabNavigator() {
                 }}
             />
 
+            <Tab.Screen
+                name="MealPlan"
+                component={MealPlanScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="calendar-outline" color={color} size={size} />
+                    ),
+                }}
+            />
+
     </Tab.Navigator>
     );
 }
 
+function AuthStack() {
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: { backgroundColor: Colors.HEADERColor },
+                headerTintColor: 'white',
+                contentStyle: { backgroundColor: Colors.BGColor },
+            }}
+        >
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Signup" component={SignupScreen} />
+        </Stack.Navigator>
+    );
+}
+
+
+
+function AuthenticatedStack() {
+    return (
+            <Stack.Navigator
+                screenOptions={{
+                    headerStyle: { backgroundColor: Colors.HEADERColor },
+                    headerTintColor: 'white',
+                    contentStyle: { backgroundColor: Colors.BGColor },
+                }} >
+
+                <Stack.Screen
+                    name="CategoriesScreen"
+                    component={BottomTabNavigator}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name="MyFoodieScreen"
+                    component={BottomTabNavigator}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name="FavoritesScreen"
+                    component={BottomTabNavigator}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name="CategoryDetailScreen"
+                    component={CategoryDetailScreen}
+                />
+
+                <Stack.Screen
+                    name="MealDetail"
+                    component={MealDetailScreen} />
+
+            </Stack.Navigator>
+
+    );
+}
+
+
+function Navigation() {
+    return (
+        <NavigationContainer>
+            <AuthStack/>
+        </NavigationContainer>
+    );
+}
 
 export default function App() {
     return (
 
         <>
-            <StatusBar style="dark"/>
-            {/*   <SafeAreaView></SafeAreaView>*/}
+            <StatusBar style="Dark" />
 
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                    headerStyle: { backgroundColor: Colors.HEADERColor },
-                    headerTintColor: 'white',
-                    contentStyle: { backgroundColor: Colors.BGColor },
-                }} initialRouteName="CategoriesScreen">
-
-                    <Stack.Screen
-                        name="CategoriesScreen" component={BottomTabNavigator}
-                                  options={{
-                                      headerShown: false
-                                  }}
-                    />
-
-                    <Stack.Screen
-                        name="MyFoodieScreen" component={BottomTabNavigator}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-
-                    <Stack.Screen
-                        name="FavoritesScreen" component={BottomTabNavigator}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-
-
-
-
-
-                    <Stack.Screen
-                        name="CategoryDetailScreen"
-                        component={CategoryDetailScreen}
-                    />
-                    <Stack.Screen name="MealDetail" component={MealDetailScreen} />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <Navigation />
         </>
     );
 }
