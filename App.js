@@ -18,7 +18,8 @@ import AuthContextProvider, {AuthContext} from './store/auth-context';
 import {useContext, useEffect, useState} from "react";
 import IconButton from "./components/ui/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SplashScreen from 'expo-splash-screen'; // Make sure to use the correct import path for your project
+import * as SplashScreen from 'expo-splash-screen';
+import FavoritesContextProvider from "./store/favorites-context"; // Make sure to use the correct import path for your project
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -211,9 +212,11 @@ export default function App() {
     return (
 
         <>
-            <StatusBar style="Dark" />
+            <StatusBar style="Dark"/>
             <AuthContextProvider>
-            <Root/>
+                <FavoritesContextProvider>
+                    <Root/>
+                </FavoritesContextProvider>
             </AuthContextProvider>
         </>
     );

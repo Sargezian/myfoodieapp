@@ -28,9 +28,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 8,
+
     },
     detailItem: {
         marginHorizontal: 4,
-        fontSize: 12,
+        fontSize: 12
     },
 });
