@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-import Colors from "../../constants/colors";
+import COLORS from "../../constants/colors";
 
 function Input({
                    label,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     labelInvalid: {
-        color: Colors.error500,
+        color: COLORS.error500,
     },
     input: {
         paddingVertical: 8,
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     inputInvalid: {
-        backgroundColor: Colors.error100,
+        backgroundColor: COLORS.error100,
     },
 });

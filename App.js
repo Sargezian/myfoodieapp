@@ -2,7 +2,7 @@ import {StatusBar} from 'expo-status-bar';
 import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Colors from "./constants/colors";
+import COLORS from "./constants/colors";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
@@ -30,12 +30,12 @@ function BottomTabNavigator() {
     return (
         <Tab.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: Colors.HEADERColor },
+                headerStyle: { backgroundColor: COLORS.HEADERColor },
                 headerTintColor: 'white',
-                tabBarStyle: { backgroundColor: Colors.HEADERColor },
+                tabBarStyle: { backgroundColor: COLORS.HEADERColor },
                 tabBarActiveTintColor: 'black'
             }} initialRouteName="MyFoodie"
-            sceneContainerStyle={{backgroundColor: Colors.BGColor}}
+            sceneContainerStyle={{backgroundColor: COLORS.BGColor}}
 
         >
         <Tab.Screen
@@ -106,9 +106,9 @@ function AuthStack() {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: Colors.HEADERColor },
+                headerStyle: { backgroundColor: COLORS.HEADERColor },
                 headerTintColor: 'white',
-                contentStyle: { backgroundColor: Colors.BGColor },
+                contentStyle: { backgroundColor: COLORS.BGColor },
             }}
         >
             <Stack.Screen name="Login" component={LoginScreen} />
@@ -123,9 +123,9 @@ function AuthenticatedStack() {
     return (
             <Stack.Navigator
                 screenOptions={{
-                    headerStyle: { backgroundColor: Colors.HEADERColor },
+                    headerStyle: { backgroundColor: COLORS.HEADERColor },
                     headerTintColor: 'white',
-                    contentStyle: { backgroundColor: Colors.BGColor },
+                    contentStyle: { backgroundColor: COLORS.BGColor },
                 }} >
 
                 <Stack.Screen
