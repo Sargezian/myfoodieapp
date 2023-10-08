@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {Animated, PanResponder, StyleSheet, View} from 'react-native';
 
-import Card from '../components/swipe/Card/Card';
-import Footer from '../components/swipe/Footer/Footer';
+import Card from '../../components/swipe/Card/Card';
+import Footer from '../../components/swipe/Footer/Footer';
 
 const { Dimensions } = require('react-native');
 const { width, height } = Dimensions.get('screen');
 export const ACTION_OFFSET = 100;
 
-import {MEALS, MEALS as mealsArray} from "../data/dummydata";
+import {MEALS, MEALS as mealsArray} from "../../data/dummydata";
 
 function MyFoodieScreen() {
     const [meals, setMeals] = useState(MEALS);

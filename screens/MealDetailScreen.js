@@ -2,11 +2,11 @@ import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 
 import List from '../components/MealDetail/List';
 import Subtitle from '../components/MealDetail/Subtitle';
-import MealDetails from '../components/MealDetails';
+import MealDetails from '../components/MealDetail/MealDetails';
 import { MEALS } from '../data/dummydata';
-import { FavoritesContext } from '../store/favorites-context';
+import { FavoritesContext } from '../context/favorites-context';
 import {useContext, useLayoutEffect} from "react";
-import IconButton from "../components/ui/IconButton";
+import IconButton from "../components/LoginAuth/LoginUI/IconButton";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);

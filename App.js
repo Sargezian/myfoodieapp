@@ -3,23 +3,23 @@ import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
-import CategoriesScreen from "./screens/CategoriesScreen";
+import CategoriesScreen from "./screens/tabs/CategoriesScreen";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons'
-import FavoritesScreen from "./screens/FavoritesScreen";
-import MyFoodieScreen from "./screens/MyFoodieScreen";
-import SearchScreen from "./screens/SearchScreen";
-import MealPlanScreen from "./screens/MealPlanScreen";
-import SignupScreen from "./screens/SignupScreen";
-import LoginScreen from "./screens/LoginScreen";
-import AuthContextProvider, {AuthContext} from './store/auth-context';
+import FavoritesScreen from "./screens/tabs/FavoritesScreen";
+import MyFoodieScreen from "./screens/tabs/MyFoodieScreen";
+import SearchScreen from "./screens/tabs/SearchScreen";
+import MealPlanScreen from "./screens/tabs/MealPlanScreen";
+import SignupScreen from "./screens/login/SignupScreen";
+import LoginScreen from "./screens/login/LoginScreen";
+import AuthContextProvider, {AuthContext} from './context/auth-context';
 import {useContext, useEffect, useState} from "react";
-import IconButton from "./components/ui/IconButton";
+import IconButton from "./components/LoginAuth/LoginUI/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from 'expo-splash-screen';
-import FavoritesContextProvider from "./store/favorites-context"; // Make sure to use the correct import path for your project
+import FavoritesContextProvider from "./context/favorites-context"; // Make sure to use the correct import path for your project
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
