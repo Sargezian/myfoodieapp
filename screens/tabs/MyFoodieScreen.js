@@ -37,6 +37,14 @@ function MyFoodieScreen() {
             const isActionActive = Math.abs(dx) > ACTION_OFFSET;
 
             if (isActionActive) {
+
+                if (direction === 1) {
+                    // If swiped right (direction === 1)
+                    // Save the current meal to favorites
+                    const currentMeal = meals[0]; // Get the current top meal
+                    favoriteMealsCtx.addFavorite(currentMeal.id); // Add the meal to favorites
+                }
+
                 Animated.timing(swipe, {
                     duration: 200,
                     toValue: {
