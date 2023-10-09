@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {Animated, PanResponder, StyleSheet, View} from 'react-native';
 
 import Card from '../../components/swipe/Card/Card';
 import Footer from '../../components/swipe/Footer/Footer';
+import { FavoritesContext } from '../../context/favorites-context';
 
 const { Dimensions } = require('react-native');
 const { width, height } = Dimensions.get('screen');
@@ -11,9 +12,13 @@ export const ACTION_OFFSET = 100;
 import {MEALS, MEALS as mealsArray} from "../../data/dummydata";
 
 function MyFoodieScreen() {
+
+
     const [meals, setMeals] = useState(MEALS);
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current;
+    const favoriteMealsCtx = useContext(FavoritesContext); // Access the FavoritesContext
+
 
     useEffect(() => {
         if (!meals.length) {
@@ -60,13 +65,21 @@ function MyFoodieScreen() {
 
     const handleChoice = useCallback(
         (direction) => {
+
+            if (direction === 1) {
+                // If the "heart" button is pressed (direction === 1)
+                // Save the current meal to favorites
+                const currentMeal = meals[0]; // Get the current top meal
+                favoriteMealsCtx.addFavorite(currentMeal.id); // Add the meal to favorites
+            }
+
             Animated.timing(swipe.x, {
                 toValue: direction * width + 0.5 * width,
                 duration: 400,
                 useNativeDriver: true,
             }).start(removeTopCard);
         },
-        [removeTopCard, swipe.x]
+        [removeTopCard, swipe.x, meals, favoriteMealsCtx]
     );
 
     return (
@@ -89,7 +102,7 @@ function MyFoodieScreen() {
                 })
                 .reverse()}
 
-            <Footer handleChoice={handleChoice} />
+            <Footer handleChoice={handleChoice}/>
         </View>
     );
 }
