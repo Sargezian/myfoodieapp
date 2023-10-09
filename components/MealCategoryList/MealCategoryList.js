@@ -2,7 +2,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 
 import MealItem from './MealItem';
 
-function MealsList({items}) {
+function MealCategoryList({items}) {
     function renderMealItem(itemData) {
         const item = itemData.item;
 
@@ -28,7 +28,7 @@ function MealsList({items}) {
     );
 }
 
-export default MealsList;
+export default MealCategoryList;
 
 const styles = StyleSheet.create({
     container: {

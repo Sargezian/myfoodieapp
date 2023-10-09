@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useContext } from 'react';
 
-import MealsList from '../../components/MealsList/MealsList';
+import MealCategoryList from '../../components/MealCategoryList/MealCategoryList';
 import { FavoritesContext } from '../../context/favorites-context';
 import { MEALS } from '../../data/dummydata';
+import IconButton from "../../components/LoginAuth/LoginUI/IconButton";
+import MealFavoriteList from "../../components/MealFavoriteList/MealFavoriteList";
 
 function FavoritesScreen() {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -11,6 +13,7 @@ function FavoritesScreen() {
     const favoriteMeals = MEALS.filter((meal) =>
         favoriteMealsCtx.ids.includes(meal.id)
     );
+
 
     if (favoriteMeals.length === 0) {
         return (
@@ -20,7 +23,12 @@ function FavoritesScreen() {
         );
     }
 
-    return <MealsList items={favoriteMeals} />;
+    return (
+        <MealFavoriteList
+            items={favoriteMeals}
+        />
+
+    );
 }
 
 export default FavoritesScreen;

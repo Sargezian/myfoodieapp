@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { MEALS, CATEGORIES } from '../data/dummydata';
-import MealsList from "../components/MealsList/MealsList";
+import MealCategoryList from "../components/MealCategoryList/MealCategoryList";
 
 function CategoryDetailScreen({ route, navigation }) {
     const categoryId = route.params.categoryId;
@@ -18,7 +18,7 @@ function CategoryDetailScreen({ route, navigation }) {
             title: categoryTitle,
         });
     }, [categoryId, navigation]);
-    return <MealsList items={displayedMeals}/>
+    return <MealCategoryList items={displayedMeals}/>
 }
 
 export default CategoryDetailScreen;
