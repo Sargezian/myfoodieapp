@@ -50,9 +50,9 @@ function MealDetailScreen({ route, navigation }) {
             />
             <View style={styles.listOuterContainer}>
                 <View style={styles.listContainer}>
-                    <Subtitle>Ingredients</Subtitle>
+                    <Subtitle>What you need</Subtitle>
                     <List data={selectedMeal.ingredients} />
-                    <Subtitle>Steps</Subtitle>
+                    <Subtitle>Steps - How to Cook</Subtitle>
                     <List data={selectedMeal.steps} />
                 </View>
             </View>

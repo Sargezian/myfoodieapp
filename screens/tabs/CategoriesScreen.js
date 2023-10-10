@@ -1,10 +1,8 @@
-import {FlatList, Platform, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import CategoryGridTile from '../../components/Discover/CategoryGrids/CategoryGridTile';
 
 import { CATEGORIES } from '../../data/dummydata';
 import DiscoverSlider from "../../components/Discover/DiscoverSlider/DiscoverSlider";
-import {useLayoutEffect} from "react";
-import {Ionicons} from "@expo/vector-icons";
 import Search from "../../components/Discover/Search/Search";
 
 function CategoriesScreen({ navigation }) {
@@ -32,7 +30,7 @@ function CategoriesScreen({ navigation }) {
             <FlatList
                 ListHeaderComponent={
                     <>
-                        <Text style={styles.headingText}> Search </Text>
+                        <Text style={styles.headingText}> What to Cook Today? </Text>
                         <Search />
                         <DiscoverSlider />
                         <Text style={styles.headingText}> Discover </Text>

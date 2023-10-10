@@ -84,10 +84,11 @@ export default function Card({
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
+        marginTop: 20,
     },
     image: {
         width: width * 0.9,
-        height: height * 0.78,
+        height: height * 0.76,
         borderRadius: 20,
     },
     gradient: {

@@ -1,10 +1,11 @@
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import MealPlan from "../../components/MealPlan/MealPlan";
 
 function MealPlanScreen() {
 
     return (
-        <View >
-            <Text> MealPlan Screen </Text>
+        <View style={styles.container} >
+            <MealPlan/>
         </View>
     );
 }
@@ -12,5 +13,8 @@ function MealPlanScreen() {
 export default MealPlanScreen;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
 
+    },
 });
