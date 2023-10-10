@@ -1,4 +1,4 @@
-import {View, StyleSheet, Platform, Text} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 
 function MealPlan() {
     return (
@@ -42,13 +42,13 @@ function MealPlan() {
                 <Text style={styles.CaloriesHeader}> Calories Analysis </Text>
             <View style={styles.CaloriesAnalyst}>
 
-                <Text> Carbo </Text>
+                <Text> Carbs {'\n'} chart here </Text>
 
-                <Text> Fat </Text>
+                <Text> Fat {'\n'} chart here</Text>
 
-                <Text> Protein </Text>
+                <Text> Protein {'\n'} chart here</Text>
 
-                <Text> Fiber </Text>
+                <Text> Fiber {'\n'} chart here</Text>
 
             </View>
 
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 10,
+        marginBottom: 10,
     },
 
     MealContainer: {
