@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useContext } from 'react';
 
-import MealCategoryList from '../../components/MealCategoryList/MealCategoryList';
+import MealCategoryList from '../../components/Discover/MealCategoryList/MealCategoryList';
 import { FavoritesContext } from '../../context/favorites-context';
 import { MEALS } from '../../data/dummydata';
 import IconButton from "../../components/LoginAuth/LoginUI/IconButton";

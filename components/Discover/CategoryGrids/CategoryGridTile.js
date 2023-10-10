@@ -2,6 +2,7 @@ import { Pressable, View, Text, StyleSheet, Platform } from 'react-native';
 
 function CategoryGridTile({ title, onPress }) {
     return (
+
         <View style={styles.gridItem}>
             <Pressable
                 android_ripple={{ color: '#ccc' }}
@@ -24,9 +25,9 @@ export default CategoryGridTile;
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
-        margin: 16,
+        margin: 10,
         height: 150,
-        borderRadius: 8,
+        borderRadius: 10,
         elevation: 4,
         backgroundColor: '#F7D4D4',
         shadowColor: 'black',

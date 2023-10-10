@@ -6,7 +6,7 @@ import MealDetails from '../components/MealDetail/MealDetails';
 import { MEALS } from '../data/dummydata';
 import { FavoritesContext } from '../context/favorites-context';
 import {useContext, useLayoutEffect} from "react";
-import IconButton from "../components/LoginAuth/LoginUI/IconButton";
+import {Ionicons} from "@expo/vector-icons";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -28,8 +28,8 @@ function MealDetailScreen({ route, navigation }) {
         navigation.setOptions({
             headerRight: () => {
                 return (
-                    <IconButton
-                        icon={mealIsFavorite ? 'heart' : 'heart-outline'}
+                    <Ionicons
+                        name={mealIsFavorite ? 'heart' : 'heart-outline'}
                         color="white"
                         onPress={changeFavoriteStatusHandler}
                     />

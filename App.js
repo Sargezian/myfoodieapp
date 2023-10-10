@@ -10,7 +10,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons'
 import FavoritesScreen from "./screens/tabs/FavoritesScreen";
 import MyFoodieScreen from "./screens/tabs/MyFoodieScreen";
-import SearchScreen from "./screens/tabs/SearchScreen";
 import MealPlanScreen from "./screens/tabs/MealPlanScreen";
 import SignupScreen from "./screens/login/SignupScreen";
 import LoginScreen from "./screens/login/LoginScreen";
@@ -43,29 +42,18 @@ function BottomTabNavigator() {
             component={CategoriesScreen}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="earth-outline" color={color} size={size} />
+                    <Ionicons name="earth" color={color} size={size} />
                 ),
             }}
 
         />
 
             <Tab.Screen
-                name="Search"
-                component={SearchScreen}
-                options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="search-outline" color={color} size={size} />
-                    ),
-                }}
-
-            />
-
-            <Tab.Screen
                 name="MyFoodie"
                 component={MyFoodieScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="fast-food-outline" color={color} size={size} />
+                        <Ionicons name="fast-food" color={color} size={size} />
                     ),
                     headerRight: ({ tintColor}) => (
                         <IconButton
@@ -83,7 +71,7 @@ function BottomTabNavigator() {
                 component={FavoritesScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="heart-outline" color={color} size={size} />
+                        <Ionicons name="heart" color={color} size={size} />
                     ),
                 }}
             />
@@ -93,7 +81,7 @@ function BottomTabNavigator() {
                 component={MealPlanScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="calendar-outline" color={color} size={size} />
+                        <Ionicons name="calendar" color={color} size={size} />
                     ),
                 }}
             />

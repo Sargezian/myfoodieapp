@@ -1,8 +1,8 @@
 import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {Animated, PanResponder, StyleSheet, View} from 'react-native';
 
-import Card from '../../components/swipe/Card/Card';
-import Footer from '../../components/swipe/Footer/Footer';
+import Card from '../../components/MyFoodieSwipe/Card/Card';
+import Footer from '../../components/MyFoodieSwipe/Footer/Footer';
 import { FavoritesContext } from '../../context/favorites-context';
 
 const { Dimensions } = require('react-native');
