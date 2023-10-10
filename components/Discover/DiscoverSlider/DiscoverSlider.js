@@ -1,4 +1,6 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import COLORS from "../../../constants/colors";
+
 
 function DiscoverSlider() {
     return (
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     },
 
     CardElevated: {
-        backgroundColor: '#F7D4D4',
+        backgroundColor: COLORS.LightColor,
         elevation: 4,
         shadowOffset: {
             width: 1,

@@ -1,5 +1,5 @@
 import { Pressable, View, Text, StyleSheet, Platform } from 'react-native';
-
+import COLORS from "../../../constants/colors";
 function CategoryGridTile({ title, onPress }) {
     return (
         <View style={styles.gridItem}>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 10,
         elevation: 4,
-        backgroundColor: '#F7D4D4',
+        backgroundColor: COLORS.LightColor,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },

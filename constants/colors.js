@@ -1,6 +1,7 @@
 const COLORS = {
     BGColor: '#D4B1B1',
     HEADERColor: '#C69F9F',
+    LightColor: '#F7D4D4',
 
 
     primary100: '#f9beda',

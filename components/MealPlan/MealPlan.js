@@ -1,4 +1,5 @@
 import {View, StyleSheet, Text} from 'react-native';
+import COLORS from "../../constants/colors";
 
 function MealPlan() {
     return (
@@ -39,7 +40,11 @@ function MealPlan() {
 
             <View style={styles.CalorieInnerContainer}>
 
-                <Text style={styles.CaloriesHeader}> Calories Analysis </Text>
+                <View style={styles.CalorieHeader}>
+                <Text style={styles.CaloriesText}> Calories Analysis </Text>
+                    <Text> See more Detail </Text>
+                </View>
+
             <View style={styles.CaloriesAnalyst}>
 
                 <Text> Carbs {'\n'} chart here </Text>
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
 
     Calender: {
         flex: 0.25,
-        backgroundColor: 'grey',
+        backgroundColor: COLORS.LightColor,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
 
     InnerContainer: {
         flex: 1,
-        backgroundColor: 'grey',
+        backgroundColor: COLORS.LightColor,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         elevation: 4,
-        backgroundColor: 'orange',
+        backgroundColor: COLORS.LightColor,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -118,10 +123,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    CaloriesHeader: {
+    CalorieHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
+
+    CaloriesText: {
         fontWeight: "bold",
         fontSize: 18,
     },
+
 
     MealHeader: {
         fontWeight: "bold",
