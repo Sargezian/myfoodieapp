@@ -1,8 +1,7 @@
 import { View, FlatList, StyleSheet } from 'react-native';
-
-import MealItem from '../MealDetail/MealItem';
-import {useContext} from "react";
+import MealItem from '../MealFavoriteList/MealFavoriteItem';
 import {FavoritesContext} from "../../context/favorites-context";
+import {useContext} from "react";
 import {Ionicons} from "@expo/vector-icons";
 
 function MealFavoriteList({ items }) {
@@ -21,7 +20,7 @@ function MealFavoriteList({ items }) {
         };
 
         const removeFavoriteMealHandler = () => {
-                favoriteMealsCtx.removeFavorite(item.id);
+            favoriteMealsCtx.removeFavorite(item.id);
         };
 
         return (
@@ -53,7 +52,7 @@ export default MealFavoriteList;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        padding: 4,
     },
     mealContainer: {
         flexDirection: 'row',

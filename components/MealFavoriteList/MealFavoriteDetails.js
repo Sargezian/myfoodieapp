@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-function MealDetails({
+function MealFavoriteDetails({
                          duration,
                          complexity,
                          affordability,
@@ -20,7 +20,7 @@ function MealDetails({
     );
 }
 
-export default MealDetails;
+export default MealFavoriteDetails;
 
 const styles = StyleSheet.create({
     details: {

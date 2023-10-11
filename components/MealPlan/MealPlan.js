@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 
     Calender: {
         flex: 0.25,
-        backgroundColor: COLORS.LightColor,
+        backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
     InnerContainer: {
         flex: 1,
-        backgroundColor: COLORS.LightColor,
+        backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         elevation: 4,
-        backgroundColor: COLORS.LightColor,
+        backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },

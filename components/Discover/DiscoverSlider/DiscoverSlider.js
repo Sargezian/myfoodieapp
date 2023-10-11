@@ -1,8 +1,13 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import COLORS from "../../../constants/colors";
-
+import React from "react";
+import {MEALS} from "../../../data/dummydata";
 
 function DiscoverSlider() {
+
+    const mealM1 = MEALS.find((meal) => meal.id === 'm2');
+
+
     return (
         <View style={styles.holderContainer}>
             <Text style={styles.headingText}> Top made meals today! </Text>
@@ -12,28 +17,28 @@ function DiscoverSlider() {
 
                 <View style={[styles.card, styles.CardElevated]}>
 
-                    <Text>sweet</Text>
+                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
                 </View>
 
 
                 <View style={[styles.card, styles.CardElevated]}>
 
-                    <Text>spicy</Text>
+                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
                 </View>
 
 
                 <View style={[styles.card, styles.CardElevated]}>
 
-                    <Text>mix</Text>
+                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
                 </View>
 
 
                 <View style={[styles.card, styles.CardElevated]}>
 
-                    <Text>fast</Text>
+                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
                 </View>
 
@@ -41,20 +46,22 @@ function DiscoverSlider() {
 
                 <View style={[styles.card, styles.CardElevated]}>
 
-                <Text>more...</Text>
+                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
             </View>
 
 
 
                   <View style={[styles.card, styles.CardElevated]}>
-                      <Text> Hello </Text>
+                      <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
 
                   </View>
 
           </ScrollView>
         </View>
     )
+
+
 }
 
 export default DiscoverSlider;
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     },
 
     CardElevated: {
-        backgroundColor: COLORS.LightColor,
+        backgroundColor: COLORS.white,
         elevation: 4,
         shadowOffset: {
             width: 1,
@@ -98,5 +105,11 @@ const styles = StyleSheet.create({
         shadowRadius: 2
 
 
+    },
+    image: {
+        width: '100%', // To make the image take the full width of the card
+        height: '100%',  // Adjust the height as needed
+        resizeMode: 'cover', // To ensure the image covers the entire space
+        borderRadius: 10, // To give the image rounded corners (if desired)
     },
 });
