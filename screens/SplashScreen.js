@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import COLORS from "../constants/colors";
 
@@ -18,6 +18,7 @@ export default function App() {
                 // Find more Lottie files at https://lottiefiles.com/featured
                 source={require('../assets/animation.json')}
             />
+
         </View>
     );
 }
