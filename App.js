@@ -20,6 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
+import FluidStack from "./components/Fluid/Fluid";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,6 +89,8 @@ function BottomTabNavigator() {
                 }}
             />
 
+
+
     </Tab.Navigator>
     );
 }
@@ -116,7 +119,7 @@ function AuthenticatedStack() {
                     headerStyle: { backgroundColor: COLORS.HEADERColor },
                     headerTintColor: 'white',
                     contentStyle: { backgroundColor: COLORS.BGColor },
-                }} >
+                }} initialRouteName="fluid" >
 
                 <Stack.Screen
                     name="CategoriesScreen"
@@ -151,7 +154,16 @@ function AuthenticatedStack() {
                     name="MealDetail"
                     component={MealDetailScreen} />
 
+
+                <Stack.Screen
+                    name="fluid"
+                    component={FluidStack}
+                    options={{
+                        headerShown: false
+                    }}/>
+
             </Stack.Navigator>
+
 
     );
 }

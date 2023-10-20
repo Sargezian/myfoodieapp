@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/auth-context';
 import { login } from '../../util/auth';
 
 function LoginScreen() {
+
     const [isAuthenticating, setIsAuthenticating] = useState(false);
 
     const authContext = useContext(AuthContext);

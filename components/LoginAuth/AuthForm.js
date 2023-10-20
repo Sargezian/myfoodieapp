@@ -17,6 +17,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
         confirmPassword: passwordsDontMatch,
     } = credentialsInvalid;
 
+
     function updateInputValueHandler(inputType, enteredValue) {
         switch (inputType) {
             case 'email':
