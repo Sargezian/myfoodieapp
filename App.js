@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
@@ -14,14 +14,18 @@ import MealPlanScreen from "./screens/tabs/MealPlanScreen";
 import SignupScreen from "./screens/login/SignupScreen";
 import LoginScreen from "./screens/login/LoginScreen";
 import AuthContextProvider, {AuthContext} from './context/auth-context';
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import IconButton from "./components/LoginAuth/LoginUI/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from 'expo-splash-screen';
-import FavoritesContextProvider from "./context/favorites-context"; // Make sure to use the correct import path for your project
+import FavoritesContextProvider from "./context/favorites-context";
+import Splash from "./screens/SplashScreen"
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+
 
 function BottomTabNavigator() {
     const AuthCxt = useContext(AuthContext);
@@ -197,13 +201,24 @@ function Root() {
 
 export default function App() {
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate loading or fetching data for your app
+        // When done loading, set isLoading to false
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 5000); // Replace 2000 with your actual loading time
+    }, []);
+
+
     return (
 
         <>
             <StatusBar style="Dark"/>
             <AuthContextProvider>
                 <FavoritesContextProvider>
-                    <Root/>
+                    {isLoading ? <Splash setIsLoading={setIsLoading} /> : <Root />}
                 </FavoritesContextProvider>
             </AuthContextProvider>
         </>
