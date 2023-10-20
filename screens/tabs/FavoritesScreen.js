@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
     },
 });
 
