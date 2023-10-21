@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet, TouchableWithoutFeedback, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
@@ -158,9 +158,32 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="fluid"
                     component={FluidStack}
-                    options={{
-                        headerShown: false
-                    }}/>
+                    options={({ navigation }) => ({
+                        headerStyle: {
+                            backgroundColor: 'white',
+                        },
+                        headerTitleAlign: 'center',
+                        ...Platform.select({
+                            android: {
+                                headerStyle: {
+                                    elevation: 0, // Hide shadow on Android
+                                },
+                            },
+                            ios: {
+                                headerShadowVisible: false, // Hide shadow on iOS
+                            },
+                        }), // Close the Platform.select
+
+                        title: 'My Foodie Screen', // Set a static title
+
+                        // Custom header title component with navigation onPress
+                        headerRight: () => (
+                            <TouchableWithoutFeedback onPress={() => navigation.navigate('MyFoodieScreen')}>
+                                <Text style={{ color: 'black', fontSize: 20, }}>Skip</Text>
+                            </TouchableWithoutFeedback>
+                        ),
+                    })}
+                />
 
             </Stack.Navigator>
 
