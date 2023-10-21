@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Button, Text } from "react-native";
+import { StyleSheet, View, Dimensions, Text } from "react-native";
 import Animated, {
     useAnimatedScrollHandler,
     useSharedValue,
@@ -15,33 +15,35 @@ const slides = [
         picture: require("../../assets/2.png"),
         aspectRatio: 500.5 / 429.5,
         TitleText: "Healthy Foods",
-        text: "Discover healthy recipes that are easy to do with detailed cooking instructions from top chefs",
-
+        text:
+            "Discover healthy recipes that are easy to do with detailed cooking instructions from top chefs",
     },
     {
         color: "#ff4a6a",
         picture: require("../../assets/1.png"),
         aspectRatio: 479.75 / 440.5,
         TitleText: "Dessert Recipes",
-        text: "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
+        text:
+            "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
     },
     {
         color: "#ffb439",
         picture: require("../../assets/3.png"),
         aspectRatio: 100 / 80,
         TitleText: "Delicious Drinks",
-        text: "Sip in style with our top chef-inspired, easy-to-make beverages that redefine the art of drink crafting",
+        text:
+            "Sip in style with our top chef-inspired, easy-to-make beverages that redefine the art of drink crafting",
     },
 ];
 
 const Fluid = () => {
-
     const x = useSharedValue(0);
     const scrollHandler = useAnimatedScrollHandler({
         onScroll: (event) => {
             x.value = event.contentOffset.x;
         },
     });
+
 
     return (
         <Animated.ScrollView
@@ -85,8 +87,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
-    },
-    button: {
     },
     TitleText: {
         fontSize: 50,

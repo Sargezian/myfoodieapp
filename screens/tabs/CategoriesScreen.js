@@ -30,7 +30,6 @@ function CategoriesScreen({ navigation }) {
             <FlatList
                 ListHeaderComponent={
                     <>
-                        <Text style={styles.headingText}> What to Cook Today? </Text>
                         <Search />
                         <DiscoverSlider />
                         <Text style={styles.headingText}> Discover </Text>

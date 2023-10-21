@@ -1,10 +1,10 @@
 const COLORS = {
-    BGColor: '#f3f3f3',
-    HEADERColor: '#d8d8d8',
+    BGColor: '#ffffff',
+    HEADERColor: '#ffffff',
     white:'#ffffff',
 
-    like: '#00eda6',
-    nope: '#ff006f',
+    like: '#000000',
+    nope: '#000000',
 
 };
 

@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {Animated, PanResponder, StyleSheet, View} from 'react-native';
+import {Animated, PanResponder, StyleSheet, View,Text} from 'react-native';
 
 import Card from '../../components/MyFoodieSwipe/Card/Card';
 import Footer from '../../components/MyFoodieSwipe/Footer/Footer';
@@ -92,20 +92,26 @@ function MyFoodieScreen() {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.topText}>Hi Lennart!</Text>
+            <Text style={styles.underText}>Let's find a new receipt for you</Text>
+            <Text style={styles.underText}>buttons missing here</Text>
+
             {meals
                 .map((meal,  index) => {
                     const isFirst = index === 0;
                     const dragHandlers = isFirst ? panResponder.panHandlers : {};
 
                     return (
+
                         <Card
-                            key={meal.id}
-                            meal={meal}
-                            isFirst={isFirst}
-                            swipe={swipe}
-                            tiltSign={tiltSign}
-                            {...dragHandlers}
-                        />
+                                key={meal.id}
+                                meal={meal}
+                                isFirst={isFirst}
+                                swipe={swipe}
+                                tiltSign={tiltSign}
+                                {...dragHandlers}
+                            />
+
                     );
                 })
                 .reverse()}
@@ -119,6 +125,18 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+    },
+    topText: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#000',
+        marginBottom: 10,
+    },
+    underText: {
+        fontSize: 20,
+        color: '#000',
+        marginBottom: 10,
+
     },
 });
 

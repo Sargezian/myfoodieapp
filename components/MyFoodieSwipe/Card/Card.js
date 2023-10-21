@@ -65,6 +65,9 @@ export default function Card({
     }, [likeOpacity, nopeOpacity]);
 
     return (
+
+
+
         <Animated.View
             style={[styles.container, isFirst && animatedCardStyle]}
             {...rest}
@@ -78,26 +81,28 @@ export default function Card({
 
             {isFirst && renderChoice()}
         </Animated.View>
+
     );
 }
 
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        marginTop: 20,
+        marginTop: 150,
+
     },
     image: {
         width: width * 0.9,
-        height: height * 0.76,
-        borderRadius: 20,
+        height: height * 0.56,
+        borderRadius: 60,
     },
     gradient: {
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
-        height: 160,
-        borderRadius: 20,
+        height: 400,
+        borderRadius: 60,
     },
     name: {
         position: 'absolute',

@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {Platform, StyleSheet, TouchableWithoutFeedback, Text} from 'react-native';
+import {Platform, StyleSheet, TouchableWithoutFeedback, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
@@ -33,7 +33,7 @@ function BottomTabNavigator() {
         <Tab.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: COLORS.HEADERColor },
-                headerTintColor: 'white',
+                headerTintColor: 'black',
                 tabBarStyle: { backgroundColor: COLORS.HEADERColor },
                 tabBarActiveTintColor: 'black'
             }} initialRouteName="MyFoodie"
@@ -41,9 +41,30 @@ function BottomTabNavigator() {
 
         >
         <Tab.Screen
-            name="Discover"
+            name="What To Cook Today?"
             component={CategoriesScreen}
             options={{
+                headerStyle: {
+                    backgroundColor: 'white',
+                },
+                ...Platform.select({
+                    android: {
+                        headerStyle: {
+                            elevation: 0, // Hide shadow on Android
+                        },
+                    },
+                    ios: {
+                        headerShadowVisible: false, // Hide shadow on iOS
+                    },
+                }),
+                tabBarLabel: ({ focused, color }) => (
+                    <Text style={{ color: color }}>Discover</Text>
+                ),
+                headerTitleStyle: {
+                    fontSize: 20,
+                    fontWeight: "bold",
+                },
+
                 tabBarIcon: ({ color, size }) => (
                     <Ionicons name="earth" color={color} size={size} />
                 ),
@@ -51,24 +72,54 @@ function BottomTabNavigator() {
 
         />
 
+
             <Tab.Screen
                 name="MyFoodie"
                 component={MyFoodieScreen}
                 options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+
+
+
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="fast-food" color={color} size={size} />
                     ),
-                    headerRight: ({ tintColor}) => (
+                    headerRight: () => (
+                        <View style={{ paddingRight: 10 }}>
                         <IconButton
                             icon="exit"
-                            color= {tintColor}
-                            size={24}
+                            color= 'black'
+                            size={30}
                             onPress={AuthCxt.logout}
                         />
+                        </View>
                     ),
+                    headerLeft: () => (
+                        <View style={{ paddingLeft: 10 }}>
+                            <IconButton
+                                icon="person"
+                                color="black"
+                                size={30}
+                                onPress={AuthCxt.logout}
+                            />
+                        </View>
+                    ),
+                    headerTitle: "",
                 }}
-
             />
+
             <Tab.Screen
                 name="Favorites"
                 component={FavoritesScreen}
@@ -125,7 +176,7 @@ function AuthenticatedStack() {
                     name="CategoriesScreen"
                     component={BottomTabNavigator}
                     options={{
-                        headerShown: false
+                        headerShown: false,
                     }}
                 />
 
@@ -162,7 +213,6 @@ function AuthenticatedStack() {
                         headerStyle: {
                             backgroundColor: 'white',
                         },
-                        headerTitleAlign: 'center',
                         ...Platform.select({
                             android: {
                                 headerStyle: {
