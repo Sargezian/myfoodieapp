@@ -20,7 +20,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
-import FluidStack from "./components/Fluid/Fluid";
+import SkipScreen from "./components/Skip/Skip";
+import TestScreen from "./screens/tabs/TestScreen";
+
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,7 +115,6 @@ function BottomTabNavigator() {
                                 icon="person"
                                 color="black"
                                 size={30}
-                                onPress={AuthCxt.logout}
                             />
                         </View>
                     ),
@@ -124,6 +126,20 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={FavoritesScreen}
                 options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+                    headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={size} />
                     ),
@@ -134,11 +150,51 @@ function BottomTabNavigator() {
                 name="MealPlan"
                 component={MealPlanScreen}
                 options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+                    headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="calendar" color={color} size={size} />
                     ),
                 }}
             />
+
+
+            <Tab.Screen
+                name="Tester"
+                component={TestScreen}
+                options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+                    headerTitle: "",
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="flag" color={color} size={size} />
+                    ),
+                }}
+            />
+
 
 
 
@@ -151,12 +207,54 @@ function AuthStack() {
         <Stack.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: COLORS.HEADERColor },
-                headerTintColor: 'white',
+                headerTintColor: 'black',
                 contentStyle: { backgroundColor: COLORS.BGColor },
             }}
         >
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Signup" component={SignupScreen} />
+            <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+                }}
+
+
+
+            />
+            <Stack.Screen
+                name="Signup"
+                component={SignupScreen}
+                options={{
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+                }}
+
+            />
+
+
         </Stack.Navigator>
     );
 }
@@ -168,9 +266,9 @@ function AuthenticatedStack() {
             <Stack.Navigator
                 screenOptions={{
                     headerStyle: { backgroundColor: COLORS.HEADERColor },
-                    headerTintColor: 'white',
+                    headerTintColor: 'black',
                     contentStyle: { backgroundColor: COLORS.BGColor },
-                }} initialRouteName="fluid" >
+                }} initialRouteName="skip" >
 
                 <Stack.Screen
                     name="CategoriesScreen"
@@ -196,20 +294,27 @@ function AuthenticatedStack() {
                     }}
                 />
 
+
                 <Stack.Screen
-                    name="CategoryDetailScreen"
-                    component={CategoryDetailScreen}
+                    name="MealPlanScreen"
+                    component={BottomTabNavigator}
+                    options={{
+                        headerShown: false
+                    }}
                 />
 
                 <Stack.Screen
-                    name="MealDetail"
-                    component={MealDetailScreen} />
-
+                    name="TestScreen"
+                    component={BottomTabNavigator}
+                    options={{
+                        headerShown: false
+                    }}
+                />
 
                 <Stack.Screen
-                    name="fluid"
-                    component={FluidStack}
-                    options={({ navigation }) => ({
+                    name="CategoryDetailScreen"
+                    component={CategoryDetailScreen}
+                    options={{
                         headerStyle: {
                             backgroundColor: 'white',
                         },
@@ -222,18 +327,57 @@ function AuthenticatedStack() {
                             ios: {
                                 headerShadowVisible: false, // Hide shadow on iOS
                             },
-                        }), // Close the Platform.select
-
-                        title: 'My Foodie Screen', // Set a static title
-
-                        // Custom header title component with navigation onPress
-                        headerRight: () => (
-                            <TouchableWithoutFeedback onPress={() => navigation.navigate('MyFoodieScreen')}>
-                                <Text style={{ color: 'black', fontSize: 20, }}>Skip</Text>
-                            </TouchableWithoutFeedback>
-                        ),
-                    })}
+                        }),
+                    }}
                 />
+
+                <Stack.Screen
+                    name="MealDetail"
+                    component={MealDetailScreen} />
+
+                <Stack.Screen
+                    name="skip"
+                    component={SkipScreen}
+                    options={({ navigation }) => {
+                        const [showSkipText, setShowSkipText] = useState(false);
+
+                        useEffect(() => {
+                            // Use a 5-second timeout to show the "Skip" text
+                            const timeoutId = setTimeout(() => {
+                                setShowSkipText(true);
+                            }, 5000);
+
+                            // Clear the timeout when the component unmounts
+                            return () => clearTimeout(timeoutId);
+                        }, []);
+
+                        return {
+                            headerStyle: {
+                                backgroundColor: 'white',
+                            },
+                            ...Platform.select({
+                                android: {
+                                    headerStyle: {
+                                        elevation: 0, // Hide shadow on Android
+                                    },
+                                },
+                                ios: {
+                                    headerShadowVisible: false, // Hide shadow on iOS
+                                },
+                            }), // Close the Platform.select
+                            headerTitle: "",
+                            // Custom header title component with navigation onPress
+                            headerRight: () => (
+                                showSkipText ? (
+                                    <TouchableWithoutFeedback onPress={() => navigation.navigate('MyFoodieScreen')}>
+                                        <Text style={{ color: 'black', fontSize: 20, }}>Skip</Text>
+                                    </TouchableWithoutFeedback>
+                                ) : null
+                            ),
+                        };
+                    }}
+                />
+
 
             </Stack.Navigator>
 

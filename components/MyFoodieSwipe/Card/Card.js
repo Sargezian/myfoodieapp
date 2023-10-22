@@ -75,7 +75,7 @@ export default function Card({
             <Image source={{ uri: imageUrl}} style={styles.image} />
             <LinearGradient
                 colors={['transparent', COLORS.HEADERColor]}
-                style={styles.gradient}
+                /*style={styles.gradient}*/
             />
             <Text style={styles.name}>{meal.title}</Text>
 
@@ -88,7 +88,7 @@ export default function Card({
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        marginTop: 150,
+        marginTop: 130,
 
     },
     image: {
@@ -102,11 +102,11 @@ export const styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: 400,
-        borderRadius: 60,
+        borderRadius: 50,
     },
     name: {
         position: 'absolute',
-        bottom: 82,
+        bottom: 40,
         left: 22,
         fontSize: 36,
         fontWeight: 'bold',

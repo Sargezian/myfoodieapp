@@ -78,12 +78,13 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         flexDirection: 'row',
-        borderRadius: 75,
-        height: 135,
+        borderRadius: 30,
+        height: 150,
     },
     image: {
-        flex: 1,
-        borderRadius: 75,
+        flex: 1.5,
+        borderBottomLeftRadius: 30,
+        borderTopLeftRadius: 30,
         height: '100%',
     },
 

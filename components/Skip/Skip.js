@@ -5,7 +5,7 @@ import Animated, {
     useSharedValue,
 } from "react-native-reanimated";
 
-import Slide from "./Slide";
+import Slide from "../Skip/Slide";
 
 const { width } = Dimensions.get("window");
 
@@ -36,7 +36,7 @@ const slides = [
     },
 ];
 
-const Fluid = () => {
+const Skip = () => {
     const x = useSharedValue(0);
     const scrollHandler = useAnimatedScrollHandler({
         onScroll: (event) => {
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Fluid;
+export default Skip;
