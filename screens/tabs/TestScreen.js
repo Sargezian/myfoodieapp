@@ -10,18 +10,10 @@ const data = [
     require('../../assets/favicon.png'),
 ];
 
-export const textData = [
-    'Discover',
-    'MyFoodie',
-    'Favorites',
-    'MealPlan',
-    'Tester',
-];
-
 export default function App() {
     return (
         <View style={styles.container}>
-            <CircularCarousel data={data} textData={textData} />
+            <CircularCarousel data={data}/>
         </View>
     );
 }

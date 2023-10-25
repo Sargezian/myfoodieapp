@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {Platform, StyleSheet, TouchableWithoutFeedback, Text, View} from 'react-native';
+import {Platform, StyleSheet, TouchableWithoutFeedback, Text, View, TouchableOpacity, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
@@ -21,12 +21,40 @@ import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
-import TestScreen from "./screens/tabs/TestScreen";
-
+import TestScreen from "./screens/tabs/TestScreen"
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+
+const CustomTabBarButton = ({children, onPress}) => (
+
+    <TouchableOpacity
+        style={{
+        top: -30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }}
+        onPress= {onPress}
+    >
+        <View style={{
+            width: 70,
+            height: 70,
+            borderRadius: 35,
+            backgroundColor: COLORS.HEADERColor,
+            shadowColor: 'black',
+            shadowOpacity: 0.25,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        }}>
+            {children}
+        </View>
+    </TouchableOpacity>
+);
+
+
 
 
 function BottomTabNavigator() {
@@ -34,52 +62,49 @@ function BottomTabNavigator() {
 
     return (
         <Tab.Navigator
+
+            initialRouteName="MyFoodie"
+
             screenOptions={{
-                headerStyle: { backgroundColor: COLORS.HEADERColor },
+
+                tabBarActiveTintColor: 'black',
+
                 headerTintColor: 'black',
-                tabBarStyle: { backgroundColor: COLORS.HEADERColor },
-                tabBarActiveTintColor: 'black'
-            }} initialRouteName="MyFoodie"
+
+                headerStyle: {
+
+                    backgroundColor: COLORS.HEADERColor
+
+                },
+
+                tabBarStyle: {
+
+                    position: 'absolute',
+                    backgroundColor: COLORS.HEADERColor,
+                    right: 20,
+                    left: 20,
+                    bottom: 25,
+                    elevation: 0,
+                    borderRadius: 15,
+                    height: 90,
+                    shadowColor: 'black',
+                    shadowOpacity: 0.25,
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowRadius: 8,
+                    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+
+                },
+
+
+            }}
             sceneContainerStyle={{backgroundColor: COLORS.BGColor}}
 
         >
-        <Tab.Screen
-            name="What To Cook Today?"
-            component={CategoriesScreen}
-            options={{
-                headerStyle: {
-                    backgroundColor: 'white',
-                },
-                ...Platform.select({
-                    android: {
-                        headerStyle: {
-                            elevation: 0, // Hide shadow on Android
-                        },
-                    },
-                    ios: {
-                        headerShadowVisible: false, // Hide shadow on iOS
-                    },
-                }),
-                tabBarLabel: ({ focused, color }) => (
-                    <Text style={{ color: color }}>Discover</Text>
-                ),
-                headerTitleStyle: {
-                    fontSize: 20,
-                    fontWeight: "bold",
-                },
-
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="earth" color={color} size={size} />
-                ),
-            }}
-
-        />
-
-
             <Tab.Screen
-                name="MyFoodie"
-                component={MyFoodieScreen}
+                name="What To Cook Today?"
+                component={CategoriesScreen}
                 options={{
+
                     headerStyle: {
                         backgroundColor: 'white',
                     },
@@ -92,35 +117,23 @@ function BottomTabNavigator() {
                         ios: {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
-                    }), // Close the Platform.select
-
-
+                    }),
+                    tabBarLabel: ({ focused, color }) => (
+                        <Text style={{ color: color }}>Discover</Text>
+                    ),
+                    headerTitleStyle: {
+                        fontSize: 20,
+                        fontWeight: "bold",
+                    },
 
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="fast-food" color={color} size={size} />
+                        <Ionicons name="earth" color={color} size={size} />
                     ),
-                    headerRight: () => (
-                        <View style={{ paddingRight: 10 }}>
-                        <IconButton
-                            icon="exit"
-                            color= 'black'
-                            size={30}
-                            onPress={AuthCxt.logout}
-                        />
-                        </View>
-                    ),
-                    headerLeft: () => (
-                        <View style={{ paddingLeft: 10 }}>
-                            <IconButton
-                                icon="person"
-                                color="black"
-                                size={30}
-                            />
-                        </View>
-                    ),
-                    headerTitle: "",
                 }}
+
             />
+
+
 
             <Tab.Screen
                 name="Favorites"
@@ -143,6 +156,68 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={size} />
                     ),
+                }}
+            />
+
+            <Tab.Screen
+                name="MyFoodie"
+                component={MyFoodieScreen}
+                options={{
+
+                    tabBarLabel: '',
+
+                    tabBarIcon: () => (
+
+                        <Image
+                            source={require('./assets/1.png')}
+                            resizeMode="contain"
+                            style={{
+                                width: 80,
+                                height: 80,
+
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <CustomTabBarButton {...props} />
+                    ),
+
+
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }), // Close the Platform.select
+
+
+                    headerRight: () => (
+                        <View style={{ paddingRight: 10 }}>
+                            <IconButton
+                                icon="exit"
+                                color= 'black'
+                                size={30}
+                                onPress={AuthCxt.logout}
+                            />
+                        </View>
+                    ),
+                    headerLeft: () => (
+                        <View style={{ paddingLeft: 10 }}>
+                            <IconButton
+                                icon="person"
+                                color="black"
+                                size={30}
+                            />
+                        </View>
+                    ),
+                    headerTitle: "",
                 }}
             />
 
@@ -198,7 +273,7 @@ function BottomTabNavigator() {
 
 
 
-    </Tab.Navigator>
+        </Tab.Navigator>
     );
 }
 
@@ -209,7 +284,10 @@ function AuthStack() {
                 headerStyle: { backgroundColor: COLORS.HEADERColor },
                 headerTintColor: 'black',
                 contentStyle: { backgroundColor: COLORS.BGColor },
+                tabBarVisible: false
+
             }}
+
         >
             <Stack.Screen
                 name="Login"
@@ -259,6 +337,21 @@ function AuthStack() {
     );
 }
 
+
+const style = StyleSheet.create({
+
+    shadow: {
+        shadowColor: '#7F5DF0',
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5,
+
+    }
+});
 
 
 function AuthenticatedStack() {

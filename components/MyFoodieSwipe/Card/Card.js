@@ -88,12 +88,12 @@ export default function Card({
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        marginTop: 130,
+        marginTop: 140,
 
     },
     image: {
         width: width * 0.9,
-        height: height * 0.56,
+        height: height * 0.46,
         borderRadius: 60,
     },
     gradient: {

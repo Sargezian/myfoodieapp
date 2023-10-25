@@ -1,9 +1,8 @@
-import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import { CircularCarouselListItem, ListItemWidth } from './list-item';
 import { useSharedValue } from 'react-native-reanimated';
 
-const CircularCarousel = ({ data, textData }) => {
+const CircularCarousel = ({ data }) => {
     const contentOffset = useSharedValue(0);
 
     return (
@@ -33,7 +32,6 @@ const CircularCarousel = ({ data, textData }) => {
                     <CircularCarouselListItem
                         contentOffset={contentOffset}
                         imageSrc={item}
-                        text={textData[index]} // Pass the corresponding text
                         index={index}
                     />
                 );

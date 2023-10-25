@@ -26,7 +26,7 @@ export default function Footer({ handleChoice }) {
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        bottom: 5,
+        top: 550,
         width: 270,
         flexDirection: 'row',
         alignItems: 'center',
