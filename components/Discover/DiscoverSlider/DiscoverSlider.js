@@ -1,115 +1,156 @@
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
-import COLORS from "../../../constants/colors";
-import React from "react";
-import {MEALS} from "../../../data/dummydata";
+import React, { useContext, useState, useEffect } from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ScrollView,
+    Image,
+    Dimensions, Pressable,
+} from 'react-native';
+import { MEALS } from '../../../data/dummydata';
+import { CATEGORIES } from '../../../data/dummydata';
+import Button from '../DiscoverSlider/Button';
+import { Ionicons } from '@expo/vector-icons';
+import { FavoritesContext } from '../../../context/favorites-context';
+import {useNavigation} from "@react-navigation/native";
 
-function DiscoverSlider() {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
-    const mealM1 = MEALS.find((meal) => meal.id === 'm2');
+function getCategoryTitle(categoryIds) {
+    const categoryTitles = categoryIds.map((categoryId) => {
+        const category = CATEGORIES.find((cat) => cat.id === categoryId);
+        return category ? category.title : 'Unknown Category';
+    });
 
+    return categoryTitles.join(', ');
+}
+
+function DiscoverSlider({ route,  id}) {
+    const favoriteMealsCtx = useContext(FavoritesContext);
+
+    const mealId = route?.params?.mealId;
+    const [isFavorite, setIsFavorite] = useState(favoriteMealsCtx.ids.includes(mealId));
+
+    useEffect(() => {
+        setIsFavorite(favoriteMealsCtx.ids.includes(mealId));
+    }, [mealId, favoriteMealsCtx.ids]);
+
+    function changeFavoriteStatusHandler(mealId) {
+
+        // Toggle the favorite status for the selected meal
+        if (favoriteMealsCtx.ids.includes(mealId)) {
+            favoriteMealsCtx.removeFavorite(mealId);
+
+        } else {
+            favoriteMealsCtx.addFavorite(mealId);
+
+        }
+    }
+
+    const navigation = useNavigation();
+
+    function selectMealItemHandler() {
+        navigation.navigate('MealDetail', {
+            mealId: id,
+        });
+    }
 
     return (
         <View style={styles.holderContainer}>
-            <Text style={styles.headingText}> Top made meals today! </Text>
-
+            <Text style={styles.headingText}>Top made meals today!</Text>
             <ScrollView horizontal={true} style={styles.container}>
+                {MEALS.map((meal) => (
+                    <View key={meal.id} style={styles.card}>
+                        <Image source={{ uri: meal.imageUrl }} style={styles.image} />
+                        <Text style={styles.category}>{getCategoryTitle(meal.categoryIds)}</Text>
+                        <Text style={styles.name}>{meal.title}</Text>
+                        <Text style={styles.mealInfo}>
+                            {meal.duration}m | {meal.complexity} | {meal.affordability}
+                        </Text>
+                        <View style={styles.underCardHolder}>
+                            <Ionicons
+                                name={isFavorite ? 'heart' : 'heart-outline'}
+                                color="black"
+                                size={30}
+                                onPress={() => changeFavoriteStatusHandler(meal.id)}
+                            />
 
+                            <Button onPress={selectMealItemHandler}>View Recipe</Button>
 
-                <View style={[styles.card, styles.CardElevated]}>
-
-                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-                </View>
-
-
-                <View style={[styles.card, styles.CardElevated]}>
-
-                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-                </View>
-
-
-                <View style={[styles.card, styles.CardElevated]}>
-
-                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-                </View>
-
-
-                <View style={[styles.card, styles.CardElevated]}>
-
-                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-                </View>
-
-
-
-                <View style={[styles.card, styles.CardElevated]}>
-
-                    <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-            </View>
-
-
-
-                  <View style={[styles.card, styles.CardElevated]}>
-                      <Image source={{ uri: mealM1.imageUrl }} style={styles.image} />
-
-                  </View>
-
-          </ScrollView>
+                        </View>
+                    </View>
+                ))}
+            </ScrollView>
         </View>
-    )
-
-
+    );
 }
+
 
 export default DiscoverSlider;
 
-
-
 const styles = StyleSheet.create({
-
     holderContainer: {
         flex: 1,
+        padding: 10,
     },
-
     headingText: {
-        fontSize: 25,
+        fontSize: windowWidth * 0.06, // Responsive font size
         fontWeight: 'bold',
-        paddingHorizontal: 8
-
+        paddingHorizontal: 10,
     },
     container: {
-        padding: 8
+        backgroundColor: 'white',
+
     },
     card: {
-        flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        width: 125,
-        height: 125,
-        borderRadius: 10,
-        margin: 8,
-    },
-
-    CardElevated: {
-        backgroundColor: COLORS.white,
+        width: windowWidth * 0.7,
+        height: windowHeight * 0.4,
+        borderRadius: 20,
         elevation: 4,
-        shadowOffset: {
-            width: 1,
-            height: 1
-        },
-        shadowColor: '#333',
-        shadowOpacity: 0.4,
-        shadowRadius: 2
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        marginRight: 20,
+        padding: 20,
+        backgroundColor: 'white',
 
+    },
+    CardElevated: {
+        marginRight: 5,
+        marginLeft: 5,
 
     },
     image: {
-        width: '100%', // To make the image take the full width of the card
-        height: '100%',  // Adjust the height as needed
-        resizeMode: 'cover', // To ensure the image covers the entire space
-        borderRadius: 10, // To give the image rounded corners (if desired)
+        flex: 3,
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+        borderRadius: 10,
     },
+    category: {
+        marginTop: 5,
+        fontSize: windowWidth * 0.03,
+    },
+    name: {
+        marginTop: 5,
+        fontSize: windowWidth * 0.04, // Responsive font size
+        fontWeight: 'bold',
+    },
+    mealInfo: {
+        marginTop: 5,
+        fontSize: windowWidth * 0.03,
+    },
+    underCardHolder: {
+        flexDirection: 'row',
+        width: '100%',
+        paddingTop: 5,
+        justifyContent: 'space-between',
+
+    },
+
 });

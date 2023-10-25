@@ -32,6 +32,7 @@ function CategoriesScreen({ navigation }) {
                     <>
                         <Search />
                         <DiscoverSlider />
+
                         <Text style={styles.headingText}> Discover </Text>
                     </>
                 }
