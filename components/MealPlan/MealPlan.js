@@ -9,7 +9,7 @@ const windowHeight = Dimensions.get('window').height;
 
 function MealPlan() {
 
-    const maxImages = 4;
+    const maxImages = 3;
     const limitedMeals = MEALS.slice(0, maxImages);
 
 
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     MealText: {
         fontWeight: "bold",
         fontSize: 18,
-        marginLeft: 120,
+        marginLeft: 150,
         marginTop: 30,
     },
     image: {
