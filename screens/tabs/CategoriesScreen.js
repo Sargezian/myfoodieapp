@@ -4,6 +4,7 @@ import CategoryGridTile from '../../components/Discover/CategoryGrids/CategoryGr
 import { CATEGORIES } from '../../data/dummydata';
 import DiscoverSlider from "../../components/Discover/DiscoverSlider/DiscoverSlider";
 import Search from "../../components/Discover/Search/Search";
+import OptionSlider from "../../components/Discover/OptionSlider/OptionSlider";
 
 function CategoriesScreen({ navigation }) {
 
@@ -31,6 +32,7 @@ function CategoriesScreen({ navigation }) {
                 ListHeaderComponent={
                     <>
                         <Search />
+                        <OptionSlider />
                         <DiscoverSlider />
 
                         <Text style={styles.headingText}> Discover </Text>

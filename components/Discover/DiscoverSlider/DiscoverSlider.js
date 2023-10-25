@@ -5,7 +5,7 @@ import {
     StyleSheet,
     ScrollView,
     Image,
-    Dimensions, Pressable,
+    Dimensions, Pressable, Platform,
 } from 'react-native';
 import { MEALS } from '../../../data/dummydata';
 import { CATEGORIES } from '../../../data/dummydata';
@@ -58,7 +58,6 @@ function DiscoverSlider({ route,  id}) {
 
     return (
         <View style={styles.holderContainer}>
-            <Text style={styles.headingText}>Top made meals today!</Text>
             <ScrollView horizontal={true} style={styles.container}>
                 {MEALS.map((meal) => (
                     <View key={meal.id} style={styles.card}>
@@ -93,11 +92,6 @@ const styles = StyleSheet.create({
     holderContainer: {
         flex: 1,
         padding: 10,
-    },
-    headingText: {
-        fontSize: windowWidth * 0.06, // Responsive font size
-        fontWeight: 'bold',
-        paddingHorizontal: 10,
     },
     container: {
         backgroundColor: 'white',

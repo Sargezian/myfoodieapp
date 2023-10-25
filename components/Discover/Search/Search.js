@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, TextInput, Text} from 'react-native';
+import {StyleSheet, View, TextInput, Text, Platform} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function Search() {
@@ -16,7 +16,7 @@ export default function Search() {
 
             <TextInput
                 style={styles.searchBox}
-                placeholder="Search for your favorite meal..."
+                placeholder="Search..."
                 clearButtonMode="always"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -35,11 +35,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 10,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        marginBottom: 10,
-        marginLeft: 8,
-        marginRight: 8,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        margin: 10,
     },
     icon: {
         marginRight: 10,
