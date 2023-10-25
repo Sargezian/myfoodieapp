@@ -79,13 +79,9 @@ function BottomTabNavigator() {
 
                 tabBarStyle: {
 
-                    position: 'absolute',
                     backgroundColor: COLORS.HEADERColor,
-                    right: 20,
-                    left: 20,
-                    bottom: 25,
                     elevation: 0,
-                    borderRadius: 15,
+                    borderRadius: 50,
                     height: 90,
                     shadowColor: 'black',
                     shadowOpacity: 0.25,
