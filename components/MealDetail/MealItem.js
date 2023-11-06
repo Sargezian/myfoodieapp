@@ -15,7 +15,6 @@ function MealItem({
                       name,
                       imageUrl,
                       duration,
-                      complexity,
                       affordability,
                       rating,
                   }) {
@@ -42,7 +41,6 @@ function MealItem({
                     <MealDetails
                         duration={duration}
                         affordability={affordability}
-                        complexity={complexity}
                         rating={rating}
                     />
                 </View>

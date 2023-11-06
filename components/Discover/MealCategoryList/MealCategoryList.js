@@ -11,7 +11,6 @@ function MealCategoryList({items}) {
             name: item.name,
             imageUrl: item.imageUrl,
             affordability: item.affordability,
-            complexity: item.complexity,
             duration: item.duration,
             rating: item.rating,
         };
