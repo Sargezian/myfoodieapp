@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
 
     itemIcon: {
         alignItems: 'center',
-        justifyContent: 'center',
         flex: 1,
+        paddingTop: 10,
         marginHorizontal: 20,
         marginVertical: 10,
         width: 10,
@@ -190,10 +190,7 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
-    subtitle: {
-        flex: 1,
 
-    },
 
 
 
