@@ -11,7 +11,7 @@ import MealDetails from '../../components/MealFavoriteList/MealFavoriteDetails';
 
 function MealFavoriteItem({
                       id,
-                      title,
+                      name,
                       imageUrl,
                       duration,
                       complexity,
@@ -41,7 +41,7 @@ function MealFavoriteItem({
 
                     <View style={styles.TextHolder}>
 
-                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.title}>{name}</Text>
 
                         <Text >Pasta salad mainly consists of pasta mixed with vegetables</Text>
 

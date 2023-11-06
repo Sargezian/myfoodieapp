@@ -2,7 +2,7 @@ class Meal {
     constructor(
         id,
         categoryIds,
-        title,
+        name,
         affordability,
         complexity,
         imageUrl,
@@ -12,7 +12,7 @@ class Meal {
     ) {
         this.id = id;
         this.categoryIds = categoryIds;
-        this.title = title;
+        this.name = name;
         this.imageUrl = imageUrl;
         this.ingredients = ingredients;
         this.steps = steps;

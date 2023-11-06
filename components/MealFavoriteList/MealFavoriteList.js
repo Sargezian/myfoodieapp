@@ -12,7 +12,7 @@ function MealFavoriteList({ items }) {
 
         const mealItemProps = {
             id: item.id,
-            title: item.title,
+            name: item.name,
             imageUrl: item.imageUrl,
             affordability: item.affordability,
             complexity: item.complexity,

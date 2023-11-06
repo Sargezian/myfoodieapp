@@ -16,7 +16,7 @@ export default function Card({
                                  ...rest
                              }) {
 
-    const { title, imageUrl } = meal;
+    const { name, imageUrl } = meal;
 
     const rotate = Animated.multiply(swipe.x, tiltSign).interpolate({
         inputRange: [-ACTION_OFFSET, 0, ACTION_OFFSET],
@@ -77,7 +77,7 @@ export default function Card({
                 colors={['transparent', COLORS.HEADERColor]}
                 /*style={styles.gradient}*/
             />
-            <Text style={styles.name}>{meal.title}</Text>
+            <Text style={styles.name}>{meal.name}</Text>
 
             {isFirst && renderChoice()}
         </Animated.View>

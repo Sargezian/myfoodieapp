@@ -12,7 +12,7 @@ import MealDetails from './MealDetails';
 
 function MealItem({
                       id,
-                      title,
+                      name,
                       imageUrl,
                       duration,
                       complexity,
@@ -36,7 +36,7 @@ function MealItem({
                 <View style={styles.innerContainer}>
                     <View>
                         <Image source={{ uri: imageUrl }} style={styles.image} />
-                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.title}>{name}</Text>
                     </View>
                     <MealDetails
                         duration={duration}

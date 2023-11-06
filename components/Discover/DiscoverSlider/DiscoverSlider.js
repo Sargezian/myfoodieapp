@@ -63,7 +63,7 @@ function DiscoverSlider({ route,  id}) {
                     <View key={meal.id} style={styles.card}>
                         <Image source={{ uri: meal.imageUrl }} style={styles.image} />
                         <Text style={styles.category}>{getCategoryTitle(meal.categoryIds)}</Text>
-                        <Text style={styles.name}>{meal.title}</Text>
+                        <Text style={styles.title}>{meal.name}</Text>
                         <Text style={styles.mealInfo}>
                             {meal.duration}m | {meal.complexity} | {meal.affordability}
                         </Text>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: windowWidth * 0.03,
     },
-    name: {
+    title: {
         marginTop: 5,
         fontSize: windowWidth * 0.04, // Responsive font size
         fontWeight: 'bold',
