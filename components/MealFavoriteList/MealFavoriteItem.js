@@ -16,6 +16,7 @@ function MealFavoriteItem({
                       duration,
                       complexity,
                       affordability,
+                      rating,
                   }) {
 
     const navigations = useNavigation();
@@ -49,6 +50,7 @@ function MealFavoriteItem({
                             duration={duration}
                             affordability={affordability}
                             complexity={complexity}
+                            rating={rating}
                         />
 
                     </View>

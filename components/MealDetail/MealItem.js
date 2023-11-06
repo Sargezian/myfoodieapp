@@ -17,6 +17,7 @@ function MealItem({
                       duration,
                       complexity,
                       affordability,
+                      rating,
                   }) {
     const navigation = useNavigation();
 
@@ -42,6 +43,7 @@ function MealItem({
                         duration={duration}
                         affordability={affordability}
                         complexity={complexity}
+                        rating={rating}
                     />
                 </View>
             </Pressable>

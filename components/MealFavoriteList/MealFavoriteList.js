@@ -17,6 +17,7 @@ function MealFavoriteList({ items }) {
             affordability: item.affordability,
             complexity: item.complexity,
             duration: item.duration,
+            rating: item.rating,
         };
 
         const removeFavoriteMealHandler = () => {

@@ -4,6 +4,7 @@ function MealFavoriteDetails({
                          duration,
                          complexity,
                          affordability,
+                         rating,
                          style,
                          textStyle,
                      }) {
@@ -15,6 +16,9 @@ function MealFavoriteDetails({
             </Text>
             <Text style={[styles.detailItem, textStyle]}>
                 {affordability}
+            </Text>
+            <Text style={[styles.detailItem, textStyle]}>
+                Rating: {rating}
             </Text>
         </View>
     );

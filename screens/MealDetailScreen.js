@@ -46,6 +46,7 @@ function MealDetailScreen({ route, navigation }) {
                 duration={selectedMeal.duration}
                 complexity={selectedMeal.complexity}
                 affordability={selectedMeal.affordability}
+                rating={selectedMeal.rating}
                 textStyle={styles.detailText}
             />
             <View style={styles.listOuterContainer}>

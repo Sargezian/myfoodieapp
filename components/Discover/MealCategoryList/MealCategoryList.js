@@ -13,6 +13,7 @@ function MealCategoryList({items}) {
             affordability: item.affordability,
             complexity: item.complexity,
             duration: item.duration,
+            rating: item.rating,
         };
         return <MealItem {...mealItemProps} />;
     }

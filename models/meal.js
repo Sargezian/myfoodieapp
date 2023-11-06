@@ -9,6 +9,7 @@ class Meal {
         duration,
         ingredients,
         steps,
+        rating
     ) {
         this.id = id;
         this.categoryIds = categoryIds;
@@ -19,6 +20,7 @@ class Meal {
         this.duration = duration;
         this.complexity = complexity;
         this.affordability = affordability;
+        this.rating = rating;
     }
 }
 
