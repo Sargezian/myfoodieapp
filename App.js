@@ -21,7 +21,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
-import TestScreen from "./screens/tabs/TestScreen"
+import ProfileScreen from "./screens/tabs/ProfileScreen"
 
 
 const Stack = createNativeStackNavigator();
@@ -130,10 +130,9 @@ function BottomTabNavigator() {
             />
 
 
-
             <Tab.Screen
-                name="Favorites"
-                component={FavoritesScreen}
+                name="MealPlan"
+                component={MealPlanScreen}
                 options={{
                     headerStyle: {
                         backgroundColor: 'white',
@@ -150,10 +149,11 @@ function BottomTabNavigator() {
                     }), // Close the Platform.select
                     headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="heart" color={color} size={size} />
+                        <Ionicons name="calendar" color={color} size={size} />
                     ),
                 }}
             />
+
 
             <Tab.Screen
                 name="MyFoodie"
@@ -197,29 +197,21 @@ function BottomTabNavigator() {
                     headerRight: () => (
                         <View style={{ paddingRight: 10 }}>
                             <IconButton
-                                icon="exit"
+                                icon="filter"
                                 color= 'black'
                                 size={30}
-                                onPress={AuthCxt.logout}
+                                onPress={null}
                             />
                         </View>
                     ),
-                    headerLeft: () => (
-                        <View style={{ paddingLeft: 10 }}>
-                            <IconButton
-                                icon="person"
-                                color="black"
-                                size={30}
-                            />
-                        </View>
-                    ),
+
                     headerTitle: "",
                 }}
             />
 
             <Tab.Screen
-                name="MealPlan"
-                component={MealPlanScreen}
+                name="Favorites"
+                component={FavoritesScreen}
                 options={{
                     headerStyle: {
                         backgroundColor: 'white',
@@ -236,15 +228,15 @@ function BottomTabNavigator() {
                     }), // Close the Platform.select
                     headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="calendar" color={color} size={size} />
+                        <Ionicons name="heart" color={color} size={size} />
                     ),
                 }}
             />
 
 
             <Tab.Screen
-                name="Tester"
-                component={TestScreen}
+                name="Profile"
+                component={ProfileScreen}
                 options={{
                     headerStyle: {
                         backgroundColor: 'white',
@@ -261,7 +253,9 @@ function BottomTabNavigator() {
                     }), // Close the Platform.select
                     headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="flag" color={color} size={size} />
+                        <Ionicons name="person" color={color} size={size} />
+
+
                     ),
                 }}
             />
@@ -377,7 +371,7 @@ function AuthenticatedStack() {
                 />
 
                 <Stack.Screen
-                    name="TestScreen"
+                    name="ProfileScreen"
                     component={BottomTabNavigator}
                     options={{
                         headerShown: false
