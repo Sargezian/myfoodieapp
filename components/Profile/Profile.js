@@ -6,9 +6,8 @@ import {Ionicons} from "@expo/vector-icons";
 
 const settingsData = [
     { id: '1', title: 'Connect with Creators on Linkedin', subtitle: 'Lennart Sargezian \n\nAbdullahi Isse' },
-    { id: '2', title: 'Notification Settings', subtitle: 'Customize notification preferences' },
-    { id: '3', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
-    { id: '4', title: 'Signout', subtitle: 'Signout from you re account' },
+    { id: '2', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
+    { id: '3', title: 'Signout', subtitle: 'Signout from you re account' },
 
     // Add more settings options with titles and subtitles
 ];
@@ -32,12 +31,9 @@ function Settings() {
         }
 
         else if (item.id === '3') {
-
-        }
-
-        else if (item.id === '4') {
             AuthCxt.logout();
         }
+
         else {
             // You can add navigation logic here for other items
         }
