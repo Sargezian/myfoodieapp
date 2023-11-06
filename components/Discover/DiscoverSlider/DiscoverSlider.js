@@ -65,7 +65,7 @@ function DiscoverSlider({ route,  id}) {
                         <Text style={styles.category}>{getCategoryTitle(meal.categoryIds)}</Text>
                         <Text style={styles.title}>{meal.name}</Text>
                         <Text style={styles.mealInfo}>
-                            {meal.duration}m | {meal.affordability} | Rating: {meal.rating}
+                            {meal.duration}m | {meal.mealtype} | Rating: {meal.rating}
                         </Text>
                         <View style={styles.underCardHolder}>
                             <Ionicons

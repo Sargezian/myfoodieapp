@@ -10,7 +10,7 @@ function MealCategoryList({items}) {
             id: item.id,
             name: item.name,
             imageUrl: item.imageUrl,
-            affordability: item.affordability,
+            mealtype: item.mealtype,
             duration: item.duration,
             rating: item.rating,
         };

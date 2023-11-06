@@ -3,7 +3,7 @@ class Meal {
         id,
         categoryIds,
         name,
-        affordability,
+        mealtype,
         imageUrl,
         duration,
         ingredients,
@@ -17,14 +17,13 @@ class Meal {
         this.ingredients = ingredients;
         this.steps = steps;
         this.duration = duration;
-        this.affordability = affordability;
+        this.mealtype = mealtype;
         this.rating = rating;
     }
 }
 
 export default Meal;
 
-// tilføj rating
 
 // tilføj description
 

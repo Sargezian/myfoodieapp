@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 function MealFavoriteDetails({
                          duration,
-                         affordability,
+                                 mealtype,
                          rating,
                          style,
                          textStyle,
@@ -11,7 +11,7 @@ function MealFavoriteDetails({
         <View style={[styles.details, style]}>
             <Text style={[styles.detailItem, textStyle]}>{duration}m</Text>
             <Text style={[styles.detailItem, textStyle]}>
-                {affordability}
+                {mealtype}
             </Text>
             <Text style={[styles.detailItem, textStyle]}>
                 Rating: {rating}

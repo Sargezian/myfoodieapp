@@ -14,7 +14,7 @@ function MealFavoriteItem({
                       name,
                       imageUrl,
                       duration,
-                      affordability,
+                              mealtype,
                       rating,
                   }) {
 
@@ -47,7 +47,7 @@ function MealFavoriteItem({
 
                         <MealDetails
                             duration={duration}
-                            affordability={affordability}
+                            mealtype={mealtype}
                             rating={rating}
                         />
 

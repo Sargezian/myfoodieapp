@@ -15,7 +15,7 @@ function MealItem({
                       name,
                       imageUrl,
                       duration,
-                      affordability,
+                      mealtype,
                       rating,
                   }) {
     const navigation = useNavigation();
@@ -40,7 +40,7 @@ function MealItem({
                     </View>
                     <MealDetails
                         duration={duration}
-                        affordability={affordability}
+                        mealtype={mealtype}
                         rating={rating}
                     />
                 </View>
