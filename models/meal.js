@@ -3,6 +3,7 @@ class Meal {
         id,
         categoryIds,
         name,
+        description,
         mealtype,
         imageUrl,
         duration,
@@ -13,6 +14,7 @@ class Meal {
         this.id = id;
         this.categoryIds = categoryIds;
         this.name = name;
+        this.description = description;
         this.imageUrl = imageUrl;
         this.ingredients = ingredients;
         this.steps = steps;
@@ -24,9 +26,5 @@ class Meal {
 
 export default Meal;
 
-
-// tilføj description
-
-// mealtype
 
 // nutritional_content

@@ -18,6 +18,7 @@ export const MEALS = [
     new Meal(
         'm1',
         ['c1', 'c2'],
+        'Spaghetti',
         'Spaghetti with Tomato Sauce',
         'Lunch',
         'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
@@ -45,6 +46,7 @@ export const MEALS = [
     new Meal(
         'm2',
         ['c2'],
+        'Toast',
         'Toast Hawaii',
         'Breakfast',
         'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
@@ -67,6 +69,7 @@ export const MEALS = [
     new Meal(
         'm3',
         ['c3'],
+        'Hamburger',
         'Classic Hamburger',
         'Dinner',
         'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
@@ -92,6 +95,7 @@ export const MEALS = [
     new Meal(
         'm4',
         ['c4'],
+        'Schnitzel',
         'Wiener Schnitzel',
         'dinner',
         'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
@@ -121,6 +125,7 @@ export const MEALS = [
     new Meal(
         'm5',
         ['c2', 'c5', 'c10'],
+        'Salad',
         'Salad with Smoked Salmon',
         'Breakfast',
         'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
@@ -149,6 +154,7 @@ export const MEALS = [
     new Meal(
         'm6',
         ['c6', 'c10'],
+        'Orange Mousse',
         'Delicious Orange Mousse',
         'Lunch',
         'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
@@ -179,6 +185,7 @@ export const MEALS = [
         'm7',
         ['c7'],
         'Pancakes',
+        'Pancakes',
         'Lunch',
         'https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg',
         20,
@@ -203,6 +210,7 @@ export const MEALS = [
     new Meal(
         'm8',
         ['c8'],
+        'Indian Chicken',
         'Creamy Indian Chicken Curry',
         'Lunch',
         'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
@@ -230,6 +238,7 @@ export const MEALS = [
     new Meal(
         'm9',
         ['c9'],
+        'Souffle',
         'Chocolate Souffle',
         'Lunch',
         'https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg',
@@ -272,6 +281,7 @@ export const MEALS = [
     new Meal(
         'm10',
         ['c2', 'c5', 'c10'],
+        'Salad',
         'Asparagus Salad with Cherry Tomatoes',
         'Lunch',
         'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
