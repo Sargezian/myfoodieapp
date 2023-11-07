@@ -27,4 +27,4 @@ class Meal {
 export default Meal;
 
 
-// nutritional_content
+// nutritional_content = {"calories:500","protein:12"}

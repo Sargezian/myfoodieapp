@@ -1,5 +1,14 @@
 import {StatusBar} from 'expo-status-bar';
-import {Platform, StyleSheet, TouchableWithoutFeedback, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+    Platform,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    SafeAreaView
+} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
@@ -22,7 +31,6 @@ import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
 import ProfileScreen from "./screens/tabs/ProfileScreen"
-
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -129,30 +137,17 @@ function BottomTabNavigator() {
 
             />
 
-
             <Tab.Screen
                 name="MealPlan"
                 component={MealPlanScreen}
                 options={{
-                    headerStyle: {
-                        backgroundColor: 'white',
-                    },
-                    ...Platform.select({
-                        android: {
-                            headerStyle: {
-                                elevation: 0, // Hide shadow on Android
-                            },
-                        },
-                        ios: {
-                            headerShadowVisible: false, // Hide shadow on iOS
-                        },
-                    }), // Close the Platform.select
-                    headerTitle: "",
+                    headerShown: false, // This hides the header bar
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="calendar" color={color} size={size} />
                     ),
                 }}
             />
+
 
 
             <Tab.Screen
@@ -213,20 +208,7 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={FavoritesScreen}
                 options={{
-                    headerStyle: {
-                        backgroundColor: 'white',
-                    },
-                    ...Platform.select({
-                        android: {
-                            headerStyle: {
-                                elevation: 0, // Hide shadow on Android
-                            },
-                        },
-                        ios: {
-                            headerShadowVisible: false, // Hide shadow on iOS
-                        },
-                    }), // Close the Platform.select
-                    headerTitle: "",
+                    headerShown: false,
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={size} />
                     ),
@@ -238,23 +220,9 @@ function BottomTabNavigator() {
                 name="Profile"
                 component={ProfileScreen}
                 options={{
-                    headerStyle: {
-                        backgroundColor: 'white',
-                    },
-                    ...Platform.select({
-                        android: {
-                            headerStyle: {
-                                elevation: 0, // Hide shadow on Android
-                            },
-                        },
-                        ios: {
-                            headerShadowVisible: false, // Hide shadow on iOS
-                        },
-                    }), // Close the Platform.select
-                    headerTitle: "",
+                    headerShown: false,
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="person" color={color} size={size} />
-
 
                     ),
                 }}
@@ -297,10 +265,8 @@ function AuthStack() {
                         },
                     }), // Close the Platform.select
                 }}
-
-
-
             />
+
             <Stack.Screen
                 name="Signup"
                 component={SignupScreen}
@@ -366,9 +332,10 @@ function AuthenticatedStack() {
                     name="MealPlanScreen"
                     component={BottomTabNavigator}
                     options={{
-                        headerShown: false
+                        headerShown: true
                     }}
                 />
+
 
                 <Stack.Screen
                     name="ProfileScreen"
@@ -479,7 +446,7 @@ function Root() {
             }
 
             setIsTryingLogin(false);
-            await SplashScreen.preventAutoHideAsync(); // Call it here
+//            await SplashScreen.preventAutoHideAsync(); // Call it here
         }
 
         fetchToken();

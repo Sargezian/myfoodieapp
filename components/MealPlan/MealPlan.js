@@ -1,8 +1,8 @@
-import {View, StyleSheet, Text, ScrollView, Image, Platform, Dimensions, FlatList} from 'react-native';
+import {View, StyleSheet, Text, Switch, ScrollView, Image, Platform, Dimensions, FlatList} from 'react-native';
 import COLORS from "../../constants/colors";
 import {MEALS} from "../../data/dummydata";
 import {Ionicons} from "@expo/vector-icons";
-import React from "react";
+import React, {useState} from "react";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -12,6 +12,14 @@ function MealPlan() {
     const maxImages = 3;
     const limitedMeals = MEALS.slice(0, maxImages);
 
+    const [isBreakfastEnabled, setBreakfastEnabled] = useState(false);
+    const [isLunchEnabled, setLunchIsEnabled] = useState(false);
+    const [isDinnerEnabled, setDinnerEnabled] = useState(false);
+    const breakfastToggleSwitch = () => setBreakfastEnabled(previousState => !previousState);
+    const lunchToggleSwitch = () => setLunchIsEnabled(previousState => !previousState);
+    const dinnerToggleSwitch = () => setDinnerEnabled(previousState => !previousState);
+
+
 
     return (
 
@@ -19,7 +27,10 @@ function MealPlan() {
 
 
             <View style={styles.Calender}>
-                <Text>Calendar</Text>
+
+                <Text style={styles.dateText}>Monday 27 Apr</Text>
+                <Ionicons name="calendar" color={'black'} size={30} />
+
             </View>
 
             <View style={styles.InnerContainer}>
@@ -41,7 +52,18 @@ function MealPlan() {
                         </View>
                     ))}
 
+
+                    <View style={styles.switchTextContainer}>
+                    <Switch
+                        trackColor={{false: '#767577', true: 'lightgreen'}}
+                        thumbColor={isBreakfastEnabled ? 'ffffff' : '#f4f3f4'}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={breakfastToggleSwitch}
+                        value={isBreakfastEnabled}
+                    />
                     <Text style={styles.MealText}> 380 kcal </Text>
+
+                    </View>
                 </View>
             </View>
 
@@ -62,7 +84,17 @@ function MealPlan() {
                         </View>
                     ))}
 
-                    <Text style={styles.MealText}> 380 kcal </Text>
+                    <View style={styles.switchTextContainer}>
+                        <Switch
+                            trackColor={{false: '#767577', true: 'lightgreen'}}
+                            thumbColor={isLunchEnabled ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={lunchToggleSwitch}
+                            value={isLunchEnabled}
+                        />
+                        <Text style={styles.MealText}> 380 kcal </Text>
+
+                    </View>
                 </View>
             </View>
 
@@ -83,7 +115,17 @@ function MealPlan() {
                         </View>
                     ))}
 
-                    <Text style={styles.MealText}> 380 kcal </Text>
+                    <View style={styles.switchTextContainer}>
+                        <Switch
+                            trackColor={{false: '#767577', true: 'lightgreen'}}
+                            thumbColor={isDinnerEnabled ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={dinnerToggleSwitch}
+                            value={isDinnerEnabled}
+                        />
+                        <Text style={styles.MealText}> 380 kcal </Text>
+
+                    </View>
                 </View>
             </View>
 
@@ -132,8 +174,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 8,
     },
+
+
     Calender: {
         flex: 0.25,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
@@ -141,10 +187,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 4,
         shadowRadius: 8,
-        padding: 8,
+        padding: 15,
         margin: 10,
 
     },
+
+
+    dateText: {
+        fontWeight: 'bold',
+        fontSize: 25,
+    },
+
 
     InnerContainer: {
         flex: 1,
@@ -187,6 +240,14 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 
+    switchTextContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        width: '100%',
+    },
+
 
     CalorieHeader: {
         flexDirection: 'row',
@@ -217,8 +278,6 @@ const styles = StyleSheet.create({
     MealText: {
         fontWeight: "bold",
         fontSize: 18,
-        marginLeft: 150,
-        marginTop: 30,
     },
     image: {
         flex: 1,
