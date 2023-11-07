@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 function MealDetails({
                          time_estimate,
+                         nutritional_content,
                          meal_type,
                          style,
                          textStyle,
@@ -10,6 +11,7 @@ function MealDetails({
     return (
         <View style={[styles.details, style]}>
             <Text style={[styles.detailItem, textStyle]}>{time_estimate} Minutes</Text>
+            <Text style={[styles.detailItem, textStyle]}>{nutritional_content}</Text>
             <Text style={[styles.detailItem, textStyle]}>
                 {meal_type}
             </Text>

@@ -7,6 +7,7 @@ class Meal {
         meal_type,
         imageUrl,
         time_estimate,
+        nutritional_content,
         ingredients,
         steps,
         rating
@@ -19,6 +20,7 @@ class Meal {
         this.ingredients = ingredients;
         this.steps = steps;
         this.time_estimate = time_estimate;
+        this.nutritional_content = nutritional_content;
         this.meal_type = meal_type;
         this.rating = rating;
     }

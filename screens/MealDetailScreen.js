@@ -57,6 +57,7 @@ function MealDetailScreen({ route, navigation }) {
             <Text style={styles.title}>{selectedMeal.description}</Text>
             <MealDetails
                 time_estimate={selectedMeal.time_estimate}
+                nutritional_content={selectedMeal.nutritional_content}
                 textStyle={styles.detailText}
             />
             <View style={styles.listOuterContainer}>
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 25,
         margin: 8,
         paddingLeft: 30,
         color: 'black',
