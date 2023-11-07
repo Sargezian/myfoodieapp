@@ -4,9 +4,9 @@ class Meal {
         categoryIds,
         name,
         description,
-        mealtype,
+        meal_type,
         imageUrl,
-        duration,
+        time_estimate,
         ingredients,
         steps,
         rating
@@ -18,8 +18,8 @@ class Meal {
         this.imageUrl = imageUrl;
         this.ingredients = ingredients;
         this.steps = steps;
-        this.duration = duration;
-        this.mealtype = mealtype;
+        this.time_estimate = time_estimate;
+        this.meal_type = meal_type;
         this.rating = rating;
     }
 }

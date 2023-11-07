@@ -13,8 +13,8 @@ function MealFavoriteItem({
                       id,
                       name,
                       imageUrl,
-                      duration,
-                              mealtype,
+                              time_estimate,
+                              meal_type,
                       rating,
                   }) {
 
@@ -46,8 +46,8 @@ function MealFavoriteItem({
                         <Text >Pasta salad mainly consists of pasta mixed with vegetables</Text>
 
                         <MealDetails
-                            duration={duration}
-                            mealtype={mealtype}
+                            time_estimate={time_estimate}
+                            meal_type={meal_type}
                             rating={rating}
                         />
 

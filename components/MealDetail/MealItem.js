@@ -14,8 +14,8 @@ function MealItem({
                       id,
                       name,
                       imageUrl,
-                      duration,
-                      mealtype,
+                      time_estimate,
+                      meal_type,
                       rating,
                   }) {
     const navigation = useNavigation();
@@ -39,8 +39,8 @@ function MealItem({
                         <Text style={styles.title}>{name}</Text>
                     </View>
                     <MealDetails
-                        duration={duration}
-                        mealtype={mealtype}
+                        time_estimate={time_estimate}
+                        meal_type={meal_type}
                         rating={rating}
                     />
                 </View>

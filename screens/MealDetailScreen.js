@@ -44,8 +44,8 @@ function MealDetailScreen({ route, navigation }) {
             <Text style={styles.title}>{selectedMeal.name}</Text>
             <Text style={styles.title}>{selectedMeal.description}</Text>
             <MealDetails
-                duration={selectedMeal.duration}
-                mealtype={selectedMeal.mealtype}
+                time_estimate={selectedMeal.time_estimate}
+                meal_type={selectedMeal.meal_type}
                 rating={selectedMeal.rating}
                 textStyle={styles.detailText}
             />
