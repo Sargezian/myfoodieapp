@@ -9,7 +9,7 @@ function MealFavoriteDetails({
                      }) {
     return (
         <View style={[styles.details, style]}>
-            <Text style={[styles.detailItem, textStyle]}>{time_estimate}m</Text>
+            <Text style={[styles.detailItem, textStyle]}>{time_estimate} Minutes</Text>
             <Text style={[styles.detailItem, textStyle]}>
                 {meal_type}
             </Text>

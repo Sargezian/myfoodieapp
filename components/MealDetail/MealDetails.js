@@ -9,12 +9,11 @@ function MealDetails({
                      }) {
     return (
         <View style={[styles.details, style]}>
-            <Text style={[styles.detailItem, textStyle]}>{time_estimate}m</Text>
+            <Text style={[styles.detailItem, textStyle]}>{time_estimate} Minutes</Text>
             <Text style={[styles.detailItem, textStyle]}>
                 {meal_type}
             </Text>
-            <Text style={[styles.detailItem, textStyle]}>
-                Rating: {rating}
+            <Text style={[styles.detailItem, textStyle]}>{rating}
             </Text>
         </View>
     );

@@ -7,6 +7,7 @@ import { MEALS } from '../data/dummydata';
 import { FavoritesContext } from '../context/favorites-context';
 import {useContext, useLayoutEffect} from "react";
 import {Ionicons} from "@expo/vector-icons";
+import COLORS from "../constants/colors";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -40,13 +41,22 @@ function MealDetailScreen({ route, navigation }) {
 
     return (
         <ScrollView style={styles.rootContainer}>
+
+
             <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
-            <Text style={styles.title}>{selectedMeal.name}</Text>
+
+            <View style={styles.Container}>
+
+                <View style={styles.topContainer}>
+            <Text style={styles.topContainerText}>{selectedMeal.name} </Text>
+                    <Text style={styles.topContainerText}>{selectedMeal.meal_type}</Text>
+                    <Text style={styles.topContainerText}> Rating: {selectedMeal.rating}</Text>
+
+                </View>
+
             <Text style={styles.title}>{selectedMeal.description}</Text>
             <MealDetails
                 time_estimate={selectedMeal.time_estimate}
-                meal_type={selectedMeal.meal_type}
-                rating={selectedMeal.rating}
                 textStyle={styles.detailText}
             />
             <View style={styles.listOuterContainer}>
@@ -56,6 +66,7 @@ function MealDetailScreen({ route, navigation }) {
                     <Subtitle>Steps - How to Cook</Subtitle>
                     <List data={selectedMeal.steps} />
                 </View>
+            </View>
             </View>
         </ScrollView>
     );
@@ -67,15 +78,35 @@ const styles = StyleSheet.create({
     rootContainer: {
         marginBottom: 32,
     },
+
+    topContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 40,
+        paddingTop: 18,
+        justifyContent: 'space-between',
+    },
+
+    topContainerText: {
+        fontSize: 15,
+
+    },
+
+    Container: {
+        marginTop: -40,
+        backgroundColor: COLORS.white,
+        borderTopRightRadius: 40,
+        borderTopLeftRadius: 40,
+    },
+
     image: {
         width: '100%',
         height: 350,
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 24,
+        fontSize: 40,
         margin: 8,
-        textAlign: 'center',
+        paddingLeft: 30,
         color: 'black',
     },
     detailText: {
