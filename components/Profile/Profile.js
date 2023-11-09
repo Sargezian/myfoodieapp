@@ -1,11 +1,14 @@
 import React, {useContext} from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, Platform } from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, Platform, Linking} from 'react-native';
 import {AuthContext} from "../../context/auth-context";
 import COLORS from "../../constants/colors";
 import {Ionicons} from "@expo/vector-icons";
+import * as MailComposer from 'expo-mail-composer';
+
+
 
 const settingsData = [
-    { id: '1', title: 'Connect with Creators on Linkedin', subtitle: 'Lennart Sargezian \n\nAbdullahi Isse' },
+    { id: '1', title: 'Connect with Creator on Linkedin', subtitle: 'Lennart Sargezian' },
     { id: '2', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
     { id: '3', title: 'Signout', subtitle: 'Signout from you re account' },
 
@@ -23,11 +26,11 @@ function Settings() {
         // You can add navigation logic here to navigate to specific settings screens
 
         if (item.id === '1') {
-
+            Linking.openURL('https://www.linkedin.com/in/sargezian/');
         }
 
         else if (item.id === '2') {
-
+            sendReportEmail();
         }
 
         else if (item.id === '3') {
@@ -41,12 +44,21 @@ function Settings() {
     };
 
     function sendReportEmail() {
-
-
-
+        // Use MailComposer to open the email composer with a pre-filled email address
+        MailComposer.composeAsync({
+            recipients: ['279961@viauc.dk'],
+            subject: 'Report',
+            body: 'Hello, I would like to report the following issue:',
+        })
+            .then(result => {
+                if (result.status === 'sent') {
+                    console.log('Email sent successfully');
+                } else {
+                    console.warn('Failed to send email');
+                }
+            })
+            .catch(error => console.error('Error opening email composer', error));
     }
-
-
 
     const renderSettingsItem = ({ item }) => (
         <TouchableOpacity
