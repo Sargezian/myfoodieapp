@@ -15,6 +15,7 @@ import {MEALS} from "../../data/dummydata";
 import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from "./DatePicker";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -60,7 +61,16 @@ function MealPlan() {
         <View style={styles.Container}>
 
 
-            <View style={styles.Calender}>
+
+            <View style={styles.InnerContainer}>
+
+                <DatePicker/>
+
+
+            </View>
+
+
+{/*            <View style={styles.Calender}>
 
                 <Text style={styles.dateText}>{selectedText}</Text>
 
@@ -75,7 +85,7 @@ function MealPlan() {
                 />
 
 
-            </View>
+            </View>*/}
 
             <View style={styles.InnerContainer}>
 
@@ -339,6 +349,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'blue',
     },
+
 });
 
 export default MealPlan;
