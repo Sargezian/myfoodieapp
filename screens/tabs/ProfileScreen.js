@@ -14,6 +14,7 @@ export default function App() {
 
             <Profile/>
 
+
         </View>
         </SafeAreaView>
 

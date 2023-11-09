@@ -1,8 +1,20 @@
-import {View, StyleSheet, Text, Switch, ScrollView, Image, Platform, Dimensions, FlatList} from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    Switch,
+    ScrollView,
+    Image,
+    Platform,
+    Dimensions,
+    FlatList,
+    TouchableOpacity
+} from 'react-native';
 import COLORS from "../../constants/colors";
 import {MEALS} from "../../data/dummydata";
 import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -21,6 +33,28 @@ function MealPlan() {
 
 
 
+    //date
+    const [date, setDate] = useState(new Date());
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [selectedText, setSelectedText] = useState('');
+
+    const showDatepicker = () => {
+        setShowDatePicker(true);
+    };
+
+    const onDateChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShowDatePicker(Platform.OS === 'ios');
+        setDate(currentDate);
+
+        // Format the selected date as per your requirement
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        const formattedDate = currentDate.toLocaleDateString('en-US', options);
+        setSelectedText(`${formattedDate}`);
+    };
+
+
+
     return (
 
         <View style={styles.Container}>
@@ -28,8 +62,18 @@ function MealPlan() {
 
             <View style={styles.Calender}>
 
-                <Text style={styles.dateText}>Monday 27 Apr</Text>
-                <Ionicons name="calendar" color={'black'} size={30} />
+                <Text style={styles.dateText}>{selectedText}</Text>
+
+
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="date"
+                    is24Hour={true}
+                    display="inline"
+                    onChange={onDateChange}
+                />
+
 
             </View>
 
@@ -178,8 +222,10 @@ const styles = StyleSheet.create({
 
     Calender: {
         flex: 0.25,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+
+        alignItems: 'center',
+
         backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
@@ -187,7 +233,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 4,
         shadowRadius: 8,
-        padding: 15,
         margin: 10,
 
     },
@@ -195,7 +240,8 @@ const styles = StyleSheet.create({
 
     dateText: {
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: 15,
+
     },
 
 
@@ -286,6 +332,12 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 20,
         backgroundColor: 'yellow',
+    },
+
+    selectedText: {
+        marginTop: 10,
+        fontSize: 16,
+        color: 'blue',
     },
 });
 
