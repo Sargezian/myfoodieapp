@@ -90,7 +90,7 @@ function BottomTabNavigator() {
                     backgroundColor: COLORS.HEADERColor,
                     elevation: 0,
                     borderRadius: 50,
-                    height: 90,
+                    height:100,
                     shadowColor: 'black',
                     shadowOpacity: 0.25,
                     shadowOffset: { width: 0, height: 2 },
@@ -109,6 +109,7 @@ function BottomTabNavigator() {
                 component={CategoriesScreen}
                 options={{
 
+
                     headerStyle: {
                         backgroundColor: 'white',
                     },
@@ -122,16 +123,17 @@ function BottomTabNavigator() {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
                     }),
-                    tabBarLabel: ({ focused, color }) => (
-                        <Text style={{ color: color }}>Discover</Text>
-                    ),
+                    tabBarLabel: 'Home',
+                    tabBarLabelStyle: {
+                        fontSize: 15, // Set the font size as needed
+                    },
                     headerTitleStyle: {
                         fontSize: 20,
                         fontWeight: "bold",
                     },
 
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="earth" color={color} size={size} />
+                        <Ionicons name="earth" color={'black'} size={40} />
                     ),
                 }}
 
@@ -141,10 +143,41 @@ function BottomTabNavigator() {
                 name="MealPlan"
                 component={MealPlanScreen}
                 options={{
-                    headerShown: false, // This hides the header bar
+                    headerTitle: "",
+
+                    headerStyle: {
+                        backgroundColor: 'white',
+                    },
+                    ...Platform.select({
+                        android: {
+                            headerStyle: {
+                                elevation: 0, // Hide shadow on Android
+
+                            },
+                        },
+                        ios: {
+                            headerShadowVisible: false, // Hide shadow on iOS
+                        },
+                    }),
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="calendar" color={color} size={size} />
+                        <Ionicons name="calendar" color={color} size={40} />
                     ),
+                    tabBarLabel: 'Meal Plan',
+                    tabBarLabelStyle: {
+                        fontSize: 15, // Set the font size as needed
+                    },
+
+                    headerRight: () => (
+                        <View style={{ paddingRight: 10 }}>
+                            <IconButton
+                                icon="person-circle"
+                                color= 'black'
+                                size={30}
+                                onPress={null}
+                            />
+                        </View>
+                    ),
+
                 }}
             />
 
@@ -210,8 +243,12 @@ function BottomTabNavigator() {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="heart" color={color} size={size} />
+                        <Ionicons name="heart" color={color} size={40} />
                     ),
+                    tabBarLabel: 'Favorites',
+                    tabBarLabelStyle: {
+                        fontSize: 15, // Set the font size as needed
+                    },
                 }}
             />
 
@@ -222,9 +259,13 @@ function BottomTabNavigator() {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" color={color} size={size} />
+                        <Ionicons name="person" color={color} size={40} />
 
                     ),
+                    tabBarLabel: 'Profile',
+                    tabBarLabelStyle: {
+                        fontSize: 15, // Set the font size as needed
+                    },
                 }}
             />
 
