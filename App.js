@@ -107,7 +107,7 @@ function BottomTabNavigator() {
             <Tab.Screen
                 name="What To Cook Today?"
                 component={CategoriesScreen}
-                options={{
+                options={({ navigation }) => ({
 
 
                     headerStyle: {
@@ -132,27 +132,27 @@ function BottomTabNavigator() {
                         fontWeight: "bold",
                     },
 
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="earth" color={color} size={40} />
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="earth" color={color} size={40}/>
                     ),
                     headerRight: () => (
-                        <View style={{ paddingRight: 10 }}>
+                        <View style={{paddingRight: 10}}>
                             <IconButton
                                 icon="person-circle"
-                                color= 'black'
+                                color='black'
                                 size={30}
-                                onPress={null}
+                                onPress={() => navigation.navigate('Profile')}
                             />
                         </View>
                     ),
-                }}
+                })}
 
             />
 
             <Tab.Screen
                 name="MealPlan"
                 component={MealPlanScreen}
-                options={{
+                options={({ navigation }) => ({
                     headerTitle: "",
 
                     headerStyle: {
@@ -183,12 +183,12 @@ function BottomTabNavigator() {
                                 icon="person-circle"
                                 color= 'black'
                                 size={30}
-                                onPress={null}
+                                onPress={() => navigation.navigate('Profile')}
                             />
                         </View>
                     ),
 
-                }}
+                })}
             />
 
 
@@ -250,7 +250,7 @@ function BottomTabNavigator() {
             <Tab.Screen
                 name="Favorites"
                 component={FavoritesScreen}
-                options={{
+                options={({ navigation }) => ({
                     headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={40} />
@@ -263,14 +263,15 @@ function BottomTabNavigator() {
                         <View style={{ paddingRight: 10 }}>
                             <IconButton
                                 icon="person-circle"
-                                color= 'black'
+                                color='black'
                                 size={30}
-                                onPress={null}
+                                onPress={() => navigation.navigate('Profile')}
                             />
                         </View>
                     ),
-                }}
+                })}
             />
+
 
 
             <Tab.Screen
