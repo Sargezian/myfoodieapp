@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View, Text } from 'react-native';
 
 import FlatButton from './LoginUI/FlatButton';
 import AuthForm from './AuthForm';
@@ -62,7 +62,13 @@ function AuthContent({ isLogin, onAuthenticate }) {
             />
             <View style={styles.buttons}>
                 <FlatButton onPress={switchAuthModeHandler}>
-                    {isLogin ? 'Create a new user' : 'Log in instead'}
+                    {isLogin ? (
+                        <>
+                            Don't have an account? <Text style={{ textDecorationLine: 'underline' }}>Sign up</Text>
+                        </>
+                    ) : (
+                        'Log in instead'
+                    )}
                 </FlatButton>
             </View>
         </View>
@@ -73,18 +79,16 @@ export default AuthContent;
 
 const styles = StyleSheet.create({
     authContent: {
-        marginTop: 64,
-        marginHorizontal: 32,
+        flex: 1,
+        justifyContent: 'center',
+        marginHorizontal: 12,
         padding: 16,
         borderRadius: 8,
-        backgroundColor: 'grey',
         elevation: 2,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.35,
         shadowRadius: 4,
     },
-    buttons: {
-        marginTop: 8,
-    },
+
 });

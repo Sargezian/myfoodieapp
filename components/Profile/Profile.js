@@ -4,6 +4,7 @@ import {AuthContext} from "../../context/auth-context";
 import COLORS from "../../constants/colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as MailComposer from 'expo-mail-composer';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 
 
@@ -11,6 +12,7 @@ const settingsData = [
     { id: '1', title: 'Connect with Creator on Linkedin', subtitle: 'Lennart Sargezian' },
     { id: '2', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
     { id: '3', title: 'Signout', subtitle: 'Signout from you re account' },
+    { id: '4', title: 'Dark Mode', subtitle: 'Dark Mode' },
 
     // Add more settings options with titles and subtitles
 ];

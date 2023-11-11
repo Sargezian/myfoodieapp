@@ -35,8 +35,10 @@ const styles = StyleSheet.create({
         marginVertical: 8,
     },
     label: {
-        color: 'white',
-        marginBottom: 4,
+        fontSize: 17,
+        fontWeight: '600',
+        color: '#222',
+        marginBottom: 8,
     },
     labelInvalid: {
         color: COLORS.error500,

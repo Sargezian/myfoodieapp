@@ -20,12 +20,16 @@ const styles = StyleSheet.create({
     button: {
         paddingVertical: 6,
         paddingHorizontal: 12,
+
     },
     pressed: {
         opacity: 0.7,
     },
     buttonText: {
+        fontSize: 17,
+        fontWeight: '600',
+        color: '#222',
         textAlign: 'center',
-        color: 'black',
+        letterSpacing: 0.15,
     },
 });

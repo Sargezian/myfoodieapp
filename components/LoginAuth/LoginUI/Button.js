@@ -5,11 +5,13 @@ import COLORS from "../../../constants/colors";
 function Button({ children, onPress }) {
     return (
         <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            style={({ pressed }) => [styles.formAction, pressed && styles.pressed]}
             onPress={onPress}
         >
-            <View>
+            <View style={styles.formAction}>
+                <View style={styles.btn}>
                 <Text style={styles.buttonText}>{children}</Text>
+                </View>
             </View>
         </Pressable>
     );
@@ -18,24 +20,27 @@ function Button({ children, onPress }) {
 export default Button;
 
 const styles = StyleSheet.create({
-    button: {
-        borderRadius: 6,
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        backgroundColor: 'grey',
-        elevation: 2,
-        shadowColor: 'black',
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
     pressed: {
         opacity: 0.7,
     },
     buttonText: {
-        textAlign: 'center',
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold'
+        fontSize: 18,
+        lineHeight: 26,
+        fontWeight: '600',
+        color: '#fff',
+    },
+    formAction: {
+        marginVertical: 24,
+    },
+    btn: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderWidth: 1,
+        backgroundColor: '#d36d6c',
+        borderColor: '#d36d6c',
     },
 });

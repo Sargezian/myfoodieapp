@@ -313,6 +313,7 @@ function AuthStack() {
                 name="Login"
                 component={LoginScreen}
                 options={{
+                    headerShown: false,
                     headerStyle: {
                         backgroundColor: 'white',
                     },

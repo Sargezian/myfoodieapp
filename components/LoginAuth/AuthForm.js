@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 
 import Button from './LoginUI/Button';
 import Input from './Input';
@@ -46,13 +46,32 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
 
     return (
         <View style={styles.form}>
-            <View>
+
+            <View style={styles.header}>
+                <Image
+                    alt=""
+                    resizeMode="contain"
+                    style={styles.headerImg}
+                    source={require('../../assets/icon.png')}
+                />
+
+                <Text style={styles.title}>
+                    Sign in to <Text style={{ color: '#d36d6c' }}>MyFoodie</Text>
+                </Text>
+
+                <Text style={styles.subtitle}>
+                    Get access to your meals and more
+                </Text>
+            </View>
+
+            <View style={styles.inputContainer}>
                 <Input
                     label="Email Address"
                     onUpdateValue={updateInputValueHandler.bind(this, 'email')}
                     value={enteredEmail}
                     keyboardType="email-address"
                     isInvalid={emailIsInvalid}
+
                 />
                 {!isLogin && (
                     <Input
@@ -84,7 +103,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
                 )}
                 <View style={styles.buttons}>
                     <Button onPress={submitHandler}>
-                        {isLogin ? 'Log In' : 'Sign Up'}
+                        {isLogin ? 'Sign in' : 'Sign Up'}
                     </Button>
                 </View>
             </View>
@@ -95,7 +114,31 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
 export default AuthForm;
 
 const styles = StyleSheet.create({
-    buttons: {
-        marginTop: 12,
+
+    header: {
+        marginVertical: 36,
     },
+    headerImg: {
+        width: 80,
+        height: 80,
+        alignSelf: 'center',
+        marginBottom: 36,
+    },
+    title: {
+        fontSize: 27,
+        fontWeight: '700',
+        color: '#1d1d1d',
+        marginBottom: 6,
+        textAlign: 'center',
+    },
+    subtitle: {
+        fontSize: 15,
+        fontWeight: '500',
+        color: '#929292',
+        textAlign: 'center',
+    },
+    inputContainer: {
+
+    }
+
 });
