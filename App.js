@@ -251,7 +251,19 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={FavoritesScreen}
                 options={({ navigation }) => ({
+
+
                     headerTitle: "",
+
+                    headerLeft: () => (
+                        <View style={{ paddingLeft: 20 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>
+                                Favorite Meals
+                            </Text>
+                        </View>
+                    ),
+
+
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={40} />
                     ),
