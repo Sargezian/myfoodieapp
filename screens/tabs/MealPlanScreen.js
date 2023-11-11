@@ -1,5 +1,6 @@
-import {View, StyleSheet, FlatList, SafeAreaView, StatusBar, Platform} from 'react-native';
+import {View, StyleSheet, FlatList, SafeAreaView, StatusBar, Platform, Text} from 'react-native';
 import MealPlan from "../../components/MealPlan/MealPlan";
+import React from "react";
 
 function MealPlanScreen() {
 
@@ -8,6 +9,8 @@ function MealPlanScreen() {
 
         <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
+
+
             <FlatList
                 ListHeaderComponent={<MealPlan />}
                 // Other FlatList properties
@@ -29,4 +32,5 @@ const styles = StyleSheet.create({
 
 
     },
+
 });

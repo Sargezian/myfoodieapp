@@ -41,7 +41,7 @@ export const MEALS = [
             'The sauce will be done once the spaghetti are.',
             'Feel free to add some cheese on top of the finished dish.'
         ],
-        20
+        40
     ),
 
     new Meal(

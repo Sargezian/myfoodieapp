@@ -16,6 +16,7 @@ import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from "./DatePicker";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -63,6 +64,9 @@ function MealPlan() {
 
 
             <View style={styles.InnerContainer}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>Manage {'\n'}your meals <Icon name="pencil-alt" size={30} color='#000' /></Text>
+                </View>
 
                 <DatePicker/>
 
@@ -348,6 +352,18 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 16,
         color: 'blue',
+    },
+
+    header: {
+        paddingHorizontal: 16,
+    },
+
+    title: {
+        fontSize: 50,
+        fontWeight: '700',
+        color: '#1d1d1d',
+        lineHeight: 50,
+        paddingTop: 12,
     },
 
 });

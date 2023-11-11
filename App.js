@@ -133,7 +133,17 @@ function BottomTabNavigator() {
                     },
 
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="earth" color={'black'} size={40} />
+                        <Ionicons name="earth" color={color} size={40} />
+                    ),
+                    headerRight: () => (
+                        <View style={{ paddingRight: 10 }}>
+                            <IconButton
+                                icon="person-circle"
+                                color= 'black'
+                                size={30}
+                                onPress={null}
+                            />
+                        </View>
                     ),
                 }}
 
@@ -241,7 +251,7 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={FavoritesScreen}
                 options={{
-                    headerShown: false,
+                    headerTitle: "",
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="heart" color={color} size={40} />
                     ),
@@ -249,6 +259,16 @@ function BottomTabNavigator() {
                     tabBarLabelStyle: {
                         fontSize: 15, // Set the font size as needed
                     },
+                    headerRight: () => (
+                        <View style={{ paddingRight: 10 }}>
+                            <IconButton
+                                icon="person-circle"
+                                color= 'black'
+                                size={30}
+                                onPress={null}
+                            />
+                        </View>
+                    ),
                 }}
             />
 

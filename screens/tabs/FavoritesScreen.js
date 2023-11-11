@@ -28,6 +28,7 @@ function FavoritesScreen() {
         <SafeAreaView style={{ flex: 1 }}>
 
             <View style={styles.container}>
+                <Text style={styles.title}>Favorite Meals</Text>
         <MealFavoriteList
             items={favoriteMeals}
         />
@@ -45,6 +46,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    },
+    title: {
+        fontSize: 32,
+        fontWeight: '700',
+        color: '#1d1d1d',
+        marginHorizontal: 20,
     },
     rootContainer: {
         flex: 1,

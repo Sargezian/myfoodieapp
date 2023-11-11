@@ -2,10 +2,12 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import MealItem from '../MealFavoriteList/MealFavoriteItem';
 import {FavoritesContext} from "../../context/favorites-context";
 import {useContext} from "react";
-import {Ionicons} from "@expo/vector-icons";
+import {FontAwesome, Ionicons} from "@expo/vector-icons";
 
 function MealFavoriteList({ items }) {
+
     const favoriteMealsCtx = useContext(FavoritesContext);
+
 
     function renderMealItem(itemData) {
         const item = itemData.item;
@@ -24,14 +26,24 @@ function MealFavoriteList({ items }) {
         };
 
         return (
-            <View style={styles.mealContainer}>
+            <View style={styles.card}>
                 <MealItem {...mealItemProps} />
-                <Ionicons
-                    name={'trash'}
-                    color="black"
-                    size={28}
-                    onPress={removeFavoriteMealHandler}
-                />
+
+
+                    <View style={styles.cardLikeWrapper}>
+
+                        <View style={styles.cardLike}>
+                            <FontAwesome
+                                color={'black'}
+                                name="trash"
+                                solid={'black'}
+                                size={22}
+                                onPress={removeFavoriteMealHandler}
+                            />
+                        </View>
+
+                    </View>
+
             </View>
         );
     }
@@ -52,11 +64,41 @@ export default MealFavoriteList;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 4,
     },
     mealContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+
+    card: {
+        position: 'relative',
+        borderRadius: 8,
+        backgroundColor: '#fff',
+        marginBottom: 16,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+        elevation: 2,
+    },
+
+    cardLike: {
+        width: 48,
+        height: 48,
+        borderRadius: 9999,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cardLikeWrapper: {
+        position: 'absolute',
+        zIndex: 1,
+        top: 12,
+        right: 12,
+    },
+
 });

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 const { width } = Dimensions.get('window');
 
@@ -35,9 +35,6 @@ export default function DatePicker() {
     return (
 
         <>
-                <View style={styles.header}>
-                    <Text style={styles.title}>Manage {'\n'}your meals <Icon name="pencil-alt" size={30} color='#000' /></Text>
-                </View>
 
                 <View style={styles.picker}>
                     <Swiper
@@ -104,13 +101,6 @@ export default function DatePicker() {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 50,
-        fontWeight: '700',
-        color: '#1d1d1d',
-        lineHeight: 50,
-        paddingTop: 12,
-    },
 
     picker: {
         flex: 1,
@@ -119,9 +109,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    header: {
-        paddingHorizontal: 16,
-    },
+
     content: {
         paddingHorizontal: 16,
     },
