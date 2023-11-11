@@ -113,12 +113,7 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: 'white',
         elevation: 4,
-        shadowColor: 'black',
-        shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 8,
-        marginHorizontal: 20,
-        marginVertical: 10,
+
         flexDirection: 'column',
         borderRadius: 10,
         height: 255,

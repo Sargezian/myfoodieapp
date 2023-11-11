@@ -63,7 +63,7 @@ function MealPlan() {
 
 
 
-            <View style={styles.InnerContainer}>
+            <View style={styles.CalendarContainer}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Manage {'\n'}your meals <Icon name="pencil-alt" size={30} color='#000' /></Text>
                 </View>
@@ -258,6 +258,16 @@ const styles = StyleSheet.create({
 
     },
 
+
+    CalendarContainer: {
+        flex: 1,
+        backgroundColor: COLORS.white,
+        elevation: 4,
+        padding: 8,
+        marginHorizontal: 10,
+        marginVertical: 2.5,
+
+    },
 
     InnerContainer: {
         flex: 1,

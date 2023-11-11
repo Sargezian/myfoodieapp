@@ -92,8 +92,10 @@ function MyFoodieScreen() {
 
     return (
         <View style={styles.container}>
+
+            <View style={styles.headerContainer}>
             <Text style={styles.topText}>Hi Lennart!</Text>
-            <Text style={styles.underText}>Find a new meal for you</Text>
+            <Text style={styles.underText}>Let's find a new meal for you!</Text>
             <View style={styles.mealContainer}>
                 <View style={styles.mealType}>
                     <Text style={styles.mealTypeText}>Breakfast</Text>
@@ -104,6 +106,7 @@ function MyFoodieScreen() {
                 <View style={styles.mealType}>
                     <Text style={styles.mealTypeText}>Dinner</Text>
                 </View>
+            </View>
             </View>
 
             {meals
@@ -148,13 +151,17 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
 
     },
+
+    headerContainer: {
+        marginRight: 100,
+    },
+
     mealContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-
     },
     mealType: {
-        padding: 18,
+        padding: 12,
         backgroundColor: 'black',
         marginHorizontal: 4,
         borderRadius: 20,

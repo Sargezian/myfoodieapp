@@ -135,16 +135,6 @@ function BottomTabNavigator() {
                     tabBarIcon: ({color, size}) => (
                         <Ionicons name="earth" color={color} size={40}/>
                     ),
-                    headerRight: () => (
-                        <View style={{paddingRight: 10}}>
-                            <IconButton
-                                icon="person-circle"
-                                color='black'
-                                size={30}
-                                onPress={() => navigation.navigate('Profile')}
-                            />
-                        </View>
-                    ),
                 })}
 
             />
@@ -153,11 +143,7 @@ function BottomTabNavigator() {
                 name="MealPlan"
                 component={MealPlanScreen}
                 options={({ navigation }) => ({
-                    headerTitle: "",
-
-                    headerStyle: {
-                        backgroundColor: 'white',
-                    },
+                    headerShown: false,
                     ...Platform.select({
                         android: {
                             headerStyle: {
@@ -176,17 +162,6 @@ function BottomTabNavigator() {
                     tabBarLabelStyle: {
                         fontSize: 15, // Set the font size as needed
                     },
-
-                    headerRight: () => (
-                        <View style={{ paddingRight: 10 }}>
-                            <IconButton
-                                icon="person-circle"
-                                color= 'black'
-                                size={30}
-                                onPress={() => navigation.navigate('Profile')}
-                            />
-                        </View>
-                    ),
 
                 })}
             />
@@ -271,16 +246,7 @@ function BottomTabNavigator() {
                     tabBarLabelStyle: {
                         fontSize: 15, // Set the font size as needed
                     },
-                    headerRight: () => (
-                        <View style={{ paddingRight: 10 }}>
-                            <IconButton
-                                icon="person-circle"
-                                color='black'
-                                size={30}
-                                onPress={() => navigation.navigate('Profile')}
-                            />
-                        </View>
-                    ),
+
                 })}
             />
 
