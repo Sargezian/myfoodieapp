@@ -93,8 +93,18 @@ function MyFoodieScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.topText}>Hi Lennart!</Text>
-            <Text style={styles.underText}>Let's find a new receipt for you</Text>
-            <Text style={styles.underText}>buttons missing here</Text>
+            <Text style={styles.underText}>Find a new meal for you</Text>
+            <View style={styles.mealContainer}>
+                <View style={styles.mealType}>
+                    <Text style={styles.mealTypeText}>Breakfast</Text>
+                </View>
+                <View style={styles.mealType}>
+                    <Text style={styles.mealTypeText}>Lunch</Text>
+                </View>
+                <View style={styles.mealType}>
+                    <Text style={styles.mealTypeText}>Dinner</Text>
+                </View>
+            </View>
 
             {meals
                 .map((meal,  index) => {
@@ -138,6 +148,24 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
 
     },
+    mealContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
+    mealType: {
+        padding: 18,
+        backgroundColor: 'black',
+        marginHorizontal: 4,
+        borderRadius: 20,
+    },
+
+    mealTypeText: {
+        color: 'white',
+        fontSize: 15,
+
+    }
+
 });
 
 

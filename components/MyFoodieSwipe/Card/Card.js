@@ -88,7 +88,7 @@ export default function Card({
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        marginTop: 140,
+        marginTop: 160,
 
     },
     image: {
