@@ -137,8 +137,6 @@ const styles = StyleSheet.create({
         color: '#929292',
         textAlign: 'center',
     },
-    inputContainer: {
 
-    }
 
 });

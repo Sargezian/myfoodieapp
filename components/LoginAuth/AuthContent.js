@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     authContent: {
         flex: 1,
         justifyContent: 'center',
-        marginHorizontal: 12,
+
         padding: 16,
         borderRadius: 8,
         elevation: 2,
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.35,
         shadowRadius: 4,
+        backgroundColor: '#e1e1e1',
     },
 
 });

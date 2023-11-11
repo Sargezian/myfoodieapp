@@ -33,4 +33,5 @@ function LoginScreen() {
     return <AuthContent isLogin onAuthenticate={loginHandler} />;
 }
 
+
 export default LoginScreen;

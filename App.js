@@ -334,6 +334,7 @@ function AuthStack() {
                 name="Signup"
                 component={SignupScreen}
                 options={{
+                    headerShown: false,
                     headerStyle: {
                         backgroundColor: 'white',
                     },
