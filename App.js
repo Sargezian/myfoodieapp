@@ -123,7 +123,7 @@ function BottomTabNavigator() {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
                     }),
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Discover',
                     tabBarLabelStyle: {
                         fontSize: 15, // Set the font size as needed
                     },

@@ -17,6 +17,7 @@ function MealFavoriteItem({
                               time_estimate,
                               meal_type,
                       rating,
+                      review
                   }) {
 
     const navigations = useNavigation();
@@ -77,7 +78,7 @@ function MealFavoriteItem({
                         <Text style={styles.cardStars}>{rating}</Text>
 
 
-                        <Text style={styles.cardReviews}>({rating} reviews)</Text>
+                        <Text style={styles.cardReviews}>{review} review</Text>
 
 
 

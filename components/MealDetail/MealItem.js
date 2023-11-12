@@ -17,6 +17,7 @@ function MealItem({
                       time_estimate,
                       meal_type,
                       rating,
+                      review
                   }) {
     const navigation = useNavigation();
 
@@ -42,6 +43,7 @@ function MealItem({
                         time_estimate={time_estimate}
                         meal_type={meal_type}
                         rating={rating}
+                        review={review}
                     />
                 </View>
             </Pressable>

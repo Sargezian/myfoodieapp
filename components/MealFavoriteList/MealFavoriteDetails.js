@@ -4,6 +4,7 @@ function MealFavoriteDetails({
                                  time_estimate,
                                  meal_type,
                          rating,
+                         review,
                          style,
                          textStyle,
                      }) {
@@ -15,6 +16,9 @@ function MealFavoriteDetails({
             </Text>
             <Text style={[styles.detailItem, textStyle]}>
                 Rating: {rating}
+            </Text>
+            <Text style={[styles.detailItem, textStyle]}>
+                Review: {review}
             </Text>
         </View>
     );

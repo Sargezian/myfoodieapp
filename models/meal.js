@@ -10,7 +10,8 @@ class Meal {
         nutritional_content,
         ingredients,
         steps,
-        rating
+        rating,
+        review
     ) {
         this.id = id;
         this.categoryIds = categoryIds;
@@ -23,6 +24,7 @@ class Meal {
         this.nutritional_content = nutritional_content;
         this.meal_type = meal_type;
         this.rating = rating;
+        this.review = review;
     }
 }
 

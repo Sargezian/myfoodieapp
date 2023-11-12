@@ -19,6 +19,7 @@ function MealFavoriteList({ items }) {
             meal_type: item.meal_type,
             time_estimate: item.time_estimate,
             rating: item.rating,
+            review: item.review,
         };
 
         const removeFavoriteMealHandler = () => {

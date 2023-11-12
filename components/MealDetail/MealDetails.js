@@ -7,6 +7,7 @@ function MealDetails({
                          style,
                          textStyle,
                          rating,
+                         review
                      }) {
     return (
         <View style={[styles.details, style]}>
@@ -17,6 +18,7 @@ function MealDetails({
             </Text>
             <Text style={[styles.detailItem, textStyle]}>{rating}
             </Text>
+            <Text style={[styles.detailItem, textStyle]}>{review}</Text>
         </View>
     );
 }

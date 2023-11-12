@@ -41,7 +41,8 @@ export const MEALS = [
             'The sauce will be done once the spaghetti are.',
             'Feel free to add some cheese on top of the finished dish.'
         ],
-        40
+        4.5,
+        345
     ),
 
     new Meal(
@@ -65,7 +66,8 @@ export const MEALS = [
             'Layer ham, the pineapple and cheese on the white bread',
             'Bake the toast for round about 10 minutes in the oven at 200°C'
         ],
-        20
+        2.2,
+        50
     ),
 
     new Meal(
@@ -92,7 +94,8 @@ export const MEALS = [
             'Bruch buns with ketchup',
             'Serve burger with tomato, cucumber and onion'
         ],
-        20
+        3.4,
+        3
     ),
 
     new Meal(
@@ -123,7 +126,8 @@ export const MEALS = [
             'Remove, and drain on kitchen paper. Fry the parsley in the remaining oil and drain.',
             'Place the schnitzels on awarmed plate and serve garnishedwith parsley and slices of lemon.'
         ],
-        20
+        3.2,
+        76
     ),
 
     new Meal(
@@ -153,7 +157,8 @@ export const MEALS = [
             'Prepare the salad',
             'Add salmon cubes and dressing'
         ],
-        20
+        4.7,
+        4
     ),
 
     new Meal(
@@ -184,7 +189,8 @@ export const MEALS = [
             'Cool down again for at least 4 hours',
             'Serve with orange peel'
         ],
-        20
+        4.8,
+        8
     ),
 
     new Meal(
@@ -211,7 +217,8 @@ export const MEALS = [
             'Heat a lightly oiled griddle or frying pan over medium high heat.',
             'Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot.'
         ],
-        20
+        3.5,
+        25
     ),
 
     new Meal(
@@ -240,7 +247,8 @@ export const MEALS = [
             'Add coconut milk',
             'Serve with rice'
         ],
-        20
+        4.9,
+        1
     ),
 
     new Meal(
@@ -285,7 +293,8 @@ export const MEALS = [
             'Stop mixing after the egg white disappears. Divide mixture between 2 prepared ramekins. Place ramekins on prepared baking sheet.',
             'Bake in preheated oven until scuffles are puffed and have risen above the top of the rims, 12 to 15 minutes.'
         ],
-        20
+        2.4,
+        6
     ),
     new Meal(
         'm10',
@@ -312,5 +321,7 @@ export const MEALS = [
             'Mix with asparagus, salad and dressing',
             'Serve with Baguette'
         ],
+        3.1,
+        5
     )
 ];

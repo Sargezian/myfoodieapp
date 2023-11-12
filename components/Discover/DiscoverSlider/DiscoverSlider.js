@@ -75,7 +75,7 @@ function DiscoverSlider({ route,  id}) {
                                 style={{ marginBottom: 2 }}
                             />
                             <Text style={styles.cardStars}> {meal.rating}</Text>
-                            <Text style={styles.cardReviews}> ({meal.rating} reviews)</Text>
+                            <Text style={styles.cardReviews}> {meal.review} review</Text>
 
                                 <View style={styles.cardLike}>
                             <TouchableOpacity
