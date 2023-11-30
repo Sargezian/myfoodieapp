@@ -1,15 +1,14 @@
 import {View, Text, Image, StyleSheet, ScrollView, Platform, TextInput} from 'react-native';
 
-import List from '../components/MealDetail/List';
-import Subtitle from '../components/MealDetail/Subtitle';
-import MealDetails from '../components/MealDetail/MealDetails';
-import { MEALS } from '../data/dummydata';
-import { FavoritesContext } from '../context/favorites-context';
+import List from '../../components/MealDetail/List';
+import Subtitle from '../../components/MealDetail/Subtitle';
+import MealDetails from '../../components/MealDetail/MealDetails';
+import { MEALS } from '../../data/dummydata';
+import { FavoritesContext } from '../../context/favorites-context';
 import React, {useContext, useLayoutEffect} from "react";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
-import COLORS from "../constants/colors";
-import Ratings from "../components/Ratings";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import COLORS from "../../constants/colors";
+import Ratings from "../../components/MealDetail/Ratings";
 
 
 function MealDetailScreen({ route, navigation }) {

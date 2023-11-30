@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-elements';
-import COLORS from "../constants/colors";
+import COLORS from "../../constants/colors";
 
 class Ratings extends React.Component {
 

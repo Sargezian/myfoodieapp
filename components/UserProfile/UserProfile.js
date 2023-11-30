@@ -1,8 +1,24 @@
-import {Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native'
+import {Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import {Ionicons} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
 
 export default function UserProfile() {
+
+
+    const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+
+    const handleFollowersPress = () => {
+        // Navigate to FollowersListScreen.js
+        navigation.navigate('Followers');
+    };
+
+    const handleFollowingsPress = () => {
+        // Navigate to FollowersListScreen.js
+        navigation.navigate('Following');
+    };
+
+
 
     return (
 
@@ -14,6 +30,18 @@ export default function UserProfile() {
                 </View>
                 <View style={styles.userNameContainer}>
                     <Text style={styles.userNameText}> Username </Text>
+
+                    <View style={styles.FollowerNumbersContainer}>
+
+                        <TouchableOpacity onPress={handleFollowersPress}>
+                            <Text style={styles.FollowerNumbersText}> 0 followers </Text>
+                        </TouchableOpacity>
+                        <Text style={styles.FollowerNumbersText}> · </Text>
+                        <TouchableOpacity onPress={handleFollowingsPress}>
+                            <Text style={styles.FollowerNumbersText}> 1 following</Text>
+                        </TouchableOpacity>
+
+                    </View>
                     <View style={styles.Follow}>
                         <Text style={styles.FollowText}>Follow</Text>
                     </View>
@@ -52,21 +80,21 @@ const styles = StyleSheet.create({
     },
 
     userNameContainer: {
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         marginHorizontal: 20,
     },
 
     userNameText: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'bold',
 
     },
 
 
     Follow: {
-        height: 50,
-        width: 100,
+        height: 40,
+        width: 80,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'black',
@@ -82,14 +110,23 @@ const styles = StyleSheet.create({
     },
 
     FollowText: {
-        fontSize: 20,
+        fontSize: 18,
         color: 'white',
         fontWeight: 'bold',
 
     },
 
+    FollowerNumbersContainer: {
+        flexDirection: 'row',
+    },
 
 
+    FollowerNumbersText: {
+
+        fontSize: 14,
+        color: 'black',
+
+    }
 
 
 

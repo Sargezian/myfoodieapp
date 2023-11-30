@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
-import { MEALS, CATEGORIES } from '../data/dummydata';
-import MealCategoryList from "../components/Discover/MealCategoryList/MealCategoryList";
+import { MEALS, CATEGORIES } from '../../data/dummydata';
+import MealCategoryList from "../../components/Discover/MealCategoryList/MealCategoryList";
 
 function CategoryDetailScreen({ route, navigation }) {
     const categoryId = route.params.categoryId;

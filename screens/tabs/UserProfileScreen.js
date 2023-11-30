@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native'
 import React from 'react'
-import UserProfile from "../components/UserProfile/UserProfile";
-import FavoriteMeals from "../components/UserProfile/FavoriteMeals";
+import UserProfile from "../../components/UserProfile/UserProfile";
+import FavoriteMeals from "../../components/UserProfile/FavoriteMeals";
 
 
 export default function UserProfileScreen() {

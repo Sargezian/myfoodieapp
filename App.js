@@ -12,26 +12,28 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import COLORS from "./constants/colors";
-import CategoriesScreen from "./screens/tabs/CategoriesScreen";
-import CategoryDetailScreen from "./screens/CategoryDetailScreen";
-import MealDetailScreen from "./screens/MealDetailScreen";
+import CategoriesScreen from "./screens/bottomTabs/CategoriesScreen";
+import CategoryDetailScreen from "./screens/tabs/CategoryDetailScreen";
+import MealDetailScreen from "./screens/tabs/MealDetailScreen";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons'
-import FavoritesScreen from "./screens/tabs/FavoritesScreen";
-import MyFoodieScreen from "./screens/tabs/MyFoodieScreen";
-import MealPlanScreen from "./screens/tabs/MealPlanScreen";
-import SignupScreen from "./screens/login/SignupScreen";
-import LoginScreen from "./screens/login/LoginScreen";
+import FavoritesScreen from "./screens/bottomTabs/FavoritesScreen";
+import MyFoodieScreen from "./screens/bottomTabs/MyFoodieScreen";
+import MealPlanScreen from "./screens/bottomTabs/MealPlanScreen";
+import SignupScreen from "./screens/tabs/login/SignupScreen";
+import LoginScreen from "./screens/tabs/login/LoginScreen";
 import AuthContextProvider, {AuthContext} from './context/auth-context';
 import React, {useContext, useEffect, useState} from "react";
 import IconButton from "./components/LoginAuth/LoginUI/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
-import Splash from "./screens/SplashScreen"
+import Splash from "./screens/tabs/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
-import ProfileScreen from "./screens/tabs/ProfileScreen"
-import UserProfileScreen from "./screens/UserProfileScreen";
+import ProfileScreen from "./screens/bottomTabs/ProfileScreen"
+import UserProfileScreen from "./screens/tabs/UserProfileScreen";
+import FollowersListScreen from "./screens/tabs/FollowersListScreen";
+import FollowingListScreen from "./screens/tabs/FollowingListScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -411,6 +413,15 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="MealDetail"
                     component={MealDetailScreen} />
+
+                <Stack.Screen
+                    name="Followers"
+                    component={FollowersListScreen} />
+
+                <Stack.Screen
+                    name="Following"
+                    component={FollowingListScreen} />
+
 
                 <Stack.Screen
                     name="skip"

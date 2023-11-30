@@ -19,12 +19,20 @@ const settingsData = [
     // Add more settings options with titles and subtitles
 ];
 
-
-
 function Settings() {
 
     const AuthCxt = useContext(AuthContext);
     const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+
+    const handleFollowersPress = () => {
+        // Navigate to FollowersListScreen.js
+        navigation.navigate('Followers');
+    };
+
+    const handleFollowingsPress = () => {
+        // Navigate to FollowersListScreen.js
+        navigation.navigate('Following');
+    };
 
 
     const handleSettingsItemPress = (item) => {
@@ -97,11 +105,24 @@ function Settings() {
 
                 </View>
 
-                <Text style={styles.name}>
+                <View style={styles.nameContainer}>
 
-                    <Text> Name + 0 followers + 1 following</Text>
+                    <Text style={styles.name}> Username</Text>
 
-                </Text>
+                </View>
+
+                <View style={styles.followerContainer}>
+
+                    <TouchableOpacity onPress={handleFollowersPress}>
+                        <Text> 0 followers </Text>
+                    </TouchableOpacity>
+                    <Text> · </Text>
+                    <TouchableOpacity onPress={handleFollowingsPress}>
+                        <Text> 1 following</Text>
+                    </TouchableOpacity>
+
+                </View>
+
 
                 <Text style={styles.email}>
 
@@ -109,18 +130,12 @@ function Settings() {
 
                 </Text>
 
-
             </View>
 
-
             <View style={styles.profileIconContainer}>
-
-
                 <View style={styles.itemIcon}>
-
                     <Ionicons name="cog" color={'black'} size={40} />
                     <Text style={styles.subtitle}>Edit Profile</Text>
-
                 </View>
 
                 <View style={styles.itemIcon}>
@@ -134,7 +149,6 @@ function Settings() {
                 </View>
 
             </View>
-
 
             <View style={styles.listContainer}>
 
@@ -176,11 +190,6 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
-    name: {
-        flex: 1,
-        marginVertical: 5,
-    },
-
     email: {
         flex: 1,
         marginVertical: 5,
@@ -214,10 +223,6 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
-
-
-
-
     settingsList: {
         flexGrow: 1,
     },
@@ -234,6 +239,27 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#666',
     },
+
+    followerContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+
+    },
+
+    nameContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+
+    name: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+
+
 });
 
 export default Settings;
