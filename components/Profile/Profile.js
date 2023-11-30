@@ -5,6 +5,7 @@ import COLORS from "../../constants/colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as MailComposer from 'expo-mail-composer';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import {useNavigation} from "@react-navigation/native";
 
 
 
@@ -13,6 +14,7 @@ const settingsData = [
     { id: '2', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
     { id: '3', title: 'Signout', subtitle: 'Signout from you re account' },
     { id: '4', title: 'Dark Mode', subtitle: 'Dark Mode' },
+    { id: '5', title: 'userprofile', subtitle: 'user' },
 
     // Add more settings options with titles and subtitles
 ];
@@ -22,6 +24,8 @@ const settingsData = [
 function Settings() {
 
     const AuthCxt = useContext(AuthContext);
+    const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+
 
     const handleSettingsItemPress = (item) => {
         console.log(`Selected: ${item.title}`);
@@ -37,6 +41,12 @@ function Settings() {
 
         else if (item.id === '3') {
             AuthCxt.logout();
+        }
+        else if (item.id === '4') {
+
+        }
+        else if (item.id === '5') {
+            navigation.navigate('UserProfile');
         }
 
         else {

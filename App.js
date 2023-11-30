@@ -31,6 +31,7 @@ import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
 import ProfileScreen from "./screens/tabs/ProfileScreen"
+import UserProfileScreen from "./screens/UserProfileScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -451,6 +452,15 @@ function AuthenticatedStack() {
                                 ) : null
                             ),
                         };
+                    }}
+                />
+
+
+                <Stack.Screen
+                    name="UserProfile"
+                    component={UserProfileScreen}
+                    options={{
+                        headerTitle: "",
                     }}
                 />
 
