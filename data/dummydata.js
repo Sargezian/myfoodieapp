@@ -21,7 +21,7 @@ export const MEALS = [
         'Spaghetti',
         'Spaghetti with Tomato Sauce',
         'Lunch',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
+        'https://images.arla.com/recordid/25283F6D-DC5A-4845-83ACFA4F53FBA197/pasta-med-bagte-tomater.jpg',
         20,
         ['calories:500","protein:12'],
         [

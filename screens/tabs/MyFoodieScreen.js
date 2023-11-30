@@ -10,6 +10,7 @@ const { width, height } = Dimensions.get('screen');
 export const ACTION_OFFSET = 100;
 
 import {MEALS, MEALS as mealsArray} from "../../data/dummydata";
+import {getDishes} from "../../API/Dish/DishAPI";
 
 function MyFoodieScreen() {
 
@@ -25,6 +26,24 @@ function MyFoodieScreen() {
             setMeals(mealsArray);
         }
     }, [meals.length]);
+
+
+/*    useEffect(() => {
+        const fetchMeals = async () => {
+            try {
+                const fetchedMeals = await getDishes();
+                setMeals(fetchedMeals);
+                console.log(fetchedMeals)
+            } catch (error) {
+                console.error('Error fetching meals:', error);
+            }
+        };
+
+        if (!meals.length) {
+            fetchMeals();
+        }
+    }, [meals.length]);*/
+
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
