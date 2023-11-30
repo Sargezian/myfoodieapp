@@ -10,14 +10,14 @@ import { useNavigation } from '@react-navigation/native';
 import {FontAwesome} from "@expo/vector-icons";
 
 function MealFavoriteItem({
-                      id,
-                      name,
-                      imageUrl,
+                              id,
+                              name,
+                              imageUrl,
                               time_estimate,
                               meal_type,
-                      rating,
-                      review
-                  }) {
+                              rating,
+                              review
+                          }) {
 
     const navigations = useNavigation();
 
@@ -47,13 +47,13 @@ function MealFavoriteItem({
                 <View style={styles.innerContainer}>
 
                     <View style={styles.cardTop}>
-                    <Image
-                        alt=""
-                        resizeMode="cover"
-                        style={styles.cardImg}
-                        source={{ uri: imageUrl }}
-                    />
-                </View>
+                        <Image
+                            alt=""
+                            resizeMode="cover"
+                            style={styles.cardImg}
+                            source={{ uri: imageUrl }}
+                        />
+                    </View>
 
                     <View style={styles.TextHolder}>
 
@@ -66,27 +66,20 @@ function MealFavoriteItem({
                         <Text >Pasta salad mainly consists of pasta mixed with vegetables</Text>
 
                         <View style={styles.cardFooter}>
-                        <FontAwesome
-                            color="#ea266d"
-                            name="star"
-                            solid={true}
-                            size={12}
-                            style={{ marginBottom: 2 }}
-                        />
+                            <FontAwesome
+                                color="#ea266d"
+                                name="star"
+                                solid={true}
+                                size={12}
+                                style={{ marginBottom: 2 }}
+                            />
 
-                        <Text style={styles.cardStars}>{rating}</Text>
-
-
-                        <Text style={styles.cardReviews}>{review} review</Text>
+                            <Text style={styles.cardStars}>{rating}</Text>
 
 
+                            <Text style={styles.cardReviews}>{review} review</Text>
 
 
-                        {/*<MealDetails
-                            time_estimate={time_estimate}
-                            meal_type={meal_type}
-                            rating={rating}
-                        />*/}
                         </View>
 
                     </View>
