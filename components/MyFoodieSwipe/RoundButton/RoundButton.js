@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         marginHorizontal: 20,
         width: 160,
         height: 60,
-        backgroundColor: COLORS.BGColor,
+        backgroundColor: '#ffebeb',
         elevation: 2,
         borderRadius: 40,
         justifyContent: 'center',

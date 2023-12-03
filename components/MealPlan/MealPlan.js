@@ -3,18 +3,14 @@ import {
     StyleSheet,
     Text,
     Switch,
-    ScrollView,
     Image,
     Platform,
     Dimensions,
-    FlatList,
-    TouchableOpacity
 } from 'react-native';
 import COLORS from "../../constants/colors";
 import {MEALS} from "../../data/dummydata";
 import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from "./DatePicker";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
@@ -230,6 +226,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 8,
+        backgroundColor: '#ffebeb',
     },
 
 
@@ -237,7 +234,6 @@ const styles = StyleSheet.create({
         flex: 0.25,
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -252,7 +248,6 @@ const styles = StyleSheet.create({
     dateText: {
         fontWeight: 'bold',
         fontSize: 15,
-
     },
 
     CalendarContainer: {
@@ -260,11 +255,12 @@ const styles = StyleSheet.create({
         padding: 8,
         marginHorizontal: 10,
         marginVertical: 2.5,
+
     },
 
     InnerContainer: {
         flex: 1,
-        backgroundColor: COLORS.BGColor,
+        backgroundColor: '#ffebeb',
         shadowColor: 'black',
         shadowOpacity: 0.10,
         shadowOffset: { width: 0, height: 2 },
@@ -282,7 +278,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         elevation: 4,
-        backgroundColor: COLORS.BGColor,
+        backgroundColor: '#ffebeb',
         shadowColor: 'black',
         shadowOpacity: 0.10,
         shadowOffset: { width: 0, height: 2 },

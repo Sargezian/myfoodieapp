@@ -88,7 +88,7 @@ function BottomTabNavigator() {
 
             screenOptions={{
 
-                tabBarActiveTintColor: COLORS.darkMainColor,
+                tabBarActiveTintColor: '#b16767',
 
                 headerTintColor: 'black',
 
