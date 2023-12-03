@@ -54,12 +54,21 @@ const CustomTabBarButton = ({children, onPress}) => (
             height: 70,
             borderRadius: 35,
             backgroundColor: COLORS.HEADERColor,
-            shadowColor: 'black',
-            shadowOpacity: 0.25,
-            shadowOffset: { width: 0, height: 2 },
-            shadowRadius: 8,
-            overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        }}>
+            ...Platform.select({
+                ios: {
+                    shadowColor: 'black',
+                    shadowOpacity: 0.25,
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowRadius: 8,
+                    overflow: 'visible',
+                },
+                android: {
+                    elevation: 8,
+                    overflow: 'hidden',
+                },
+            }),
+        }}
+        >
             {children}
         </View>
     </TouchableOpacity>
@@ -89,15 +98,23 @@ function BottomTabNavigator() {
                 },
 
                 tabBarStyle: {
-
                     backgroundColor: COLORS.HEADERColor,
-                    elevation: 0,
                     borderRadius: 20,
-                    height: Platform.OS === 'android' ? 70 : 100, // Adjust the height for both platforms
-                    shadowColor: 'black',
-                    shadowOpacity: 0.15,
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowRadius: 8,
+                    height: Platform.OS === 'android' ? 80 : 100, // Adjust the height for both platforms
+                    ...Platform.select({
+                        ios: {
+                            borderBottomWidth: 1,
+                            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+                        },
+                        android: {
+                            elevation: 8,
+                            shadowColor: 'black',
+                            shadowOpacity: 0.15,
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowRadius: 8,
+                        },
+
+                    }),
 
                 },
 
