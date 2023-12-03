@@ -148,7 +148,7 @@ function MyFoodieScreen() {
                 })
                 .reverse()}
 
-            <Footer handleChoice={handleChoice}/>
+            <Footer style={styles.footerStyle}  handleChoice={handleChoice}/>
         </View>
     );
 }
@@ -158,6 +158,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
+
+    footerStyle: {
+        flex: 1,
+
+    },
+
     topText: {
         fontSize: 40,
         fontWeight: 'bold',

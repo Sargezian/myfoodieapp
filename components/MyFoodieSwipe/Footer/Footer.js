@@ -10,13 +10,13 @@ export default function Footer({ handleChoice }) {
             <RoundButton
                 name="times"
                 size={40}
-                color={COLORS.nope}
+                color={COLORS.white}
                 onPress={() => handleChoice(-1)}
             />
             <RoundButton
                 name="heart"
                 size={34}
-                color={COLORS.like}
+                color={COLORS.white}
                 onPress={() => handleChoice(1)}
             />
         </View>
@@ -26,11 +26,8 @@ export default function Footer({ handleChoice }) {
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 550,
-        width: 270,
+        top: Platform.OS === 'android' ? 580 : 560, // Adjust the top value for both platforms
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
         zIndex: 1,
     },
 });

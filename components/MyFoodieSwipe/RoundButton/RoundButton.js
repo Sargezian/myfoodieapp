@@ -35,9 +35,10 @@ export default function RoundButton({ name, size, color, onPress }) {
 
 export const styles = StyleSheet.create({
     container: {
-        width: 70,
-        height: 70,
-        backgroundColor: 'rgba(255,255,255,0)',
+        marginHorizontal: 20,
+        width: 130,
+        height: 60,
+        backgroundColor: 'black',
         elevation: 5,
         borderRadius: 40,
         justifyContent: 'center',
