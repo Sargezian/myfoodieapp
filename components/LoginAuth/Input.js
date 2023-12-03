@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import {View, Text, TextInput, StyleSheet, Platform} from 'react-native';
 
 import COLORS from "../../constants/colors";
 
@@ -33,6 +33,7 @@ export default Input;
 const styles = StyleSheet.create({
     inputContainer: {
         marginVertical: 8,
+
     },
     label: {
         fontSize: 17,
@@ -46,9 +47,15 @@ const styles = StyleSheet.create({
     input: {
         paddingVertical: 8,
         paddingHorizontal: 6,
-        backgroundColor: 'white',
-        borderRadius: 4,
         fontSize: 16,
+        borderRadius: 10,
+        elevation: 4,
+        backgroundColor: COLORS.white,
+        shadowColor: 'black',
+        shadowOpacity: 0.10,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 2,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
     inputInvalid: {
         backgroundColor: COLORS.error100,

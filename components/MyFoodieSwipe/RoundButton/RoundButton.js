@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react';
-import {Animated, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Animated, Platform, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import COLORS from "../../../constants/colors";
 
 export default function RoundButton({ name, size, color, onPress }) {
     const scale = useRef(new Animated.Value(1)).current;
@@ -27,7 +28,7 @@ export default function RoundButton({ name, size, color, onPress }) {
             delayPressOut={110}
         >
             <Animated.View style={[styles.container, { transform: [{ scale }] }]}>
-                <FontAwesome name={name} size={size} color={color} />
+                <FontAwesome name={name} size={size} color={'black'} />
             </Animated.View>
         </TouchableWithoutFeedback>
     );
@@ -36,12 +37,18 @@ export default function RoundButton({ name, size, color, onPress }) {
 export const styles = StyleSheet.create({
     container: {
         marginHorizontal: 20,
-        width: 130,
+        width: 160,
         height: 60,
-        backgroundColor: 'black',
-        elevation: 5,
+        backgroundColor: COLORS.BGColor,
+        elevation: 2,
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center',
+        shadowColor: 'black',
+        shadowOpacity: 0.10,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+
     },
 });

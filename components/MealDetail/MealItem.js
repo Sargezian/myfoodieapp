@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import MealDetails from './MealDetails';
+import COLORS from "../../constants/colors";
 
 function MealItem({
                       id,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
         margin: 16,
         borderRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,

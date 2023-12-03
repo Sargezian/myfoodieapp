@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         marginHorizontal: 12,
         backgroundColor: COLORS.white,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.10,
+        shadowRadius: 4,
     },
     itemText: {
         color: '#000000',

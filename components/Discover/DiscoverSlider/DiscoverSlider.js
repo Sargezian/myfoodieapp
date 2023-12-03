@@ -13,6 +13,7 @@ import Button from '../DiscoverSlider/Button';
 import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import { FavoritesContext } from '../../../context/favorites-context';
 import {useNavigation} from "@react-navigation/native";
+import COLORS from "../../../constants/colors";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     container: {
-        backgroundColor: 'white',
+        backgroundColor: COLORS.BGColor,
     },
     card: {
         alignItems: 'flex-start',

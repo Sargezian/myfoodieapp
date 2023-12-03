@@ -124,4 +124,6 @@ export const styles = StyleSheet.create({
         right: 45,
         transform: [{ rotate: '30deg' }],
     },
+
+
 });

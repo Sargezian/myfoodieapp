@@ -6,6 +6,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import Slide from "../Skip/Slide";
+import COLORS from "../../constants/colors";
 
 const { width } = Dimensions.get("window");
 
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         width,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: COLORS.BGColor,
     },
     TitleText: {
         fontSize: 50,

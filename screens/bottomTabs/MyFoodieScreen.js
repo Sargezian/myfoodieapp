@@ -1,6 +1,5 @@
 import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {Animated, PanResponder, StyleSheet, View,Text} from 'react-native';
-
+import {Animated, PanResponder, StyleSheet, View, Text, Platform} from 'react-native';
 import Card from '../../components/MyFoodieSwipe/Card/Card';
 import Footer from '../../components/MyFoodieSwipe/Footer/Footer';
 import { FavoritesContext } from '../../context/favorites-context';
@@ -11,6 +10,7 @@ export const ACTION_OFFSET = 100;
 
 import {MEALS, MEALS as mealsArray} from "../../data/dummydata";
 import {getDishes} from "../../API/Dish/DishAPI";
+import COLORS from "../../constants/colors";
 
 function MyFoodieScreen() {
 
@@ -116,6 +116,9 @@ function MyFoodieScreen() {
             <Text style={styles.topText}>Hi Lennart!</Text>
             <Text style={styles.underText}>Let's find a new meal for you!</Text>
             <View style={styles.mealContainer}>
+                <View style={styles.allMealType}>
+                    <Text style={styles.allMealTypeText}>All types</Text>
+                </View>
                 <View style={styles.mealType}>
                     <Text style={styles.mealTypeText}>Breakfast</Text>
                 </View>
@@ -178,23 +181,52 @@ export const styles = StyleSheet.create({
     },
 
     headerContainer: {
-        marginRight: 100,
+
     },
 
     mealContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    mealType: {
+
+
+    allMealType: {
         padding: 12,
         backgroundColor: 'black',
         marginHorizontal: 4,
         borderRadius: 20,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOpacity: 0.10,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
+    mealType: {
+        padding: 12,
+        backgroundColor: COLORS.white,
+        marginHorizontal: 4,
+        borderRadius: 20,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOpacity: 0.10,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
+    allMealTypeText:  {
+        color: 'white',
+        fontSize: 15,
+        fontWeight: 'bold'
+
     },
 
     mealTypeText: {
-        color: 'white',
+        color: 'black',
         fontSize: 15,
+        fontWeight: 'bold'
 
     }
 

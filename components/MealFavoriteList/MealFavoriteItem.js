@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {FontAwesome} from "@expo/vector-icons";
+import COLORS from "../../constants/colors";
 
 function MealFavoriteItem({
                       id,
@@ -111,9 +112,8 @@ const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         elevation: 4,
-
         flexDirection: 'column',
         borderRadius: 10,
         height: 255,

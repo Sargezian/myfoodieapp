@@ -113,7 +113,7 @@ function MealPlan() {
 
                     <View style={styles.switchTextContainer}>
                     <Switch
-                        trackColor={{false: '#767577', true: 'lightgreen'}}
+                        trackColor={{false: '#767577', true: COLORS.darkMainColor}}
                         thumbColor={isBreakfastEnabled ? 'ffffff' : '#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={breakfastToggleSwitch}
@@ -144,7 +144,7 @@ function MealPlan() {
 
                     <View style={styles.switchTextContainer}>
                         <Switch
-                            trackColor={{false: '#767577', true: 'lightgreen'}}
+                            trackColor={{false: '#767577', true: COLORS.darkMainColor}}
                             thumbColor={isLunchEnabled ? '#ffffff' : '#f4f3f4'}
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={lunchToggleSwitch}
@@ -175,7 +175,7 @@ function MealPlan() {
 
                     <View style={styles.switchTextContainer}>
                         <Switch
-                            trackColor={{false: '#767577', true: 'lightgreen'}}
+                            trackColor={{false: '#767577', true: COLORS.darkMainColor}}
                             thumbColor={isDinnerEnabled ? '#ffffff' : '#f4f3f4'}
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={dinnerToggleSwitch}
@@ -226,7 +226,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor: 'white',
         marginRight: -50,
         marginTop: 10,
         marginBottom: 10,
@@ -237,9 +236,7 @@ const styles = StyleSheet.create({
     Calender: {
         flex: 0.25,
         flexDirection: 'column',
-
         alignItems: 'center',
-
         backgroundColor: COLORS.white,
         shadowColor: 'black',
         shadowOpacity: 0.25,
@@ -258,22 +255,18 @@ const styles = StyleSheet.create({
 
     },
 
-
     CalendarContainer: {
         flex: 1,
-        backgroundColor: COLORS.white,
-        elevation: 4,
         padding: 8,
         marginHorizontal: 10,
         marginVertical: 2.5,
-
     },
 
     InnerContainer: {
         flex: 1,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.BGColor,
         shadowColor: 'black',
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.10,
         shadowOffset: { width: 0, height: 2 },
         borderRadius: 20,
         elevation: 4,
@@ -281,6 +274,7 @@ const styles = StyleSheet.create({
         padding: 8,
         marginHorizontal: 10,
         marginVertical: 2.5,
+
     },
 
     CalorieInnerContainer: {
@@ -288,9 +282,9 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         elevation: 4,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.BGColor,
         shadowColor: 'black',
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.10,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 8,
     },

@@ -3,8 +3,8 @@ import { Alert, StyleSheet, View, Text } from 'react-native';
 
 import FlatButton from './LoginUI/FlatButton';
 import AuthForm from './AuthForm';
-import COLORS from "../../constants/colors";
 import {useNavigation} from "@react-navigation/native";
+import COLORS from "../../constants/colors";
 
 function AuthContent({ isLogin, onAuthenticate }) {
     const navigation = useNavigation();
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     authContent: {
         flex: 1,
         justifyContent: 'center',
-
         padding: 16,
         borderRadius: 8,
         elevation: 2,
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.35,
         shadowRadius: 4,
-        backgroundColor: '#e1e1e1',
+        backgroundColor: COLORS.BGColor,
     },
 
 });

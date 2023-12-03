@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
+import COLORS from "../../constants/colors";
 
 
 const { width } = Dimensions.get('window');
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
         borderColor: '#e3e3e3',
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: COLORS.white,
     },
     itemWeekday: {
         fontSize: 13,

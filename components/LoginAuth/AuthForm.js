@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 
 import Button from './LoginUI/Button';
 import Input from './Input';
+import COLORS from "../../constants/colors";
 
 function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
     const [enteredEmail, setEnteredEmail] = useState('');
@@ -56,7 +57,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
                 />
 
                 <Text style={styles.title}>
-                    Sign in to <Text style={{ color: '#d36d6c' }}>MyFoodie</Text>
+                    Sign in to <Text style={{ color: COLORS.mainColor }}>MyFoodie</Text>
                 </Text>
 
                 <Text style={styles.subtitle}>

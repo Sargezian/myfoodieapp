@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 
 import RoundButton from '../RoundButton/RoundButton';
 import COLORS from "../../../constants/colors";

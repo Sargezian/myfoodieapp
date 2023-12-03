@@ -3,10 +3,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import COLORS from "../../../constants/colors";
 
 export default function Choice({ type }) {
-    const color = COLORS[type];
+    const color = COLORS.BGColor;
 
     return (
-        <View style={[styles.container, { borderColor: color }]}>
+        <View style={[styles.container, { borderColor: COLORS.BGColor }]}>
             <Text style={[styles.text, { color }]}>{type}</Text>
         </View>
     );

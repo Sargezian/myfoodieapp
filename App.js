@@ -26,7 +26,6 @@ import AuthContextProvider, {AuthContext} from './context/auth-context';
 import React, {useContext, useEffect, useState} from "react";
 import IconButton from "./components/LoginAuth/LoginUI/IconButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SplashScreen from 'expo-splash-screen';
 import FavoritesContextProvider from "./context/favorites-context";
 import Splash from "./screens/tabs/SplashScreen"
 import SkipScreen from "./components/Skip/Skip";
@@ -50,10 +49,12 @@ const CustomTabBarButton = ({children, onPress}) => (
         onPress= {onPress}
     >
         <View style={{
-            width: 70,
-            height: 70,
+            width: 80,
+            height: 80,
             borderRadius: 35,
-            backgroundColor: COLORS.HEADERColor,
+            borderWidth: 4,
+            borderColor: '#ffc7c7',
+            backgroundColor: '#ffd9d9',
             ...Platform.select({
                 ios: {
                     shadowColor: 'black',
@@ -87,20 +88,20 @@ function BottomTabNavigator() {
 
             screenOptions={{
 
-                tabBarActiveTintColor: 'black',
+                tabBarActiveTintColor: COLORS.darkMainColor,
 
                 headerTintColor: 'black',
 
                 headerStyle: {
 
-                    backgroundColor: COLORS.HEADERColor
+                    backgroundColor: COLORS.BGColor
 
                 },
 
                 tabBarStyle: {
-                    backgroundColor: COLORS.HEADERColor,
-                    borderRadius: 20,
-                    height: Platform.OS === 'android' ? 80 : 100, // Adjust the height for both platforms
+                    backgroundColor: COLORS.BGColor,
+
+                    height: Platform.OS === 'android' ? 80 : 100,
                     ...Platform.select({
                         ios: {
                             borderBottomWidth: 1,
@@ -130,7 +131,7 @@ function BottomTabNavigator() {
 
 
                     headerStyle: {
-                        backgroundColor: 'white',
+                        backgroundColor: COLORS.BGColor,
                     },
                     ...Platform.select({
                         android: {
@@ -197,11 +198,12 @@ function BottomTabNavigator() {
                     tabBarIcon: () => (
 
                         <Image
-                            source={require('./assets/1.png')}
+                            source={require('./assets/Strawberry.png')}
                             resizeMode="contain"
                             style={{
-                                width: 80,
-                                height: 80,
+                                marginTop: 10,
+                                width: 60,
+                                height: 60,
 
                             }}
                         />
@@ -212,7 +214,7 @@ function BottomTabNavigator() {
 
 
                     headerStyle: {
-                        backgroundColor: 'white',
+                        backgroundColor: COLORS.BGColor,
                     },
                     ...Platform.select({
                         android: {
@@ -223,7 +225,7 @@ function BottomTabNavigator() {
                         ios: {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
-                    }), // Close the Platform.select
+                    }),
 
 
                     headerRight: () => (
@@ -298,7 +300,7 @@ function AuthStack() {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: COLORS.HEADERColor },
+                headerStyle: { backgroundColor: COLORS.BGColor },
                 headerTintColor: 'black',
                 contentStyle: { backgroundColor: COLORS.BGColor },
                 tabBarVisible: false
@@ -312,7 +314,7 @@ function AuthStack() {
                 options={{
                     headerShown: false,
                     headerStyle: {
-                        backgroundColor: 'white',
+                        backgroundColor: COLORS.BGColor,
                     },
                     ...Platform.select({
                         android: {
@@ -333,7 +335,7 @@ function AuthStack() {
                 options={{
                     headerShown: false,
                     headerStyle: {
-                        backgroundColor: 'white',
+                        backgroundColor: COLORS.BGColor,
                     },
                     ...Platform.select({
                         android: {
@@ -359,7 +361,7 @@ function AuthenticatedStack() {
     return (
             <Stack.Navigator
                 screenOptions={{
-                    headerStyle: { backgroundColor: COLORS.HEADERColor },
+                    headerStyle: { backgroundColor: COLORS.BGColor },
                     headerTintColor: 'black',
                     contentStyle: { backgroundColor: COLORS.BGColor },
                 }} initialRouteName="skip" >
@@ -411,7 +413,7 @@ function AuthenticatedStack() {
                     component={CategoryDetailScreen}
                     options={{
                         headerStyle: {
-                            backgroundColor: 'white',
+                            backgroundColor: COLORS.BGColor,
                         },
                         ...Platform.select({
                             android: {
@@ -457,7 +459,7 @@ function AuthenticatedStack() {
 
                         return {
                             headerStyle: {
-                                backgroundColor: 'white',
+                                backgroundColor: COLORS.BGColor,
                             },
                             ...Platform.select({
                                 android: {

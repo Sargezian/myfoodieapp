@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 
     Container: {
         marginTop: -40,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.BGColor,
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
     },
