@@ -92,13 +92,12 @@ function BottomTabNavigator() {
 
                     backgroundColor: COLORS.HEADERColor,
                     elevation: 0,
-                    borderRadius: 50,
-                    height:100,
+                    borderRadius: 20,
+                    height: Platform.OS === 'android' ? 70 : 100, // Adjust the height for both platforms
                     shadowColor: 'black',
-                    shadowOpacity: 0.25,
+                    shadowOpacity: 0.15,
                     shadowOffset: { width: 0, height: 2 },
                     shadowRadius: 8,
-                    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
 
                 },
 
