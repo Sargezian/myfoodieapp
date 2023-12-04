@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Text } from "react-native";
+import {StyleSheet, View, Dimensions, Text, Platform} from "react-native";
 import Animated, {
     useAnimatedScrollHandler,
     useSharedValue,
@@ -26,6 +26,7 @@ const slides = [
         TitleText: "Dessert Recipes",
         text:
             "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
+
     },
     {
         color: "#ffb439",
@@ -74,6 +75,31 @@ const Skip = () => {
                         />
                         <Text style={styles.TitleText}>{slide.TitleText}</Text>
                         <Text style={styles.text}>{slide.text}</Text>
+
+                        {index === 0 && (
+                            <View style={styles.firstDotContainer}>
+                                <Text style={styles.firstMainDotStyle}></Text>
+                                <Text style={styles.firstDotStyle}></Text>
+                                <Text style={styles.firstDotStyle}></Text>
+                            </View>
+                        )}
+
+                        {index === 1 && (
+                            <View style={styles.firstDotContainer}>
+                                <Text style={styles.firstDotStyle}></Text>
+                                <Text style={styles.firstMainDotStyle}></Text>
+                                <Text style={styles.firstDotStyle}></Text>
+                            </View>
+                        )}
+
+                        {index === 2 && (
+                            <View style={styles.firstDotContainer}>
+                                <Text style={styles.firstDotStyle}></Text>
+                                <Text style={styles.firstDotStyle}></Text>
+                                <Text style={styles.firstMainDotStyle}></Text>
+                            </View>
+                        )}
+
                     </View>
                 );
             })}
@@ -98,6 +124,34 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginTop: 10,
     },
+
+    firstDotContainer: {
+        marginTop: 35,
+        flexDirection: 'row',
+        width: 115,
+        height: 35,
+        borderRadius: 20,
+        shadowColor: 'black',
+        shadowOpacity: 0.75,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 2,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
+    firstMainDotStyle: {
+        flex: 1,
+        elevation: 8,
+        backgroundColor: COLORS.darkMainColor,
+        margin: 5,
+    },
+
+    firstDotStyle: {
+        flex: 1,
+        elevation: 8,
+        backgroundColor: COLORS.mainColor,
+        margin: 5,
+    },
+
 });
 
 export default Skip;

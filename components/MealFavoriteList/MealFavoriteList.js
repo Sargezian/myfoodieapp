@@ -1,14 +1,11 @@
-import { View, FlatList, StyleSheet } from 'react-native';
-import MealItem from '../MealFavoriteList/MealFavoriteItem';
+import {FontAwesome} from "@expo/vector-icons";
 import {FavoritesContext} from "../../context/favorites-context";
 import {useContext} from "react";
-import {FontAwesome, Ionicons} from "@expo/vector-icons";
+import { View, FlatList, StyleSheet } from 'react-native';
+import MealItem from '../MealFavoriteList/MealFavoriteItem';
 
 function MealFavoriteList({ items }) {
-
     const favoriteMealsCtx = useContext(FavoritesContext);
-
-
     function renderMealItem(itemData) {
         const item = itemData.item;
 
@@ -21,16 +18,12 @@ function MealFavoriteList({ items }) {
             rating: item.rating,
             review: item.review,
         };
-
         const removeFavoriteMealHandler = () => {
             favoriteMealsCtx.removeFavorite(item.id);
         };
-
         return (
             <View style={styles.card}>
                 <MealItem {...mealItemProps} />
-
-
                     <View style={styles.cardLikeWrapper}>
 
                         <View style={styles.cardLike}>
@@ -44,11 +37,9 @@ function MealFavoriteList({ items }) {
                         </View>
 
                     </View>
-
             </View>
         );
     }
-
     return (
         <View style={styles.container}>
             <FlatList

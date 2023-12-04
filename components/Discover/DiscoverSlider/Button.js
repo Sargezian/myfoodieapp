@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text, View, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 
 function Button({ children, onPress }) {
     return (
@@ -11,6 +11,8 @@ function Button({ children, onPress }) {
         </Pressable>
     );
 }
+
+export default Button;
 
 const styles = StyleSheet.create({
     button: {
@@ -27,5 +29,3 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
-
-export default Button;

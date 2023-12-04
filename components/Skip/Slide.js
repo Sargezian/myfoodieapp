@@ -21,8 +21,8 @@ const SIZE = width * RATIO;
 const C = 0.551915024494;
 const CENTER = { x: 1, y: 1 };
 
-const vec = (x,y) => cartesian2Canvas({ x, y }, CENTER);
-const addX = (v,x) => {
+const vec = (x, y) => cartesian2Canvas({ x, y }, CENTER);
+const addX = (v, x) => {
     "worklet";
     return { x: v.x + x, y: v.y };
 };
@@ -31,32 +31,21 @@ const P01 = vec(C, 1);
 const P02 = vec(1, C);
 const P03 = vec(1, 0);
 
-//const P10 = vec(1, 0);
 const P11 = vec(1, -C);
 const P12 = vec(C, -1);
 const P13 = vec(0, -1);
 
-// const P20 = vec(0, -1);
 const P21 = vec(-C, -1);
 const P22 = vec(-1, -C);
 const P23 = vec(-1, 0);
 
-// const P30 = vec(-1, 0);
 const P31 = vec(-1, C);
 const P32 = vec(-C, 1);
 const P33 = vec(0, 1);
 
-interface SlideProps {
-    x: Animated.SharedValue<number>;
-    index: number;
-    colors: [string, string, string];
-    picture: number;
-    aspectRatio: number;
-}
-
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const Slide = ({ x, index, colors, picture, aspectRatio }: SlideProps) => {
+const Slide = ({ x, index, colors, picture, aspectRatio }) => {
     const animatedProps = useAnimatedProps(() => {
         const progress = (x.value - width * index) / width;
         const offset = interpolate(progress, [0, 1], [0, -2], Extrapolate.CLAMP);
@@ -113,6 +102,7 @@ const Slide = ({ x, index, colors, picture, aspectRatio }: SlideProps) => {
             fill: interpolateColor(progress, [-1, 0, 1], colors),
         };
     });
+
     return (
         <View>
             <Svg width={SIZE} height={SIZE} viewBox="0 0 2 2">

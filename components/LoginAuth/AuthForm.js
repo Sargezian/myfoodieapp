@@ -10,15 +10,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
     const [enteredConfirmEmail, setEnteredConfirmEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
     const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
-
     const {
         email: emailIsInvalid,
         confirmEmail: emailsDontMatch,
         password: passwordIsInvalid,
         confirmPassword: passwordsDontMatch,
     } = credentialsInvalid;
-
-
     function updateInputValueHandler(inputType, enteredValue) {
         switch (inputType) {
             case 'email':
@@ -35,7 +32,6 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
                 break;
         }
     }
-
     function submitHandler() {
         onSubmit({
             email: enteredEmail,
@@ -44,10 +40,8 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             confirmPassword: enteredConfirmPassword,
         });
     }
-
     return (
         <View style={styles.form}>
-
             <View style={styles.header}>
                 <Image
                     alt=""
@@ -64,7 +58,6 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
                     Get access to your meals and more
                 </Text>
             </View>
-
             <View style={styles.inputContainer}>
                 <Input
                     label="Email Address"
@@ -111,7 +104,6 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
         </View>
     );
 }
-
 export default AuthForm;
 
 const styles = StyleSheet.create({

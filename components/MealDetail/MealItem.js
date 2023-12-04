@@ -1,25 +1,10 @@
-import {
-    View,
-    Pressable,
-    Text,
-    Image,
-    StyleSheet,
-    Platform,
-} from 'react-native';
+import { View, Pressable, Text, Image, StyleSheet, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import MealDetails from './MealDetails';
 import COLORS from "../../constants/colors";
 
-function MealItem({
-                      id,
-                      name,
-                      imageUrl,
-                      time_estimate,
-                      meal_type,
-                      rating,
-                      review
-                  }) {
+function MealItem({id, name, imageUrl, time_estimate, meal_type, rating, review}) {
+
     const navigation = useNavigation();
 
     function selectMealItemHandler() {
