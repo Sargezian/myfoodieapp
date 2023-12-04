@@ -57,7 +57,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
                 />
 
                 <Text style={styles.title}>
-                    Sign in to <Text style={{ color: COLORS.mainColor }}>MyFoodie</Text>
+                    Sign in to <Text style={{ color: COLORS.darkMainColor }}>MyFoodie</Text>
                 </Text>
 
                 <Text style={styles.subtitle}>

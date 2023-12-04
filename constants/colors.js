@@ -11,7 +11,6 @@ const COLORS = {
 
     BGColor: '#ffd9d9',
 
-
     darkMainColor: '#d36d6c',
 };
 

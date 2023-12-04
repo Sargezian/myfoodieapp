@@ -136,13 +136,14 @@ function BottomTabNavigator() {
                     ...Platform.select({
                         android: {
                             headerStyle: {
+                                backgroundColor: COLORS.BGColor,
                                 elevation: 0, // Hide shadow on Android
                             },
                         },
                         ios: {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
-                    }),
+                    }), // Close the Platform.select
                     tabBarLabel: 'Discover',
                     tabBarLabelStyle: {
                         fontSize: 15, // Set the font size as needed
@@ -219,13 +220,14 @@ function BottomTabNavigator() {
                     ...Platform.select({
                         android: {
                             headerStyle: {
+                                backgroundColor: COLORS.BGColor,
                                 elevation: 0, // Hide shadow on Android
                             },
                         },
                         ios: {
                             headerShadowVisible: false, // Hide shadow on iOS
                         },
-                    }),
+                    }), // Close the Platform.select
 
 
                     headerRight: () => (
@@ -464,6 +466,7 @@ function AuthenticatedStack() {
                             ...Platform.select({
                                 android: {
                                     headerStyle: {
+                                        backgroundColor: COLORS.BGColor,
                                         elevation: 0, // Hide shadow on Android
                                     },
                                 },
