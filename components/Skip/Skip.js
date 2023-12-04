@@ -131,11 +131,6 @@ const styles = StyleSheet.create({
         width: 115,
         height: 35,
         borderRadius: 20,
-        shadowColor: 'black',
-        shadowOpacity: 0.75,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 2,
-        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
     firstMainDotStyle: {
@@ -143,6 +138,11 @@ const styles = StyleSheet.create({
         elevation: 8,
         backgroundColor: COLORS.darkMainColor,
         margin: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.75,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 2,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
     firstDotStyle: {
@@ -150,6 +150,11 @@ const styles = StyleSheet.create({
         elevation: 8,
         backgroundColor: COLORS.mainColor,
         margin: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.75,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 2,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
 });
