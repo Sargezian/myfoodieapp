@@ -1,12 +1,27 @@
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import COLORS from "../../constants/colors";
+import COLORS from '../../constants/colors';
 
 function List({ data }) {
-    return data.map((dataPoint) => (
-        <View key={dataPoint} style={styles.listItem}>
-            <Text style={styles.itemText}>{dataPoint}</Text>
+    return (
+        <View>
+            {data.map((dataPoint, index) => (
+                <View key={index} style={styles.listItem}>
+                    {Array.isArray(dataPoint) ? (
+                        // If the dataPoint is an array (multi-line), render each lin
+                        dataPoint.map((line, subIndex) => (
+                            <Text key={subIndex} style={styles.itemText}>
+                                {line}
+                            </Text>
+                        ))
+                    ) : (
+                        // If the dataPoint is a single-line string, render it
+                        <Text style={styles.itemText}>{dataPoint}</Text>
+                    )}
+                </View>
+            ))}
         </View>
-    ));
+    );
 }
 
 export default List;
@@ -22,7 +37,7 @@ const styles = StyleSheet.create({
         elevation: 2,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.10,
+        shadowOpacity: 0.1,
         shadowRadius: 4,
     },
     itemText: {

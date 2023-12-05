@@ -10,16 +10,16 @@ function MealFavoriteList({ items }) {
         const item = itemData.item;
 
         const mealItemProps = {
-            id: item.id,
+            id: item.dishId,
             name: item.name,
-            imageUrl: item.imageUrl,
-            meal_type: item.meal_type,
-            time_estimate: item.time_estimate,
+            imageUrl: item.imageURL,
+            meal_type: item.mealType,
+            time_estimate: item.timeEstimate,
             rating: item.rating,
             review: item.review,
         };
         const removeFavoriteMealHandler = () => {
-            favoriteMealsCtx.removeFavorite(item.id);
+            favoriteMealsCtx.removeFavorite(item.userId, item.dishId);
         };
         return (
             <View style={styles.card}>
@@ -44,7 +44,7 @@ function MealFavoriteList({ items }) {
         <View style={styles.container}>
             <FlatList
                 data={items}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.dishId}
                 renderItem={renderMealItem}
             />
         </View>

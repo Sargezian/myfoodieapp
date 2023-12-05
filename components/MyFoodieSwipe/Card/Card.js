@@ -16,7 +16,7 @@ export default function Card({
                                  ...rest
                              }) {
 
-    const { name, imageUrl } = meal;
+    const { name, imageURL } = meal;
 
     const rotate = Animated.multiply(swipe.x, tiltSign).interpolate({
         inputRange: [-ACTION_OFFSET, 0, ACTION_OFFSET],
@@ -72,7 +72,7 @@ export default function Card({
             style={[styles.container, isFirst && animatedCardStyle]}
             {...rest}
         >
-            <Image source={{ uri: imageUrl}} style={styles.image} />
+            <Image source={{ uri: imageURL}} style={styles.image} />
             <LinearGradient
                 colors={['transparent', COLORS.HEADERColor]}
                 /*style={styles.gradient}*/
@@ -108,7 +108,7 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 40,
         left: 22,
-        fontSize: 36,
+        fontSize: 25,
         fontWeight: 'bold',
         color: '#fff',
     },

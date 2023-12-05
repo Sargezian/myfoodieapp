@@ -1,11 +1,13 @@
-import React, {useContext} from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, Platform, Linking} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, Platform, Linking,Image} from 'react-native';
 import {AuthContext} from "../../context/auth-context";
 import COLORS from "../../constants/colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as MailComposer from 'expo-mail-composer';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {useNavigation} from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
@@ -23,7 +25,20 @@ function Settings() {
 
     const AuthCxt = useContext(AuthContext);
     const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+    const [username, setUsername] = useState('');
 
+    const getUsernameFromAsyncStorage = async () => {
+        try {
+            const storedUsername = await AsyncStorage.getItem('username');
+            setUsername(storedUsername || ''); // Set the username state
+        } catch (error) {
+            console.error('Error retrieving username:', error);
+        }
+    };
+
+    useEffect(() => {
+        getUsernameFromAsyncStorage();
+    }, []);
     const handleFollowersPress = () => {
         // Navigate to FollowersListScreen.js
         navigation.navigate('Followers');
@@ -100,14 +115,16 @@ function Settings() {
             <View style={styles.profileContainer}>
 
                 <View style={styles.profileImage}>
-
-                    <Text> ProfileImage</Text>
+                    <Image
+                        source={{ uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}
+                        style={{ width: 100, height: 100, borderRadius: 50 }}
+                    />
 
                 </View>
 
                 <View style={styles.nameContainer}>
 
-                    <Text style={styles.name}> Username</Text>
+                    <Text style={styles.name}> {username}</Text>
 
                 </View>
 
@@ -176,19 +193,14 @@ const styles = StyleSheet.create({
     },
 
     profileImage: {
-        flex: 5,
+        flex: 3,
         marginVertical: 10,
-        width: 150,
-        height: 70,
+        width: 100,
+        height: 100,
         borderRadius: 75,
-        elevation: 4,
-        backgroundColor: '#ffebeb',
-        shadowColor: 'black',
-        shadowOpacity: 0.10,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 8,
-        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        overflow: 'hidden',
     },
+
 
     email: {
         flex: 1,

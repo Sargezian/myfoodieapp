@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8181/api';
+const API_BASE_URL = 'http://10.0.2.2:8181/api';
 
 export const getDishes = async () => {
     try {
@@ -10,3 +10,23 @@ export const getDishes = async () => {
         throw error;
     }
 };
+
+export const getDishByType = async (dishType) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/dish/type/${dishType}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching dish:', error);
+        throw error;
+    }
+}
+
+export const getDishById = async (id) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/dish/dish/${id}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching dish:', error);
+        throw error;
+    }
+}

@@ -21,7 +21,7 @@ export const MEALS = [
         'Spaghetti',
         'Spaghetti with Tomato Sauce',
         'Lunch',
-        'https://images.arla.com/recordid/25283F6D-DC5A-4845-83ACFA4F53FBA197/pasta-med-bagte-tomater.jpg',
+        'https://cdn.pixabay.com/photo/2023/12/01/10/56/10-56-19-539_1280.jpg',
         20,
         ['calories:500","protein:12'],
         [
@@ -51,7 +51,7 @@ export const MEALS = [
         'Toast',
         'Toast Hawaii',
         'Breakfast',
-        'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
+        'https://cdn.pixabay.com/photo/2023/12/01/11/15/11-15-35-854_1280.jpg',
         10,
         ['calories:500","protein:12'],
         [
