@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Platform, StatusBar, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { FavoritesContext } from '../../context/favorites-context';
 import MealFavoriteList from "../../components/MealFavoriteList/MealFavoriteList";
 

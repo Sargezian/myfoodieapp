@@ -3,16 +3,16 @@ import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native'
 import { getDishByType } from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
 
-const BreakfastList = () => {
-    const [breakfastData, setBreakfastData] = useState([]);
+const LunchList = () => {
+    const [lunchData, setLunchData] = useState([]);
 
     useEffect(() => {
         const fetchDishByType = async () => {
             try {
-                const data = await getDishByType('breakfast');
-                setBreakfastData(data);
+                const data = await getDishByType('lunch');
+                setLunchData(data);
             } catch (error) {
-                console.error('Error fetching breakfast data:', error);
+                console.error('Error fetching lunch data:', error);
             }
         };
 
@@ -22,14 +22,14 @@ const BreakfastList = () => {
     return (
         <View style={styles.container}>
             <ScrollView>
-                {breakfastData.map((breakfast, index) => (
-                    <View key={breakfast.dish_id || index} style={styles.breakfastItem}>
-                        <Image source={{ uri: breakfast.imageURL }} style={styles.image} />
+                {lunchData.map((lunch, index) => (
+                    <View key={lunch.dish_id || index} style={styles.breakfastItem}>
+                        <Image source={{ uri: lunch.imageURL }} style={styles.image} />
                         <View style={styles.textContainer}>
-                            <Text style={styles.dishName}>{breakfast.name}</Text>
-                            <Text style={styles.details}>Time: {breakfast.timeEstimate} Minutes</Text>
+                            <Text style={styles.dishName}>{lunch.name}</Text>
+                            <Text style={styles.details}>Time: {lunch.timeEstimate} Minutes</Text>
                             <Text style={styles.details}>Nutritional Content:</Text>
-                            <Text style={styles.nutritionalContent}>{breakfast.nutritionalContent}</Text>
+                            <Text style={styles.nutritionalContent}>{lunch.nutritionalContent}</Text>
                         </View>
                         <View style={styles.TopRightContainer}>
                             <Text style={styles.addSymbol} > + </Text>
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BreakfastList;
+export default LunchList;

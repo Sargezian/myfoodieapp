@@ -59,6 +59,14 @@ function MealPlan() {
         navigation.navigate('BreakFastList');
     };
 
+    const handleLunchListPress = () => {
+        navigation.navigate('LunchList');
+    };
+
+
+    const handleDinnerListPress = () => {
+        navigation.navigate('DinnerList');
+    };
 
 
     return (
@@ -138,7 +146,10 @@ function MealPlan() {
 
             <View style={styles.InnerContainer}>
                 <View style={styles.MealHeader}>
+                    <TouchableOpacity onPress={handleLunchListPress}>
                     <Text style={styles.MealHeaderText}> Lunch </Text>
+                    </TouchableOpacity>
+
                     <Text style={styles.MealHeaderClock}>  <Ionicons
                         name={'time'}
                         color="black"
@@ -169,7 +180,10 @@ function MealPlan() {
 
             <View style={styles.InnerContainer}>
                 <View style={styles.MealHeader}>
+                    <TouchableOpacity onPress={handleDinnerListPress}>
                     <Text style={styles.MealHeaderText}> Dinner </Text>
+                    </TouchableOpacity>
+
                     <Text style={styles.MealHeaderClock}>  <Ionicons
                         name={'time'}
                         color="black"
