@@ -33,6 +33,9 @@ import ProfileScreen from "./screens/bottomTabs/ProfileScreen"
 import UserProfileScreen from "./screens/tabs/UserProfileScreen";
 import FollowersListScreen from "./screens/tabs/FollowersListScreen";
 import FollowingListScreen from "./screens/tabs/FollowingListScreen";
+import BreakFastListScreen from "./screens/tabs/BreakFastListScreen";
+import LunchListScreen from "./screens/tabs/LunchListScreen";
+import DinnerListScreen from "./screens/tabs/DinnerListScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -441,6 +444,19 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="Following"
                     component={FollowingListScreen} />
+
+                <Stack.Screen
+                    name="BreakFastList"
+                    component={BreakFastListScreen} />
+
+                <Stack.Screen
+                    name="LunchList"
+                    component={LunchListScreen} />
+
+                <Stack.Screen
+                    name="DinnerList"
+                    component={DinnerListScreen} />
+
 
 
                 <Stack.Screen

@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     profileIconContainer: {
         flex: 0.30,
         flexDirection: 'row',
+        elevation: 4,
     },
 
     listContainer: {

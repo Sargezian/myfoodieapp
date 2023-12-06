@@ -5,7 +5,7 @@ const API_KEY = 'AIzaSyAQ78f4BVY6CGItdvxhLmx8RR2DNvY88Gk'
 
 async function checkEmailExists(email) {
     try {
-        const response = await axios.get(`http://10.0.2.2:8181/api/user/exist/email/${email}`);
+        const response = await axios.get(`http://localhost:8181/api/user/exist/email/${email}`);
         return response.data;
     } catch (error) {
         console.error('Error checking email:', error);
@@ -27,7 +27,7 @@ async function authenticate(mode, email, password) {
     console.log(`User ${username} authenticated successfully!`);
     const emailExists = await checkEmailExists(email);
     if (!emailExists) {
-       const res = await axios.post(`http://10.0.2.2:8181/api/user`, {
+       const res = await axios.post(`http://localhost:8181/api/user`, {
             id: email,
             username: username,
             email: email,

@@ -5,25 +5,25 @@ import COLORS from '../../constants/colors';
 function List({ data }) {
     return (
         <View>
-            {data.map((dataPoint, index) => (
-                <View key={index} style={styles.listItem}>
-                    {Array.isArray(dataPoint) ? (
-                        // If the dataPoint is an array (multi-line), render each lin
-                        dataPoint.map((line, subIndex) => (
-                            <Text key={subIndex} style={styles.itemText}>
-                                {line}
-                            </Text>
-                        ))
-                    ) : (
-                        // If the dataPoint is a single-line string, render it
-                        <Text style={styles.itemText}>{dataPoint}</Text>
-                    )}
-                </View>
-            ))}
+            {Array.isArray(data) &&
+                data.map((dataPoint, index) => (
+                    <View key={index} style={styles.listItem}>
+                        {Array.isArray(dataPoint) ? (
+                            // If the dataPoint is an array (multi-line), render each line
+                            dataPoint.map((line, subIndex) => (
+                                <Text key={subIndex} style={styles.itemText}>
+                                    {line}
+                                </Text>
+                            ))
+                        ) : (
+                            // If the dataPoint is a single-line string, render it
+                            <Text style={styles.itemText}>{dataPoint}</Text>
+                        )}
+                    </View>
+                ))}
         </View>
     );
 }
-
 export default List;
 
 const styles = StyleSheet.create({

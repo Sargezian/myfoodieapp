@@ -11,7 +11,7 @@ export const FavoritesContext = createContext({
 
 const addToFavorite = async (favorite) => {
     try {
-        const favoriteResponse = await fetch("http://10.0.2.2:8181/api/favorite", {
+        const favoriteResponse = await fetch("http://localhost:8181/api/favorite", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const addToFavorite = async (favorite) => {
 
 const removeFavoriteByUserIdAndDishId = async (userId, dishId) => {
     try {
-        const response = await fetch(`http://10.0.2.2:8181/api/favorite/${userId}/${dishId}`, {
+        const response = await fetch(`http://localhost:8181/api/favorite/${userId}/${dishId}`, {
             method: 'DELETE',
         });
         if (response.status !== 204) {
@@ -57,7 +57,7 @@ function FavoritesContextProvider({children}) {
 
     const getFavoriteMealsByUserId = async () => {
         try {
-            const response = await fetch(`http://10.0.2.2:8181/api/favorite/${email}`);
+            const response = await fetch(`http://localhost:8181/api/favorite/${email}`);
             const data = await response.json();
             return data;
         } catch (error) {
@@ -68,7 +68,7 @@ function FavoritesContextProvider({children}) {
 
     const getFavoriteMealsByUserIdAndDishId = async (userId, dishId) => {
         try {
-            const response = await fetch(`http://10.0.2.2:8181/api/favorite/dish/${userId}/${dishId}`);
+            const response = await fetch(`http://localhost:8181/api/favorite/dish/${userId}/${dishId}`);
             return await response.json();
         } catch (error) {
             console.error('Error fetching Favorite Meals By UserId:', error);

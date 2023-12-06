@@ -5,7 +5,7 @@ import {
     Switch,
     Image,
     Platform,
-    Dimensions,
+    Dimensions, TouchableOpacity,
 } from 'react-native';
 import COLORS from "../../constants/colors";
 import {MEALS} from "../../data/dummydata";
@@ -13,6 +13,7 @@ import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
 import DatePicker from "./DatePicker";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import {useNavigation} from "@react-navigation/native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -49,6 +50,13 @@ function MealPlan() {
         const options = { weekday: 'long', day: 'numeric', month: 'long' };
         const formattedDate = currentDate.toLocaleDateString('en-US', options);
         setSelectedText(`${formattedDate}`);
+    };
+
+
+    const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+
+    const handleBreakFastListPress = () => {
+        navigation.navigate('BreakFastList');
     };
 
 
@@ -90,7 +98,10 @@ function MealPlan() {
             <View style={styles.InnerContainer}>
 
                 <View style={styles.MealHeader}>
+                    <TouchableOpacity onPress={handleBreakFastListPress}>
                 <Text style={styles.MealHeaderText}> Breakfast </Text>
+                    </TouchableOpacity>
+
                     <Text style={styles.MealHeaderClock}> <Ionicons
                         name={'time'}
                         color="black"
@@ -101,9 +112,13 @@ function MealPlan() {
                 <View style={styles.MealContainer}>
 
                     {limitedMeals.map((meal) => (
+
+
                         <View style={styles.card} key={meal.id}>
                             <Image source={{ uri: meal.imageUrl }} style={styles.image} />
                         </View>
+
+
                     ))}
 
 
