@@ -67,7 +67,6 @@ const LunchList = () => {
                                 style={styles.addSymbol}
                                 onPress={() => {
                                     handleAddToCalendar(lunch.id);
-                                    console.log('dishid ' + lunch.id);
                                 }}
                             >
                                 +

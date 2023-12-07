@@ -19,7 +19,6 @@ const BreakfastList = () => {
                 console.error('Error fetching breakfast data:', error);
             }
         };
-        console.log(breakfastData)
         fetchDishByType();
     }, []);
 
@@ -45,7 +44,7 @@ const BreakfastList = () => {
             let date = new Date(2023, 11, 6)
 
             await addDishToCalendar(userId, dishId, selectedDate);
-            console.log('Dish added to calendar successfully!');
+
         } catch (error) {
             console.error('Error adding dish to calendar:', error.message);
         }
@@ -68,7 +67,6 @@ const BreakfastList = () => {
                                 style={styles.addSymbol}
                                 onPress={() => {
                                     handleAddToCalendar(breakfast.id);
-                                    console.log('dishid ' + breakfast.id);
                                 }}
                             >
                                 +

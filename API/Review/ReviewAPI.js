@@ -59,7 +59,6 @@ export const removeDishByUserIdAndReviewId = async (userId, reviewId) => {
             }),
         });
 
-        console.log(response.status)
 
         if (response.status !== 204) {
             throw new Error('Failed to remove review');
@@ -72,3 +71,13 @@ export const removeDishByUserIdAndReviewId = async (userId, reviewId) => {
 };
 
 
+
+export const getRatingByDishId = async (mealId) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/review/rating/${mealId}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching Rating by dishId:', error);
+        throw error;
+    }
+}

@@ -5,7 +5,6 @@ import MealFavoriteList from "../../components/MealFavoriteList/MealFavoriteList
 
 function FavoritesScreen() {
     const favoriteMealsCtx = useContext(FavoritesContext);
-    console.log(favoriteMealsCtx)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

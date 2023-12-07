@@ -10,9 +10,9 @@ import MealDetails from '../../components/MealDetail/MealDetails';
 import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
-import {addDishToCalendar} from "../../API/MealPlan/MealPlanAPI";
+
 import {
-    addReviewToDish,
+    addReviewToDish, getRatingByDishId,
     getReviewByUserId,
     getReviewsByDishId,
     removeDishByUserIdAndReviewId
@@ -28,7 +28,7 @@ function MealDetailScreen({ route, navigation }) {
     const [rating, setRating] = useState('');
     const [reviewByUser, setReviewByUserIdData] = useState([]);
     const [reviewByDishId, setReviewByDishIdData] = useState([]);
-
+    const [ratingByDishId, setRatingByDishIdData] = useState('');
 
 
     useEffect(() => {
@@ -37,7 +37,7 @@ function MealDetailScreen({ route, navigation }) {
 
                 const data = await getReviewsByDishId(mealId);
                 setReviewByDishIdData(data);
-                console.log(' rating + ' + mealId)
+                console.log(' rating is  + ' + mealId)
             } catch (error) {
                 console.error('Error fetching reviews by dishId:', error);
             }
@@ -46,6 +46,22 @@ function MealDetailScreen({ route, navigation }) {
 
     }, [mealId]);
 
+
+
+    useEffect(() => {
+        const fetchRatingByDishId = async () => {
+            try {
+
+                const data = await getRatingByDishId(mealId);
+                setRatingByDishIdData(data);
+                console.log(' rating + ' + mealId)
+            } catch (error) {
+                console.error('Error fetching rating by dishId:', error);
+            }
+        };
+        fetchRatingByDishId();
+
+    }, [mealId]);
 
 
     useEffect(() => {
@@ -168,19 +184,21 @@ function MealDetailScreen({ route, navigation }) {
                 <View style={styles.topContainer}>
                     <Text style={styles.topContainerText}>{selectedMeal.name} </Text>
                 </View>
-
+                {typeof ratingByDishId === 'number' && (
                     <View style={styles.SubmitContainer}>
                         <Text style={styles.topTextStyle}>{selectedMeal.mealType}</Text>
                         <Text style={styles.topTextStyle}>{selectedMeal.timeEstimate} Minutes</Text>
-                        <Text style={styles.RatingNumber}><FontAwesome
-                            color="#ea266d"
-                            name="star"
-                            solid={true}
-                            size={16}
-                            style={{ marginBottom: 2 }}
-                        /> 1 out of 5</Text>
+                        <Text style={styles.RatingNumber}>
+                            <FontAwesome
+                                color="#ea266d"
+                                name="star"
+                                solid={true}
+                                size={16}
+                                style={{ marginBottom: 2 }}
+                            /> {ratingByDishId.toFixed(2)} out of 5
+                        </Text>
                     </View>
-
+                )}
 
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionText}>{selectedMeal.description}</Text>
