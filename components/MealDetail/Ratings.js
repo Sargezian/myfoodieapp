@@ -7,6 +7,8 @@ class Ratings extends React.Component {
 
     render() {
 
+        const { ratingCompleted } = this.props;
+
         return (
             <View>
 
@@ -15,9 +17,10 @@ class Ratings extends React.Component {
                 <Rating
                     style={{ flexDirection: 'row', paddingHorizontal: 10 }}
                     ratingTextColor="black"
-                    onFinishRating={this.ratingCompleted}
+                    onFinishRating={(rating) => {
+                        ratingCompleted(rating);
+                    }}
                     showRating
-
                 />
                     </View>
 

@@ -10,8 +10,8 @@ import MealDetails from '../../components/MealDetail/MealDetails';
 import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
-import Edit from "../../components/MealDetail/Edit";
-import {Center, NativeBaseProvider} from "native-base";
+import {addDishToCalendar} from "../../API/MealPlan/MealPlanAPI";
+import {addReviewToDish} from "../../API/Review/ReviewAPI";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -19,6 +19,8 @@ function MealDetailScreen({ route, navigation }) {
     const [selectedMeal, setSelectedMeal] = useState({});
     const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
     const [email, setEmail] = useState('');
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState('');
 
 
     const handleEditPress = () => {
@@ -29,6 +31,7 @@ function MealDetailScreen({ route, navigation }) {
         try {
             const storedEmail = await AsyncStorage.getItem('email');
             setEmail(storedEmail || ''); // Set the username state
+
         } catch (error) {
             console.error('Error retrieving emaiæ:', error);
         }
@@ -77,6 +80,27 @@ function MealDetailScreen({ route, navigation }) {
     if (!selectedMeal || !selectedMeal.ingredients || !selectedMeal.recipe) {
         return <Text>Loading...</Text>;
     }
+
+
+
+    const handleAddReviewToDish = async (dishId, rating, title, comment) => {
+        try {
+
+            const userId = email;
+
+            // Get the current date in "YYYY-MM-DD" format
+            const dateCreated = new Date().toISOString().split('T')[0];
+
+            await addReviewToDish(userId, dishId, rating, title, comment, dateCreated);
+
+            console.log('Review added to dish successfully!');
+        } catch (error) {
+            //console.log("id" + userId);
+            //console.log("api" + userId, dishId, rating, title, comment, dateCreated);
+            console.error('Error adding review to dish:', error.message);
+        }
+    };
+
 
     return (
         <ScrollView style={styles.rootContainer}>
@@ -139,16 +163,23 @@ function MealDetailScreen({ route, navigation }) {
                             </View>
                         </View>
                         <View style={styles.ratingContainer}>
-                            <Ratings />
+                            <Ratings ratingCompleted={(rating) => setRating(rating)} />
                             <View style={styles.mockTextBoxContainer}>
                                 <TextInput
                                     style={styles.mockTextBox}
                                     placeholder="Type your review here"
                                     multiline
+                                    onChangeText={(text) => setComment(text)}
                                 />
                             </View>
                             <View style={styles.EnterContainer}>
-                                <Text style={styles.EnterSubmit}> Submit Review</Text>
+                                <Text style={styles.EnterSubmit}
+                                      onPress={() => {
+
+                                          handleAddReviewToDish(selectedMeal.id, rating, selectedMeal.name, comment);
+                                      }}
+
+                                > Submit Review</Text>
                             </View>
                         </View>
                     </View>
@@ -195,6 +226,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.BGColor,
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
+
     },
 
     image: {
@@ -241,7 +273,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         backgroundColor: COLORS.white,
         shadowColor: 'black',
-        shadowOpacity: 0.05,
+        shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
@@ -322,8 +354,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginVertical: 8,
-        backgroundColor: 'white',
         borderRadius: 20,
+        backgroundColor: COLORS.white,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
     ReviewProfile: {
