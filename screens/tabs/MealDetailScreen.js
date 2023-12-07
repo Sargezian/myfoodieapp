@@ -11,7 +11,7 @@ import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
 import {addDishToCalendar} from "../../API/MealPlan/MealPlanAPI";
-import {addReviewToDish, getReviewByUserId} from "../../API/Review/ReviewAPI";
+import {addReviewToDish, getReviewByUserId, getReviewsByDishId} from "../../API/Review/ReviewAPI";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -22,6 +22,25 @@ function MealDetailScreen({ route, navigation }) {
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState('');
     const [reviewByUser, setReviewByUserIdData] = useState([]);
+    const [reviewByDishId, setReviewByDishIdData] = useState([]);
+
+
+
+    useEffect(() => {
+        const fetchReviewsByDishId = async () => {
+            try {
+
+                const data = await getReviewsByDishId(mealId);
+                setReviewByDishIdData(data);
+                console.log(' rating + ' + mealId)
+            } catch (error) {
+                console.error('Error fetching reviews by dishId:', error);
+            }
+        };
+        fetchReviewsByDishId();
+
+    }, [mealId]);
+
 
 
     useEffect(() => {
@@ -31,7 +50,7 @@ function MealDetailScreen({ route, navigation }) {
                 const data = await getReviewByUserId(email);
                 setReviewByUserIdData(data);
             } catch (error) {
-                console.error('Error fetching breakfast data:', error);
+                console.error('Error fetching reviews data:', error);
             }
         };
         fetchReviewByUserId();
@@ -163,16 +182,17 @@ function MealDetailScreen({ route, navigation }) {
                         {selectedMeal.recipe && <List data={selectedMeal.recipe} />}
                         <Subtitle>Review</Subtitle>
                         <View style={styles.ReviewListContainer}>
-                            <View style={styles.ReviewProfile}>
-                                <Ionicons name="person" color={'black'} size={25} />
-                            </View>
 
                             {Array.isArray(reviewByUser) && reviewByUser.length > 0 ? (
                                 reviewByUser.map((reviewByUserId) => (
                                     <View key={reviewByUserId.id} style={styles.ReviewListInside}>
-                                        <Text style={styles.usernameStyling}>
-                                            {extractUsernameFromEmail(reviewByUserId.userId)}
-                                        </Text>
+                                        <View style={styles.ReviewProfile}>
+                                            <Ionicons name="person" color={'black'} size={25} />
+                                            <Text style={styles.usernameStyling}>
+                                                {extractUsernameFromEmail(reviewByUserId.userId)}
+                                            </Text>
+                                        </View>
+
                                         <Text style={styles.dateStyling}> {reviewByUserId.dateCreated}</Text>
                                         <Text> {reviewByUserId.comment} </Text>
                                         <Text style={styles.starsStyling}>
@@ -194,6 +214,31 @@ function MealDetailScreen({ route, navigation }) {
                                     <Text style={styles.DeleteText}> Delete </Text>
                                 </View>
                             </View>
+                        </View>
+
+
+                        <View style={styles.ReviewListContainer}>
+
+                            {Array.isArray(reviewByDishId) && reviewByDishId.length > 0 ? (
+                                reviewByDishId.map((reviewByMealId) => (
+                                    <View key={reviewByMealId.id} style={styles.ReviewListInside}>
+                                        <View style={styles.ReviewProfile}>
+                                            <Ionicons name="person" color={'black'} size={25} />
+                                            <Text style={styles.usernameStyling}>
+                                                {extractUsernameFromEmail(reviewByMealId.userId)}
+                                            </Text>
+                                        </View>
+                                        <Text style={styles.dateStyling}> {reviewByMealId.dateCreated}</Text>
+                                        <Text> {reviewByMealId.comment} </Text>
+                                        <Text style={styles.starsStyling}>
+                                            <ListRating startingValue={reviewByMealId.rating} />
+                                        </Text>
+                                    </View>
+                                ))
+                            ) : (
+                                <Text>No reviews yet</Text>
+                            )}
+
                         </View>
 
                         <View style={styles.ratingContainer}>
@@ -386,7 +431,7 @@ const styles = StyleSheet.create({
 
     ReviewListContainer: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         marginVertical: 8,
         borderRadius: 20,
         backgroundColor: COLORS.white,
@@ -399,6 +444,7 @@ const styles = StyleSheet.create({
 
     ReviewProfile: {
         flex: 0.25,
+        flexDirection: 'row',
     },
 
     ReviewListInside: {

@@ -26,7 +26,6 @@ export const addReviewToDish = async (userId, dishId, rating, title, comment, da
     }
 };
 
-
 export const getReviewByUserId = async (userId) => {
     try {
         const response = await fetch(`${API_BASE_URL}/review/user/${userId}`);
@@ -37,6 +36,15 @@ export const getReviewByUserId = async (userId) => {
     }
 }
 
+export const getReviewsByDishId = async (mealId) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/review/${mealId}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching Reviews by DishId:', error);
+        throw error;
+    }
+}
 
 
 
