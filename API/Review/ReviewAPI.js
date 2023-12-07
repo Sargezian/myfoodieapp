@@ -46,6 +46,29 @@ export const getReviewsByDishId = async (mealId) => {
     }
 }
 
+export const removeDishByUserIdAndReviewId = async (userId, reviewId) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/review/${userId}/${reviewId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: userId,
+                reviewId: reviewId,
+            }),
+        });
 
+        console.log(response.status)
+
+        if (response.status !== 204) {
+            throw new Error('Failed to remove review');
+        }
+
+    } catch (error) {
+        console.error('Error removing review:', error.message);
+        throw error;
+    }
+};
 
 

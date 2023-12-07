@@ -11,7 +11,12 @@ import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
 import {addDishToCalendar} from "../../API/MealPlan/MealPlanAPI";
-import {addReviewToDish, getReviewByUserId, getReviewsByDishId} from "../../API/Review/ReviewAPI";
+import {
+    addReviewToDish,
+    getReviewByUserId,
+    getReviewsByDishId,
+    removeDishByUserIdAndReviewId
+} from "../../API/Review/ReviewAPI";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -136,6 +141,18 @@ function MealDetailScreen({ route, navigation }) {
     };
 
 
+    const handleRemoveDishByUserIdAndDishId = async (userId, reviewId) => {
+        try {
+            await removeDishByUserIdAndReviewId(userId, reviewId);
+        } catch (error) {
+            console.error('Error removing review to dish:', error.message);
+        }
+    };
+
+
+
+
+
     const extractUsernameFromEmail = (email) => {
         const [username] = email.split('@');
         return username;
@@ -198,22 +215,26 @@ function MealDetailScreen({ route, navigation }) {
                                         <Text style={styles.starsStyling}>
                                             <ListRating startingValue={reviewByUserId.rating} />
                                         </Text>
+                                        <View style={styles.ReviewButton}>
+
+                                            <View style={styles.Edit}>
+                                                <TouchableOpacity onPress={handleEditPress}>
+                                                    <Text style={styles.EditText}> Edit </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={styles.Delete}>
+                                                <Text   onPress={() => {
+                                                    handleRemoveDishByUserIdAndDishId(reviewByUserId.userId, reviewByUserId.id);
+                                                    console.log(reviewByUserId.userId, reviewByUserId.id)
+                                                }} style={styles.DeleteText}> Delete </Text>
+                                            </View>
+                                        </View>
                                     </View>
                                 ))
                             ) : (
                                 <Text>No reviews yet</Text>
                             )}
-                            <View style={styles.ReviewButton}>
 
-                                <View style={styles.Edit}>
-                                    <TouchableOpacity onPress={handleEditPress}>
-                                    <Text style={styles.EditText}> Edit </Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.Delete}>
-                                    <Text style={styles.DeleteText}> Delete </Text>
-                                </View>
-                            </View>
                         </View>
 
 
