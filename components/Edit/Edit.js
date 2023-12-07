@@ -1,26 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 
 import EditRatings from './EditRatings';
+import COLORS from "../../constants/colors";
+import Subtitle from "../MealDetail/Subtitle";
 
 export default function Edit() {
     return (
         <View style={styles.container}>
+            <Subtitle>Edit star rating</Subtitle>
             <View style={styles.ratingContainer}>
-                <Text style={styles.ratingLabel}>Rating</Text>
                 <View style={styles.starsContainer}>
                     <EditRatings />
                 </View>
             </View>
+            <Subtitle>Edit comment</Subtitle>
             <View style={styles.commentContainer}>
                 <TextInput
                     style={styles.commentInput}
                     placeholder="Type your comment here"
                     multiline
                 />
-                <View style={styles.EnterContainer}>
-                    <Text style={styles.EnterSubmit}> Submit Review</Text>
-                </View>
+            </View>
+            <View style={styles.EnterContainer}>
+                <Text style={styles.EnterSubmit}> Submit Review</Text>
             </View>
         </View>
     );
@@ -29,35 +32,49 @@ export default function Edit() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: COLORS.BGColor,
         padding: 16,
+        alignItems: 'center',
     },
     ratingContainer: {
         flex: 0.20,
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20,
-    },
-    ratingLabel: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        marginVertical: 20,
+        borderRadius: 20,
+        elevation: 4,
+        backgroundColor: COLORS.white,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
     starsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     commentContainer: {
-        flex: 0.5,
+        flex: 0.35,
+        width: '100%',
+        marginVertical: 20,
+        borderRadius: 20,
+        elevation: 4,
+        backgroundColor: COLORS.white,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
 
     },
     commentInput: {
-        flex: 0.5,
-        borderColor: '#CCCCCC',
-        borderWidth: 1,
-        borderRadius: 8,
+        flex: 1,
         padding: 10,
         fontSize: 16,
+
     },
     EnterContainer: {
         backgroundColor: 'black',
