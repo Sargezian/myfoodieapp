@@ -173,11 +173,11 @@ function MealDetailScreen({ route, navigation }) {
                                         <Text style={styles.usernameStyling}>
                                             {extractUsernameFromEmail(reviewByUserId.userId)}
                                         </Text>
-                                        <Text style={styles.dateStyling}> {reviewByUserId.date}</Text>
+                                        <Text style={styles.dateStyling}> {reviewByUserId.dateCreated}</Text>
+                                        <Text> {reviewByUserId.comment} </Text>
                                         <Text style={styles.starsStyling}>
                                             <ListRating startingValue={reviewByUserId.rating} />
                                         </Text>
-                                        <Text> {reviewByUserId.comment} </Text>
                                     </View>
                                 ))
                             ) : (
