@@ -9,7 +9,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import {FontAwesome} from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {getRatingByDishId, getReviewsByDishId} from "../../API/Review/ReviewAPI";
 
 function MealFavoriteItem({
                       id,
@@ -28,6 +29,24 @@ function MealFavoriteItem({
             mealId: id,
         });
     }
+
+    const [ratingByDishId, setRatingByDishIdData] = useState('');
+
+
+    useEffect(() => {
+        const fetchRatingByDishId = async () => {
+            try {
+
+                const data = await getRatingByDishId(id);
+                setRatingByDishIdData(data);
+                console.log(' rating + ' + id)
+            } catch (error) {
+                console.error('Error fetching rating by dishId:', error);
+            }
+        };
+        fetchRatingByDishId();
+
+    }, [id]);
 
 
     return (
@@ -61,7 +80,7 @@ function MealFavoriteItem({
                         <Text style={styles.title}>Time: {time_estimate} Minutes</Text>
 
 
-
+                        {typeof ratingByDishId === 'number' && (
                         <View style={styles.cardFooter}>
 
                             <Text style={styles.cardStars}> <FontAwesome
@@ -70,13 +89,14 @@ function MealFavoriteItem({
                                 solid={true}
                                 size={12}
                                 style={{ marginBottom: 2, marginHorizontal: 8, }}
-                            />3 out of 5 {rating} </Text>
+                            />{ratingByDishId.toFixed(2)} out of 5 {rating} </Text>
 
 
 
                         <Text style={styles.cardReviews}>{review} 10 review</Text>
 
                         </View>
+                        )}
 
                     </View>
                 </View>
