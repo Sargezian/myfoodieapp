@@ -5,6 +5,9 @@ import COLORS from "../../constants/colors";
 
 class ListRating extends React.Component {
     render() {
+        const { startingValue } = this.props;
+
+
         return (
             <View>
                 <View style={styles.RatingContainer}>
@@ -15,7 +18,7 @@ class ListRating extends React.Component {
                         onFinishRating={this.ratingCompleted}
                         ratingTextColor="black"
                         readonly // Make the rating non-editable
-                        startingValue={3.5} // Set the initial value (if needed)
+                        startingValue={startingValue} // Set the initial value (if needed)
                     />
                 </View>
             </View>

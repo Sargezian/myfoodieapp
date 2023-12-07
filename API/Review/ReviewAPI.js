@@ -25,3 +25,14 @@ export const addReviewToDish = async (userId, dishId, rating, title, comment, da
         throw error;
     }
 };
+
+
+export const getReviewByUserId = async (userId) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/review/user/${userId}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching Review by UserId:', error);
+        throw error;
+    }
+}

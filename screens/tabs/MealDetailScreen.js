@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet, ScrollView, Platform, TextInput, Touchabl
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
 import Ratings from "../../components/MealDetail/Ratings";
-import { getDishById } from "../../API/Dish/DishAPI";
+import {getDishById, getDishByType} from "../../API/Dish/DishAPI";
 import List from '../../components/MealDetail/List';
 import Subtitle from '../../components/MealDetail/Subtitle';
 import MealDetails from '../../components/MealDetail/MealDetails';
@@ -11,7 +11,7 @@ import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
 import {addDishToCalendar} from "../../API/MealPlan/MealPlanAPI";
-import {addReviewToDish} from "../../API/Review/ReviewAPI";
+import {addReviewToDish, getReviewByUserId} from "../../API/Review/ReviewAPI";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -21,7 +21,22 @@ function MealDetailScreen({ route, navigation }) {
     const [email, setEmail] = useState('');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState('');
+    const [reviewByUser, setReviewByUserIdData] = useState([]);
 
+
+    useEffect(() => {
+        const fetchReviewByUserId = async () => {
+            try {
+
+                const data = await getReviewByUserId(email);
+                setReviewByUserIdData(data);
+            } catch (error) {
+                console.error('Error fetching breakfast data:', error);
+            }
+        };
+        fetchReviewByUserId();
+        console.log(reviewByUser);
+    }, [email]);
 
     const handleEditPress = () => {
         navigation.navigate('EditRating');
@@ -102,6 +117,13 @@ function MealDetailScreen({ route, navigation }) {
     };
 
 
+    const extractUsernameFromEmail = (email) => {
+        const [username] = email.split('@');
+        return username;
+    };
+
+
+
     return (
         <ScrollView style={styles.rootContainer}>
             <Image style={styles.image} source={{ uri: selectedMeal.imageURL}} />
@@ -144,12 +166,23 @@ function MealDetailScreen({ route, navigation }) {
                             <View style={styles.ReviewProfile}>
                                 <Ionicons name="person" color={'black'} size={25} />
                             </View>
-                            <View style={styles.ReviewListInside}>
-                                <Text style={styles.usernameStyling}> Username </Text>
-                                <Text style={styles.dateStyling}> Date </Text>
-                                <Text style={styles.starsStyling}> <ListRating /> </Text>
-                                <Text> fint </Text>
-                            </View>
+
+                            {Array.isArray(reviewByUser) && reviewByUser.length > 0 ? (
+                                reviewByUser.map((reviewByUserId) => (
+                                    <View key={reviewByUserId.id} style={styles.ReviewListInside}>
+                                        <Text style={styles.usernameStyling}>
+                                            {extractUsernameFromEmail(reviewByUserId.userId)}
+                                        </Text>
+                                        <Text style={styles.dateStyling}> {reviewByUserId.date}</Text>
+                                        <Text style={styles.starsStyling}>
+                                            <ListRating startingValue={reviewByUserId.rating} />
+                                        </Text>
+                                        <Text> {reviewByUserId.comment} </Text>
+                                    </View>
+                                ))
+                            ) : (
+                                <Text>No reviews yet</Text>
+                            )}
                             <View style={styles.ReviewButton}>
 
                                 <View style={styles.Edit}>
@@ -162,6 +195,7 @@ function MealDetailScreen({ route, navigation }) {
                                 </View>
                             </View>
                         </View>
+
                         <View style={styles.ratingContainer}>
                             <Ratings ratingCompleted={(rating) => setRating(rating)} />
                             <View style={styles.mockTextBoxContainer}>
@@ -369,6 +403,7 @@ const styles = StyleSheet.create({
 
     ReviewListInside: {
         flex: 1,
+        flexDirection: 'column',
     },
 
     ReviewButton: {
