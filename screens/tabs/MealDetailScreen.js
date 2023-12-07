@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, Platform, TextInput } from 'react-native';
+import {View, Text, Image, StyleSheet, ScrollView, Platform, TextInput, TouchableOpacity} from 'react-native';
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
 import Ratings from "../../components/MealDetail/Ratings";
@@ -9,6 +9,9 @@ import Subtitle from '../../components/MealDetail/Subtitle';
 import MealDetails from '../../components/MealDetail/MealDetails';
 import { FavoritesContext } from '../../context/favorites-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ListRating from "../../components/MealDetail/ListRating";
+import Edit from "../../components/MealDetail/Edit";
+import {Center, NativeBaseProvider} from "native-base";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -16,6 +19,11 @@ function MealDetailScreen({ route, navigation }) {
     const [selectedMeal, setSelectedMeal] = useState({});
     const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
     const [email, setEmail] = useState('');
+
+
+    const handleEditPress = () => {
+        navigation.navigate('EditRating');
+    };
 
     const getEmailFromAsyncStorage = async () => {
         try {
@@ -113,14 +121,17 @@ function MealDetailScreen({ route, navigation }) {
                                 <Ionicons name="person" color={'black'} size={25} />
                             </View>
                             <View style={styles.ReviewListInside}>
-                                <Text> Username </Text>
-                                <Text> Date </Text>
-                                <Text> Stars </Text>
-                                <Text> Comment </Text>
+                                <Text style={styles.usernameStyling}> Username </Text>
+                                <Text style={styles.dateStyling}> Date </Text>
+                                <Text style={styles.starsStyling}> <ListRating /> </Text>
+                                <Text> fint </Text>
                             </View>
                             <View style={styles.ReviewButton}>
+
                                 <View style={styles.Edit}>
+                                    <TouchableOpacity onPress={handleEditPress}>
                                     <Text style={styles.EditText}> Edit </Text>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={styles.Delete}>
                                     <Text style={styles.DeleteText}> Delete </Text>
@@ -241,9 +252,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         justifyContent: 'center',
         alignItems: 'center',
+    },
 
+    usernameStyling: {
+        paddingVertical: 2,
+        fontWeight: 'bold',
+    },
 
+    dateStyling: {
+        color: 'grey',
+    },
 
+    starsStyling: {
+        marginVertical: 4,
     },
 
     SubmitContainer: {
@@ -251,7 +272,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-
 
     },
 
@@ -302,6 +322,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginVertical: 8,
+        backgroundColor: 'white',
+        borderRadius: 20,
     },
 
     ReviewProfile: {

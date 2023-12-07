@@ -36,6 +36,7 @@ import FollowingListScreen from "./screens/tabs/FollowingListScreen";
 import BreakFastListScreen from "./screens/tabs/BreakFastListScreen";
 import LunchListScreen from "./screens/tabs/LunchListScreen";
 import DinnerListScreen from "./screens/tabs/DinnerListScreen";
+import EditRatingScreen from "./screens/tabs/EditRatingScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -456,6 +457,9 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="DinnerList"
                     component={DinnerListScreen} />
+                <Stack.Screen
+                    name="EditRating"
+                    component={EditRatingScreen} />
 
 
 
