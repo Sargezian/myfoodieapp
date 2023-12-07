@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native';
 import { getDishByType } from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
+import { addDishToCalendar } from '../../../API/MealPlan/MealPlanAPI';
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Update the import path accordingly
 
 const BreakfastList = () => {
     const [breakfastData, setBreakfastData] = useState([]);
+    const [email, setEmail] = useState('');
+
 
     useEffect(() => {
         const fetchDishByType = async () => {
@@ -15,15 +19,43 @@ const BreakfastList = () => {
                 console.error('Error fetching breakfast data:', error);
             }
         };
-
+        console.log(breakfastData)
         fetchDishByType();
     }, []);
+
+    const getEmailFromAsyncStorage = async () => {
+        try {
+            const storedEmail = await AsyncStorage.getItem('email');
+            setEmail(storedEmail || ''); // Set the username state
+        } catch (error) {
+            console.error('Error retrieving email:', error);
+        }
+    };
+
+    useEffect(() => {
+        getEmailFromAsyncStorage();
+    }, []);
+
+
+    const handleAddToCalendar = async (dishId) => {
+        try {
+            // Replace 'userId' and 'date' with values from your context
+            const userId = email; // Replace with the actual userId
+           // use the getDateFromAsyncStorage here instead of new Date
+            let date = new Date(2023, 11, 6)
+
+            await addDishToCalendar(userId, dishId, selectedDate);
+            console.log('Dish added to calendar successfully!');
+        } catch (error) {
+            console.error('Error adding dish to calendar:', error.message);
+        }
+    };
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 {breakfastData.map((breakfast, index) => (
-                    <View key={breakfast.dish_id || index} style={styles.breakfastItem}>
+                    <View key={breakfast.id || index} style={styles.breakfastItem}>
                         <Image source={{ uri: breakfast.imageURL }} style={styles.image} />
                         <View style={styles.textContainer}>
                             <Text style={styles.dishName}>{breakfast.name}</Text>
@@ -32,7 +64,15 @@ const BreakfastList = () => {
                             <Text style={styles.nutritionalContent}>{breakfast.nutritionalContent}</Text>
                         </View>
                         <View style={styles.TopRightContainer}>
-                            <Text style={styles.addSymbol} > + </Text>
+                            <Text
+                                style={styles.addSymbol}
+                                onPress={() => {
+                                    handleAddToCalendar(breakfast.id);
+                                    console.log('dishid ' + breakfast.id);
+                                }}
+                            >
+                                +
+                            </Text>
                         </View>
                     </View>
                 ))}

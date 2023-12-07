@@ -90,12 +90,18 @@ export default function DatePicker() {
                                                 </Text>
                                             </View>
                                         </TouchableWithoutFeedback>
+
                                     );
                                 })}
+
                             </View>
+
                         ))}
                     </Swiper>
                 </View>
+            <View style={styles.dateItemStyle}><Text style={styles.dateTextItemStyle}>
+                {value.toDateString()}
+            </Text></View>
 </>
 
     );
@@ -109,6 +115,15 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+
+    dateItemStyle: {
+        width: 150,
+    },
+
+    dateTextItemStyle: {
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 
     content: {

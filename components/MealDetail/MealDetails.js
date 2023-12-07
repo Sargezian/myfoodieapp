@@ -11,7 +11,6 @@ function MealDetails({
                      }) {
     return (
         <View style={[styles.details, style]}>
-            <Text style={[styles.detailItem, textStyle]}>{time_estimate} Minutes</Text>
             {nutritional_content.map((item, index) => (
                 <Text key={index} style={[styles.detailItem, textStyle]}>
                     {item}

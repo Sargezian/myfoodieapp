@@ -9,11 +9,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import {FontAwesome} from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
+import React from "react";
 
 function MealFavoriteItem({
                       id,
                       name,
-                      imageUrl,
+                      imageUrl, nutritional_content,
                               time_estimate,
                               meal_type,
                       rating,
@@ -29,21 +30,14 @@ function MealFavoriteItem({
     }
 
 
-
-
-
     return (
         <View style={styles.container}>
-
-
 
             <Pressable
                 android_ripple={{ color: '#ccc' }}
                 style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
                 onPress={selectMealItemHandler}
             >
-
-
 
                 <View style={styles.innerContainer}>
 
@@ -61,33 +55,27 @@ function MealFavoriteItem({
                         <View style={styles.opHolder}>
                             <Text style={styles.title}>{name}, {meal_type}</Text>
 
-                            <Text style={styles.title}>{time_estimate} Minutes</Text>
+
                         </View>
 
-                        <Text >Pasta salad mainly consists of pasta mixed with vegetables</Text>
+                        <Text style={styles.title}>Time: {time_estimate} Minutes</Text>
+
+
 
                         <View style={styles.cardFooter}>
-                        <FontAwesome
-                            color="#ea266d"
-                            name="star"
-                            solid={true}
-                            size={12}
-                            style={{ marginBottom: 2 }}
-                        />
 
-                        <Text style={styles.cardStars}>{rating}</Text>
-
-
-                        <Text style={styles.cardReviews}>{review} review</Text>
+                            <Text style={styles.cardStars}> <FontAwesome
+                                color="#ea266d"
+                                name="star"
+                                solid={true}
+                                size={12}
+                                style={{ marginBottom: 2, marginHorizontal: 8, }}
+                            />3 out of 5 {rating} </Text>
 
 
 
+                        <Text style={styles.cardReviews}>{review} 10 review</Text>
 
-                        {/*<MealDetails
-                            time_estimate={time_estimate}
-                            meal_type={meal_type}
-                            rating={rating}
-                        />*/}
                         </View>
 
                     </View>
@@ -117,6 +105,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         borderRadius: 10,
         height: 255,
+
     },
 
     cardTop: {
@@ -153,11 +142,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     cardStars: {
-        marginLeft: 2,
-        marginRight: 6,
+
         fontSize: 14,
         fontWeight: '500',
         color: '#232425',
+        marginHorizontal: 2,
     },
     cardReviews: {
         fontSize: 14,

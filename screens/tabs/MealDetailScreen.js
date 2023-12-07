@@ -74,9 +74,14 @@ function MealDetailScreen({ route, navigation }) {
         <ScrollView style={styles.rootContainer}>
             <Image style={styles.image} source={{ uri: selectedMeal.imageURL}} />
             <View style={styles.Container}>
-                <View style={styles.TitleContainer}>
-                    <Text style={styles.title}>{selectedMeal.description}</Text>
+
+                <View style={styles.topContainer}>
+                    <Text style={styles.topContainerText}>{selectedMeal.name} </Text>
+                </View>
+
                     <View style={styles.SubmitContainer}>
+                        <Text style={styles.topTextStyle}>{selectedMeal.mealType}</Text>
+                        <Text style={styles.topTextStyle}>{selectedMeal.timeEstimate} Minutes</Text>
                         <Text style={styles.RatingNumber}><FontAwesome
                             color="#ea266d"
                             name="star"
@@ -85,15 +90,14 @@ function MealDetailScreen({ route, navigation }) {
                             style={{ marginBottom: 2 }}
                         /> 1 out of 5</Text>
                     </View>
+
+
+                <View style={styles.descriptionContainer}>
+                    <Text style={styles.descriptionText}>{selectedMeal.description}</Text>
                 </View>
-                <View style={styles.topContainer}>
-                    <Text style={styles.topContainerText}>Name: {selectedMeal.name} </Text>
-                    <Text style={styles.topContainerText}>MealType: {selectedMeal.mealType}</Text>
-                    <Text style={styles.topContainerText}>Reviews given: 1</Text>
-                </View>
-                <Subtitle>Cooking Time & NutritionalContent</Subtitle>
+
+                <Subtitle>Nutritional Content</Subtitle>
                 <MealDetails
-                    time_estimate={selectedMeal.timeEstimate}
                     nutritional_content={selectedMeal.nutritionalContent}
                     textStyle={styles.detailText}
                 />
@@ -151,15 +155,28 @@ const styles = StyleSheet.create({
     },
 
     topContainer: {
-        flexDirection: 'column',
-        paddingHorizontal: 40,
+        flexDirection: 'row',
+        paddingHorizontal: 20,
         justifyContent: 'space-between',
+        alignItems: 'center',
+
+        marginVertical: 8,
+    },
+
+    topTextStyle: {
+        fontSize: 15,
+      fontWeight: 'bold',
     },
 
     topContainerText: {
-        fontSize: 15,
+        fontSize: 20,
+        fontWeight: 'bold',
 
+    },
 
+    topContainerTextSecond: {
+      fontSize: 12,
+        fontWeight: 'bold',
     },
 
     Container: {
@@ -183,6 +200,17 @@ const styles = StyleSheet.create({
     detailText: {
         color: 'black',
     },
+
+    descriptionContainer: {
+        paddingHorizontal: 20,
+        marginVertical: 8,
+    },
+
+    descriptionText: {
+      fontSize: 14,
+
+    },
+
     listOuterContainer: {
         alignItems: 'center',
         marginTop: -80
@@ -211,11 +239,20 @@ const styles = StyleSheet.create({
     RatingNumber: {
         fontSize: 15,
         fontWeight: 'bold',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+
+
     },
 
     SubmitContainer: {
-        justifyContent: 'center',
-        marginRight: 20,
+
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+
     },
 
     SubmitReview: {
@@ -227,7 +264,7 @@ const styles = StyleSheet.create({
     TitleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-
+        backgroundColor: 'green',
 
     },
     scrollView: {

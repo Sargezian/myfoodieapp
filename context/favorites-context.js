@@ -49,7 +49,7 @@ function FavoritesContextProvider({children}) {
     const getEmailFromAsyncStorage = async () => {
         try {
             const storedEmail = await AsyncStorage.getItem('email');
-            setEmail(storedEmail || ''); // Set the username state
+            setEmail(storedEmail || '');
         } catch (error) {
             console.error('Error retrieving email:', error);
         }

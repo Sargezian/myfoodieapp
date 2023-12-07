@@ -14,6 +14,7 @@ function MealFavoriteList({ items }) {
             name: item.name,
             imageUrl: item.imageURL,
             meal_type: item.mealType,
+            nutritional_content: item.nutritionalContent,
             time_estimate: item.timeEstimate,
             rating: item.rating,
             review: item.review,

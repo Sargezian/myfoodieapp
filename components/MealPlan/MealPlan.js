@@ -8,7 +8,6 @@ import {
     Dimensions, TouchableOpacity,
 } from 'react-native';
 import COLORS from "../../constants/colors";
-import {MEALS} from "../../data/dummydata";
 import {Ionicons} from "@expo/vector-icons";
 import React, {useState} from "react";
 import DatePicker from "./DatePicker";
@@ -20,16 +19,12 @@ const windowHeight = Dimensions.get('window').height;
 
 function MealPlan() {
 
-    const maxImages = 3;
-    const limitedMeals = MEALS.slice(0, maxImages);
-
     const [isBreakfastEnabled, setBreakfastEnabled] = useState(false);
     const [isLunchEnabled, setLunchIsEnabled] = useState(false);
     const [isDinnerEnabled, setDinnerEnabled] = useState(false);
     const breakfastToggleSwitch = () => setBreakfastEnabled(previousState => !previousState);
     const lunchToggleSwitch = () => setLunchIsEnabled(previousState => !previousState);
     const dinnerToggleSwitch = () => setDinnerEnabled(previousState => !previousState);
-
 
 
     //date
@@ -52,7 +47,6 @@ function MealPlan() {
         setSelectedText(`${formattedDate}`);
     };
 
-
     const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
 
     const handleBreakFastListPress = () => {
@@ -73,8 +67,6 @@ function MealPlan() {
 
         <View style={styles.Container}>
 
-
-
             <View style={styles.CalendarContainer}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Manage {'\n'}your meals <Icon name="pencil-alt" size={30} color='#000' /></Text>
@@ -82,26 +74,7 @@ function MealPlan() {
 
                 <DatePicker/>
 
-
             </View>
-
-
-{/*            <View style={styles.Calender}>
-
-                <Text style={styles.dateText}>{selectedText}</Text>
-
-
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode="date"
-                    is24Hour={true}
-                    display="inline"
-                    onChange={onDateChange}
-                />
-
-
-            </View>*/}
 
             <View style={styles.InnerContainer}>
 
@@ -119,16 +92,18 @@ function MealPlan() {
 
                 <View style={styles.MealContainer}>
 
-                    {limitedMeals.map((meal) => (
 
+                        <View style={styles.card} >
 
-                        <View style={styles.card} key={meal.id}>
-                            <Image source={{ uri: meal.imageUrl }} style={styles.image} />
+                            <Text style={styles.addSign}> + </Text>
+
                         </View>
 
+                    <View style={styles.cardImg} >
 
-                    ))}
+                        <Text style={styles.addSignImg}> + </Text>
 
+                    </View>
 
                     <View style={styles.switchTextContainer}>
                     <Switch
@@ -158,11 +133,11 @@ function MealPlan() {
                 </View>
                 <View style={styles.MealContainer}>
 
-                    {limitedMeals.map((meal) => (
-                        <View style={styles.card} key={meal.id}>
-                            <Image source={{ uri: meal.imageUrl }} style={styles.image} />
+
+                        <View style={styles.card} >
+                            <Text style={styles.addSign}> + </Text>
                         </View>
-                    ))}
+
 
                     <View style={styles.switchTextContainer}>
                         <Switch
@@ -192,11 +167,11 @@ function MealPlan() {
                 </View>
                 <View style={styles.MealContainer}>
 
-                    {limitedMeals.map((meal) => (
-                        <View style={styles.card} key={meal.id}>
-                            <Image source={{ uri: meal.imageUrl }} style={styles.image} />
+
+                        <View style={styles.card}>
+                            <Text style={styles.addSign}> + </Text>
                         </View>
-                    ))}
+
 
                     <View style={styles.switchTextContainer}>
                         <Switch
@@ -242,8 +217,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     card: {
-        width: windowWidth * 0.2,
-        height: windowHeight * 0.1,
+        width: windowWidth * 0.175,
+        height: windowHeight * 0.085,
+        marginTop: 12,
         borderRadius: 20,
         elevation: 4,
         shadowColor: 'black',
@@ -251,11 +227,35 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        marginRight: -50,
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 8,
-        backgroundColor: '#ffebeb',
+        backgroundColor: '#545454',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    addSign: {
+        fontSize: 42,
+        color: COLORS.white,
+    },
+
+    cardImg: {
+        width: windowWidth * 0.175,
+        height: windowHeight * 0.085,
+        marginTop: 12,
+        borderRadius: 20,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        backgroundColor: '#545454',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    addSignImg: {
+        fontSize: 42,
+        color: COLORS.white,
     },
 
 
