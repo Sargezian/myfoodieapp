@@ -6,7 +6,7 @@ import COLORS from "../../constants/colors";
 class EditRatings extends React.Component {
 
     render() {
-
+        const { ratingCompleted } = this.props;
         return (
             <View>
 
@@ -15,8 +15,11 @@ class EditRatings extends React.Component {
                     <Rating
                         style={{ flexDirection: 'row', paddingHorizontal: 10 }}
                         ratingTextColor="black"
-                        onFinishRating={this.ratingCompleted}
+                        onFinishRating={(rating) => {
+                            ratingCompleted(rating);
+                        }}
                         showRating
+                        startingValue={3}
 
                     />
                 </View>

@@ -54,10 +54,10 @@ function DiscoverSlider({ route,  id}) {
 
 
     return (
-        <View style={styles.holderContainer}>
-            <ScrollView horizontal={true} style={styles.container}>
+        <View style={styles.holderContainer2}>
+            <ScrollView horizontal={true} style={styles.container2}>
                 {MEALS.map((meal) => (
-                    <View key={meal.id} style={styles.card}>
+                    <View key={meal.id} style={styles.card2}>
                         <Image source={{ uri: meal.imageUrl }} style={styles.image} />
 
                         <View style={styles.categoryContainer}>
@@ -107,14 +107,14 @@ function DiscoverSlider({ route,  id}) {
 export default DiscoverSlider;
 
 const styles = StyleSheet.create({
-    holderContainer: {
+    holderContainer2: {
         flex: 1,
         padding: 10,
     },
-    container: {
+    container2: {
         backgroundColor: COLORS.BGColor,
     },
-    card: {
+    card2: {
         alignItems: 'flex-start',
         justifyContent: 'center',
         width: windowWidth * 0.50,

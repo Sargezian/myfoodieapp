@@ -5,9 +5,26 @@ import { CATEGORIES } from '../../data/dummydata';
 import DiscoverSlider from "../../components/Discover/DiscoverSlider/DiscoverSlider";
 import Search from "../../components/Discover/Search/Search";
 import OptionSlider from "../../components/Discover/OptionSlider/OptionSlider";
+import {useEffect, useState} from "react";
+import {getDishByType, getDishes} from "../../API/Dish/DishAPI";
+import {getAllCategories} from "../../API/Dish/CategoryAPI";
 
 function CategoriesScreen({ navigation }) {
+    const [category, setCategory] = useState([]);
 
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const categories = await getAllCategories();
+                setCategory(categories);
+            } catch (error) {
+                console.error('Error fetching meals:', error);
+            }
+        };
+        fetchCategories();
+        console.log(category)
+    }, []);
     function renderCategoryItem(itemData) {
         function pressHandler() {
             navigation.navigate('CategoryDetailScreen', {
@@ -33,13 +50,13 @@ function CategoriesScreen({ navigation }) {
                     <>
                         <Search />
                         <OptionSlider />
-                        <DiscoverSlider />
+
 
                         <Text style={styles.headingText}> Discover </Text>
                     </>
                 }
-                data={CATEGORIES}
-                keyExtractor={(item) => item.id}
+                data={category}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={renderCategoryItem}
                 numColumns={2}
             />

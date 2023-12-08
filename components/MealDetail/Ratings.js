@@ -21,6 +21,7 @@ class Ratings extends React.Component {
                         ratingCompleted(rating);
                     }}
                     showRating
+                    startingValue={3}
                 />
                     </View>
 

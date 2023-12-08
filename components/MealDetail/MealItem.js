@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import MealDetails from './MealDetails';
 import COLORS from "../../constants/colors";
 
-function MealItem({id, name, imageUrl, time_estimate, meal_type, rating, review}) {
+function MealItem({id, name, imageUrl, time_estimate, meal_type,nutritional_content}) {
 
     const navigation = useNavigation();
 
@@ -28,8 +28,9 @@ function MealItem({id, name, imageUrl, time_estimate, meal_type, rating, review}
                     <MealDetails
                         time_estimate={time_estimate}
                         meal_type={meal_type}
-                        rating={rating}
-                        review={review}
+                        nutritional_content={nutritional_content}
+                        rating={"Rating: 1 out of 5"}
+                        review={"Review given: 1"}
                     />
                 </View>
             </Pressable>

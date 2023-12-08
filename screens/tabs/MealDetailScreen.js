@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import {View, Text, Image, StyleSheet, ScrollView, Platform, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet, ScrollView, Platform, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
 import Ratings from "../../components/MealDetail/Ratings";
@@ -12,11 +12,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListRating from "../../components/MealDetail/ListRating";
 
 import {
-    addReviewToDish, getRatingByDishId,
-    getReviewByUserId,
+    addReviewToDish,
+    getReviewByUserIdAndDishId,
+    getRatingByDishId,
     getReviewsByDishId,
     removeDishByUserIdAndReviewId
 } from "../../API/Review/ReviewAPI";
+import {useFocusEffect} from "@react-navigation/native";
 
 function MealDetailScreen({ route, navigation }) {
     const favoriteMealsCtx = useContext(FavoritesContext);
@@ -26,27 +28,44 @@ function MealDetailScreen({ route, navigation }) {
     const [email, setEmail] = useState('');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState('');
-    const [reviewByUser, setReviewByUserIdData] = useState([]);
+    const [reviewByUserAndDishId, setReviewByUserIdAndDishId] = useState([]);
     const [reviewByDishId, setReviewByDishIdData] = useState([]);
+    const [forceUpdateId, setForceUpdateId] = useState(0);
+
     const [ratingByDishId, setRatingByDishIdData] = useState('');
 
 
-    useEffect(() => {
-        const fetchReviewsByDishId = async () => {
-            try {
 
-                const data = await getReviewsByDishId(mealId);
-                setReviewByDishIdData(data);
-                console.log(' rating is  + ' + mealId)
-            } catch (error) {
-                console.error('Error fetching reviews by dishId:', error);
-            }
-        };
-        fetchReviewsByDishId();
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                try {
+                    const data = await getReviewsByDishId(mealId);
+                    setReviewByDishIdData(data);
+                    console.log(' rating + ' + mealId);
+                } catch (error) {
+                    console.error('Error fetching reviews by dishId:', error);
+                }
+            };
+            fetchData();
+        }, [mealId, forceUpdateId])
+    );
 
-    }, [mealId]);
 
 
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                try {
+                    const data = await getReviewByUserIdAndDishId(email, mealId);
+                    setReviewByUserIdAndDishId(data);
+                } catch (error) {
+                    console.error('Error fetching reviews data:', error);
+                }
+            };
+            fetchData();
+        }, [email, mealId, forceUpdateId])
+    );
 
     useEffect(() => {
         const fetchRatingByDishId = async () => {
@@ -63,23 +82,13 @@ function MealDetailScreen({ route, navigation }) {
 
     }, [mealId]);
 
-
-    useEffect(() => {
-        const fetchReviewByUserId = async () => {
-            try {
-
-                const data = await getReviewByUserId(email);
-                setReviewByUserIdData(data);
-            } catch (error) {
-                console.error('Error fetching reviews data:', error);
-            }
-        };
-        fetchReviewByUserId();
-        console.log(reviewByUser);
-    }, [email]);
-
-    const handleEditPress = () => {
+    const handleEditPress = async () => {
         navigation.navigate('EditRating');
+        if (reviewByUserAndDishId.length > 0) {
+            await AsyncStorage.setItem('reviewId', reviewByUserAndDishId[0].id.toString());
+            await AsyncStorage.setItem('dishId', reviewByUserAndDishId[0].dishId.toString());
+        }
+
     };
 
     const getEmailFromAsyncStorage = async () => {
@@ -140,26 +149,37 @@ function MealDetailScreen({ route, navigation }) {
 
     const handleAddReviewToDish = async (dishId, rating, title, comment) => {
         try {
-
             const userId = email;
 
-            // Get the current date in "YYYY-MM-DD" format
             const dateCreated = new Date().toISOString().split('T')[0];
+            const reviewRating = rating || 3;
 
-            await addReviewToDish(userId, dishId, rating, title, comment, dateCreated);
+            if (reviewByUserAndDishId.length > 0) {
+                console.log('You have already submitted a review.');
+                Alert.alert('Review Error', 'You have already submitted a review for this dish.');
+                return;
+            }
+
+            if (!comment.trim()) {
+                Alert.alert('Comment Error', 'Comment is mandatory. Please enter a comment.');
+                return;
+            }
+
+            await addReviewToDish(userId, dishId, reviewRating, title, comment, dateCreated);
 
             console.log('Review added to dish successfully!');
+            setForceUpdateId((prevId) => prevId + 1);
         } catch (error) {
-            //console.log("id" + userId);
-            //console.log("api" + userId, dishId, rating, title, comment, dateCreated);
             console.error('Error adding review to dish:', error.message);
         }
     };
 
 
+
     const handleRemoveDishByUserIdAndDishId = async (userId, reviewId) => {
         try {
             await removeDishByUserIdAndReviewId(userId, reviewId);
+            setForceUpdateId((prevId) => prevId + 1);
         } catch (error) {
             console.error('Error removing review to dish:', error.message);
         }
@@ -217,21 +237,20 @@ function MealDetailScreen({ route, navigation }) {
                         {selectedMeal.recipe && <List data={selectedMeal.recipe} />}
                         <Subtitle>Review</Subtitle>
                         <View style={styles.ReviewListContainer}>
-
-                            {Array.isArray(reviewByUser) && reviewByUser.length > 0 ? (
-                                reviewByUser.map((reviewByUserId) => (
-                                    <View key={reviewByUserId.id} style={styles.ReviewListInside}>
+                            {Array.isArray(reviewByUserAndDishId) && reviewByUserAndDishId.length > 0 ? (
+                                reviewByUserAndDishId.map((reviewByUserIdAndDishId) => (
+                                    <View key={reviewByUserIdAndDishId.id} style={styles.ReviewListInside}>
                                         <View style={styles.ReviewProfile}>
                                             <Ionicons name="person" color={'black'} size={25} />
                                             <Text style={styles.usernameStyling}>
-                                                {extractUsernameFromEmail(reviewByUserId.userId)}
+                                                {extractUsernameFromEmail(reviewByUserIdAndDishId.userId)}
                                             </Text>
                                         </View>
 
-                                        <Text style={styles.dateStyling}> {reviewByUserId.dateCreated}</Text>
-                                        <Text> {reviewByUserId.comment} </Text>
+                                        <Text style={styles.dateStyling}> {reviewByUserIdAndDishId.dateCreated}</Text>
+                                        <Text> {reviewByUserIdAndDishId.comment} </Text>
                                         <Text style={styles.starsStyling}>
-                                            <ListRating startingValue={reviewByUserId.rating} />
+                                            <ListRating startingValue={reviewByUserIdAndDishId.rating} />
                                         </Text>
                                         <View style={styles.ReviewButton}>
 
@@ -242,15 +261,15 @@ function MealDetailScreen({ route, navigation }) {
                                             </View>
                                             <View style={styles.Delete}>
                                                 <Text   onPress={() => {
-                                                    handleRemoveDishByUserIdAndDishId(reviewByUserId.userId, reviewByUserId.id);
-                                                    console.log(reviewByUserId.userId, reviewByUserId.id)
+                                                    handleRemoveDishByUserIdAndDishId(reviewByUserIdAndDishId.userId, reviewByUserIdAndDishId.id);
+                                                    console.log(reviewByUserIdAndDishId.userId, reviewByUserIdAndDishId.id)
                                                 }} style={styles.DeleteText}> Delete </Text>
                                             </View>
                                         </View>
                                     </View>
                                 ))
                             ) : (
-                                <Text>No reviews yet</Text>
+                                <Text>No reviews by you yet</Text>
                             )}
 
                         </View>

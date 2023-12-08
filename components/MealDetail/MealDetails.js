@@ -11,7 +11,7 @@ function MealDetails({
                      }) {
     return (
         <View style={[styles.details, style]}>
-            {nutritional_content.map((item, index) => (
+            {nutritional_content && nutritional_content.map((item, index) => (
                 <Text key={index} style={[styles.detailItem, textStyle]}>
                     {item}
                 </Text>
