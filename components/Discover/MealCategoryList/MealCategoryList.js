@@ -24,7 +24,7 @@ function MealCategoryList({ items }) {
             time_estimate: item.timeEstimate,
             nutritional_content: item.nutritionalContent
         };
-        console.log('MealItemProps:', mealItemProps)
+
         return <MealItem {...mealItemProps} />;
     }
 
@@ -36,7 +36,7 @@ function MealCategoryList({ items }) {
                 data={items}
                 keyExtractor={(item) => item.dishId.toString()} // Assuming dishId is the correct property
                 renderItem={(itemData) => {
-                    console.log('Item: ', itemData.item);
+
                     return renderMealItem(itemData);
                 }}
             />

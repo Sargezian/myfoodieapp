@@ -1,13 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native';
+import COLORS from "../../constants/colors";
 
 function MealDetails({
-                         time_estimate,
                          nutritional_content,
-                         meal_type,
                          style,
                          textStyle,
-                         rating,
-                         review
                      }) {
     return (
         <View style={[styles.details, style]}>
@@ -16,9 +13,6 @@ function MealDetails({
                     {item}
                 </Text>
             ))}
-            <Text style={[styles.detailItem, textStyle]}>{meal_type}</Text>
-            <Text style={[styles.detailItem, textStyle]}>{rating}</Text>
-            <Text style={[styles.detailItem, textStyle]}>{review}</Text>
         </View>
     );
 }
@@ -28,6 +22,17 @@ const styles = StyleSheet.create({
         flexDirection: 'column', // Change flexDirection to 'column'
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 6,
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        marginVertical: 4,
+        marginHorizontal: 12,
+        backgroundColor: COLORS.white,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
 
     },
     detailItem: {

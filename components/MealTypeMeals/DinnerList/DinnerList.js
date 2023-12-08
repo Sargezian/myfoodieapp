@@ -3,12 +3,14 @@ import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native'
 import { getDishByType } from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
 import { addDishToCalendar } from '../../../API/MealPlan/MealPlanAPI'; // Update the import path accordingly
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Update the import path accordingly
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useDate} from "../../../context/date-context"; // Update the import path accordingly
 
 
 const DinnerList = () => {
     const [dinnerData, setDinnerData] = useState([]);
     const [email, setEmail] = useState('');
+    const { selectedDate, setNewDate } = useDate();
 
 
     useEffect(() => {
@@ -40,12 +42,13 @@ const DinnerList = () => {
 
     const handleAddToCalendar = async (dishId) => {
         try {
-            // Replace 'userId' and 'date' with values from your context
-            const userId = email; // Replace with the actual userId
-            let date = new Date(2023, 11, 6)
 
-            await addDishToCalendar(userId, dishId, date);
-            console.log('Dish added to calendar successfully!');
+            const userId = email;
+
+            const currentDateSelected = selectedDate.toString();
+
+            await addDishToCalendar(userId, dishId, currentDateSelected);
+
         } catch (error) {
             console.error('Error adding dish to calendar:', error.message);
         }

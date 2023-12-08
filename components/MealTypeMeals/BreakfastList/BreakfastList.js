@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native';
 import { getDishByType } from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
-import { addDishToCalendar } from '../../../API/MealPlan/MealPlanAPI';
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Update the import path accordingly
+import {addDishToCalendar, removeCalendarByUserIdAndDishId} from '../../../API/MealPlan/MealPlanAPI';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useDate} from "../../../context/date-context";
+import {removeDishByUserIdAndReviewId} from "../../../API/Review/ReviewAPI"; // Update the import path accordingly
 
 const BreakfastList = () => {
     const [breakfastData, setBreakfastData] = useState([]);
     const [email, setEmail] = useState('');
-
-
+    const { selectedDate, setNewDate } = useDate();
+    
     useEffect(() => {
         const fetchDishByType = async () => {
             try {
@@ -36,19 +38,34 @@ const BreakfastList = () => {
     }, []);
 
 
+
+
     const handleAddToCalendar = async (dishId) => {
         try {
-            // Replace 'userId' and 'date' with values from your context
-            const userId = email; // Replace with the actual userId
-           // use the getDateFromAsyncStorage here instead of new Date
-            let date = new Date(2023, 11, 6)
 
-            await addDishToCalendar(userId, dishId, selectedDate);
+            const userId = email;
+
+            const currentDateSelected = selectedDate.toString();
+
+            await addDishToCalendar(userId, dishId, currentDateSelected);
 
         } catch (error) {
             console.error('Error adding dish to calendar:', error.message);
         }
     };
+
+    const handleRemoveDish = async (dishId) => {
+        try {
+
+            const userId = email;
+
+            await removeCalendarByUserIdAndDishId(userId, dishId);
+            console.log('removing bl ' + userId, dishId)
+        } catch (error) {
+            console.error('Error removing dish:', error.message);
+        }
+    };
+
 
     return (
         <View style={styles.container}>
@@ -72,6 +89,17 @@ const BreakfastList = () => {
                                 +
                             </Text>
                         </View>
+
+                        <View style={styles.trashContainer}>
+                            <Text
+                                style={styles.removeSymbol}
+                                onPress={() => {
+                                    handleRemoveDish(breakfast.id);
+                                }}
+                            >
+                                trash
+                            </Text>
+                        </View>
                     </View>
                 ))}
             </ScrollView>
@@ -84,11 +112,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     breakfastItem: {
+        borderRadius: 40,
+        marginVertical: 4,
+        marginHorizontal: 12,
         padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
         flexDirection: 'row', // Align image and text horizontally
         alignItems: 'center', // Center items vertically
+        elevation: 4,
+        backgroundColor: '#ffebeb',
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
     image: {
         width: 100,
@@ -115,9 +151,29 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
+    trashContainer: {
+        width: 40,
+        height: 40,
+        borderRadius: 60,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
     addSymbol: {
         fontSize: 22,
         fontWeight: 'bold'
+    },
+
+    removeSymbol: {
+        fontSize: 10,
+
     },
 
     dishName: {

@@ -9,10 +9,14 @@ import {
 } from 'react-native';
 import COLORS from "../../constants/colors";
 import {Ionicons} from "@expo/vector-icons";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import DatePicker from "./DatePicker";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import {useNavigation} from "@react-navigation/native";
+import {useFocusEffect, useNavigation} from "@react-navigation/native";
+import {useDate} from "../../context/date-context";
+import {getReviewByUserIdAndDishId} from "../../API/Review/ReviewAPI";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCalendarByUserIdAndDate} from "../../API/MealPlan/MealPlanAPI";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,11 +30,17 @@ function MealPlan() {
     const lunchToggleSwitch = () => setLunchIsEnabled(previousState => !previousState);
     const dinnerToggleSwitch = () => setDinnerEnabled(previousState => !previousState);
 
+    const [calendarByUserIdAndDate, setCalendarByUserIdAndDate] = useState([]);
+    const [email, setEmail] = useState('');
+    const { selectedDate, setNewDate } = useDate();
+
+    const [calendarDataFetched, setCalendarDataFetched] = useState(false);
 
     //date
     const [date, setDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [selectedText, setSelectedText] = useState('');
+
 
     const showDatepicker = () => {
         setShowDatePicker(true);
@@ -62,6 +72,43 @@ function MealPlan() {
         navigation.navigate('DinnerList');
     };
 
+    const getEmailFromAsyncStorage = async () => {
+        try {
+            const storedEmail = await AsyncStorage.getItem('email');
+            setEmail(storedEmail || ''); // Set the username state
+
+        } catch (error) {
+            console.error('Error retrieving emaiæ:', error);
+        }
+    };
+
+    useEffect(() => {
+        getEmailFromAsyncStorage();
+    }, []);
+
+
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                try {
+                    const userId = email;
+                    const date = selectedDate.toString();
+
+                    console.log(userId, date)
+
+                    const data = await getCalendarByUserIdAndDate(userId, date);
+                    setCalendarByUserIdAndDate(data);
+                    setCalendarDataFetched(true); // Update the state to indicate data has been fetched
+                } catch (error) {
+                    console.error('Error fetching Calendar data:', error);
+                }
+            };
+
+            fetchData();
+        }, [email, selectedDate]) // Include email and selectedDate in the dependencies array
+    );
+
 
     return (
 
@@ -79,9 +126,9 @@ function MealPlan() {
             <View style={styles.InnerContainer}>
 
                 <View style={styles.MealHeader}>
-                    <TouchableOpacity onPress={handleBreakFastListPress}>
+
                 <Text style={styles.MealHeaderText}> Breakfast </Text>
-                    </TouchableOpacity>
+
 
                     <Text style={styles.MealHeaderClock}> <Ionicons
                         name={'time'}
@@ -92,17 +139,23 @@ function MealPlan() {
 
                 <View style={styles.MealContainer}>
 
-
-                        <View style={styles.card} >
-
-                            <Text style={styles.addSign}> + </Text>
-
-                        </View>
-
-                    <View style={styles.cardImg} >
+                   {/* <View style={styles.cardImg} >
 
                         <Text style={styles.addSignImg}> + </Text>
 
+                    </View>*/}
+
+                    {/* Check if calendarByUserIdAndDate is an array before mapping */}
+                    {calendarDataFetched && Array.isArray(calendarByUserIdAndDate) && calendarByUserIdAndDate.map((calendarData) => (
+                        <View key={calendarData.id} style={styles.cardForDishes}>
+                            <Image source={{ uri: calendarData.imageURL }} style={styles.calendarImage} />
+                        </View>
+                    ))}
+
+                    <View style={styles.card} >
+                        <TouchableOpacity onPress={handleBreakFastListPress}>
+                        <Text style={styles.addSign}> + </Text>
+                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.switchTextContainer}>
@@ -121,9 +174,8 @@ function MealPlan() {
 
             <View style={styles.InnerContainer}>
                 <View style={styles.MealHeader}>
-                    <TouchableOpacity onPress={handleLunchListPress}>
+
                     <Text style={styles.MealHeaderText}> Lunch </Text>
-                    </TouchableOpacity>
 
                     <Text style={styles.MealHeaderClock}>  <Ionicons
                         name={'time'}
@@ -134,8 +186,18 @@ function MealPlan() {
                 <View style={styles.MealContainer}>
 
 
-                        <View style={styles.card} >
+                    {/* Check if calendarByUserIdAndDate is an array before mapping */}
+                    {calendarDataFetched && Array.isArray(calendarByUserIdAndDate) && calendarByUserIdAndDate.map((calendarData) => (
+                        <View key={calendarData.id} style={styles.cardForDishes}>
+                            <Image source={{ uri: calendarData.imageURL }} style={styles.calendarImage} />
+                        </View>
+                    ))}
+
+                        <View style={styles.card}>
+
+                            <TouchableOpacity onPress={handleLunchListPress}>
                             <Text style={styles.addSign}> + </Text>
+                            </TouchableOpacity>
                         </View>
 
 
@@ -155,9 +217,9 @@ function MealPlan() {
 
             <View style={styles.InnerContainer}>
                 <View style={styles.MealHeader}>
-                    <TouchableOpacity onPress={handleDinnerListPress}>
+
+
                     <Text style={styles.MealHeaderText}> Dinner </Text>
-                    </TouchableOpacity>
 
                     <Text style={styles.MealHeaderClock}>  <Ionicons
                         name={'time'}
@@ -168,8 +230,17 @@ function MealPlan() {
                 <View style={styles.MealContainer}>
 
 
+                    {/* Check if calendarByUserIdAndDate is an array before mapping */}
+                    {calendarDataFetched && Array.isArray(calendarByUserIdAndDate) && calendarByUserIdAndDate.map((calendarData) => (
+                        <View key={calendarData.id} style={styles.cardForDishes}>
+                            <Image source={{ uri: calendarData.imageURL }} style={styles.calendarImage} />
+                        </View>
+                    ))}
+
                         <View style={styles.card}>
+                            <TouchableOpacity onPress={handleDinnerListPress}>
                             <Text style={styles.addSign}> + </Text>
+                            </TouchableOpacity>
                         </View>
 
 
@@ -394,6 +465,35 @@ const styles = StyleSheet.create({
         lineHeight: 50,
         paddingTop: 12,
     },
+
+    cardForDishes: {
+        backgroundColor: 'green',
+        width: windowWidth * 0.175,
+        height: windowHeight * 0.085,
+        marginTop: 12,
+        borderRadius: 20,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+
+    calendarImage: {
+        borderRadius: 20,
+        width: '100%',
+        height: '100%',
+
+    },
+
+    imgText: {
+
+
+    }
 
 });
 

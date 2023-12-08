@@ -22,7 +22,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-function OptionSlider({ route, id }) {
+function OptionSlider() {
     const favoriteMealsCtx = useContext(FavoritesContext);
     const [selectedCategory, setSelectedCategory] = useState('popular');
     const [data, setData] = useState([]);
@@ -53,12 +53,9 @@ function OptionSlider({ route, id }) {
             if (responseData && responseData.length > 0) {
                 setData(responseData);
                 const firstMealId = responseData[0].dishId ||responseData[0].id ;
-                console.log('this is the meal id ' + firstMealId);
             } else {
-                console.log(`${category} data is empty or not in the expected format.`);
             }
         } catch (error) {
-            console.error(`Error fetching ${category} dishes:`, error);
         } finally {
             setLoading(false);
         }
@@ -74,7 +71,6 @@ function OptionSlider({ route, id }) {
                 mealId: mealId,
             });
         } else {
-            console.log('MealId is not available yet.');
         }
     }
 
@@ -115,6 +111,7 @@ function OptionSlider({ route, id }) {
                     <ScrollView horizontal={true} style={styles.container2}>
                         {data.map((meal) => (
                             <Pressable
+                                key={meal.dishId || meal.id}
                                 android_ripple={{ color: '#ccc' }}
                                 style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
                                 onPress={() => selectMealItemHandler(meal.dishId || meal.id)}>
@@ -168,12 +165,12 @@ const styles = StyleSheet.create({
     },
 
     selectedCard: {
-        borderBottomColor: 'white',
+        borderBottomColor: COLORS.darkMainColor,
         borderBottomWidth: 2,
     },
 
     selectedText: {
-        color: 'white',
+        color: COLORS.darkMainColor,
     },
 
     holderContainer2: {

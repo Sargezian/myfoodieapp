@@ -51,7 +51,6 @@ function Settings() {
 
 
     const handleSettingsItemPress = (item) => {
-        console.log(`Selected: ${item.title}`);
         // You can add navigation logic here to navigate to specific settings screens
 
         if (item.id === '1') {

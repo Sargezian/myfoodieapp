@@ -26,13 +26,11 @@ export default function Search() {
 
     const fetchDishes = async () => {
         try {
-            const response = await fetch(`http://10.0.2.2:8181/api/dish?${searchQuery}`);
+            const response = await fetch(`http://localhost:8181/api/dish?${searchQuery}`);
             const json = await response.json();
             setData(json);
-            console.log(json);
         } catch (error) {
             setError(error);
-            console.log(error);
         } finally {
             setIsLoading(false);
         }
@@ -65,7 +63,6 @@ export default function Search() {
                 mealId: mealId,
             });
         } else {
-            console.log('MealId is not available yet.');
         }
     }
     return (
@@ -127,21 +124,21 @@ const styles = StyleSheet.create({
     searchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'white',
-        paddingHorizontal: 10,
+        backgroundColor: '#ffebeb',
+        padding: 4,
         borderRadius: 10,
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
+        shadowRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        margin: 10,
+
     },
     itemContainer: {
         flexDirection: 'row', // Adjust the direction as needed
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#ffebeb',
         paddingHorizontal: 10,
         paddingVertical: 8, // Add vertical padding for spacing
         borderRadius: 10,
@@ -152,6 +149,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         marginVertical: 6, // Add vertical margin for spacing
+
     },
     icon: {
         marginRight: 10,

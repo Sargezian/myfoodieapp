@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
     StyleSheet,
     View,
@@ -9,14 +9,17 @@ import {
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
 import COLORS from "../../constants/colors";
+import { useDate } from '../../context/date-context'; // Import the context hook
 
 
 const { width } = Dimensions.get('window');
 
 export default function DatePicker() {
+    const { selectedDate, setNewDate } = useDate(); // Use the context hook
     const swiper = useRef();
     const [value, setValue] = useState(new Date());
     const [week, setWeek] = useState(0);
+
 
     const weeks = React.useMemo(() => {
         const start = moment().add(week, 'weeks').startOf('week');
@@ -32,6 +35,12 @@ export default function DatePicker() {
             });
         });
     }, [week]);
+
+    useEffect(() => {
+        const formattedDate = `${value.getFullYear()}-${(value.getMonth() + 1).toString().padStart(2, '0')}-${value.getDate().toString().padStart(2, '0')}`;
+        setNewDate(formattedDate); // Update the context when the date changes
+    }, [value, setNewDate]);
+
 
     return (
 
@@ -51,7 +60,9 @@ export default function DatePicker() {
                                 const newIndex = ind - 1;
                                 const newWeek = week + newIndex;
                                 setWeek(newWeek);
-                                setValue(moment(value).add(newIndex, 'week').toDate());
+                                const newDate = moment(value).add(newIndex, 'week').toDate();
+                                setValue(newDate);
+                                onDateChange(newDate); // Call the onDateChange prop
                                 swiper.current.scrollTo(1, false);
                             }, 100);
                         }}>
@@ -105,6 +116,7 @@ export default function DatePicker() {
 </>
 
     );
+
 }
 
 const styles = StyleSheet.create({

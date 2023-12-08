@@ -1,13 +1,25 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useState} from "react";
+import React, { createContext, useContext, useState } from 'react';
 
-const [date, setDate] = useState('');
+const DateContext = createContext();
 
-const getDateFromAsyncStorage = async () => {
-    try {
-        const storedDate = await AsyncStorage.getItem('date');
-        setDate(storedDate || '');
-    } catch (error) {
-        console.error('Error retrieving Date:', error);
+export const DateProvider = ({ children }) => {
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const setNewDate = (newDate) => {
+        setSelectedDate(newDate);
+    };
+
+    return (
+        <DateContext.Provider value={{ selectedDate, setNewDate }}>
+            {children}
+        </DateContext.Provider>
+    );
+};
+
+export const useDate = () => {
+    const context = useContext(DateContext);
+    if (!context) {
+        throw new Error('useDate must be used within a DateProvider');
     }
+    return context;
 };

@@ -37,6 +37,7 @@ import BreakFastListScreen from "./screens/tabs/BreakFastListScreen";
 import LunchListScreen from "./screens/tabs/LunchListScreen";
 import DinnerListScreen from "./screens/tabs/DinnerListScreen";
 import EditRatingScreen from "./screens/tabs/EditRatingScreen";
+import {DateProvider} from "./context/date-context";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -579,9 +580,11 @@ export default function App() {
         <>
             <StatusBar style="Dark"/>
             <AuthContextProvider>
-                <FavoritesContextProvider>
-                    {isLoading ? <Splash setIsLoading={setIsLoading} /> : <Root />}
-                </FavoritesContextProvider>
+                <DateProvider>
+                    <FavoritesContextProvider>
+                        {isLoading ? <Splash setIsLoading={setIsLoading}/> : <Root/>}
+                    </FavoritesContextProvider>
+                </DateProvider>
             </AuthContextProvider>
         </>
     );

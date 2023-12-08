@@ -35,16 +35,15 @@ function MealDetailScreen({ route, navigation }) {
     const [ratingByDishId, setRatingByDishIdData] = useState('');
 
 
-
     useFocusEffect(
         React.useCallback(() => {
             const fetchData = async () => {
                 try {
                     const data = await getReviewsByDishId(mealId);
                     setReviewByDishIdData(data);
-                    console.log(' rating + ' + mealId);
+
                 } catch (error) {
-                    console.error('Error fetching reviews by dishId:', error);
+
                 }
             };
             fetchData();
@@ -73,9 +72,9 @@ function MealDetailScreen({ route, navigation }) {
 
                 const data = await getRatingByDishId(mealId);
                 setRatingByDishIdData(data);
-                console.log(' rating + ' + mealId)
+
             } catch (error) {
-                console.error('Error fetching rating by dishId:', error);
+
             }
         };
         fetchRatingByDishId();
@@ -109,12 +108,12 @@ function MealDetailScreen({ route, navigation }) {
     useEffect(() => {
         const fetchMealById = async () => {
             try {
-                console.log(mealId)
+
                 const mealData = await getDishById(mealId);
-                console.log(mealData.ingredients);
+
                 setSelectedMeal(mealData);
             } catch (error) {
-                console.error('Error fetching meal:', error);
+
             }
         };
 
@@ -155,7 +154,7 @@ function MealDetailScreen({ route, navigation }) {
             const reviewRating = rating || 3;
 
             if (reviewByUserAndDishId.length > 0) {
-                console.log('You have already submitted a review.');
+
                 Alert.alert('Review Error', 'You have already submitted a review for this dish.');
                 return;
             }
@@ -167,10 +166,10 @@ function MealDetailScreen({ route, navigation }) {
 
             await addReviewToDish(userId, dishId, reviewRating, title, comment, dateCreated);
 
-            console.log('Review added to dish successfully!');
+
             setForceUpdateId((prevId) => prevId + 1);
         } catch (error) {
-            console.error('Error adding review to dish:', error.message);
+
         }
     };
 
@@ -224,13 +223,14 @@ function MealDetailScreen({ route, navigation }) {
                     <Text style={styles.descriptionText}>{selectedMeal.description}</Text>
                 </View>
 
-                <Subtitle>Nutritional Content</Subtitle>
-                <MealDetails
-                    nutritional_content={selectedMeal.nutritionalContent}
-                    textStyle={styles.detailText}
-                />
+
                 <View style={styles.listOuterContainer}>
                     <View style={styles.listContainer}>
+                        <Subtitle>Nutritional Content</Subtitle>
+                        <MealDetails
+                            nutritional_content={selectedMeal.nutritionalContent}
+                            textStyle={styles.detailText}
+                        />
                         <Subtitle>What you need</Subtitle>
                         {selectedMeal.ingredients && <List data={selectedMeal.ingredients} />}
                         <Subtitle>Steps - How to Cook</Subtitle>
@@ -262,7 +262,6 @@ function MealDetailScreen({ route, navigation }) {
                                             <View style={styles.Delete}>
                                                 <Text   onPress={() => {
                                                     handleRemoveDishByUserIdAndDishId(reviewByUserIdAndDishId.userId, reviewByUserIdAndDishId.id);
-                                                    console.log(reviewByUserIdAndDishId.userId, reviewByUserIdAndDishId.id)
                                                 }} style={styles.DeleteText}> Delete </Text>
                                             </View>
                                         </View>
@@ -383,7 +382,17 @@ const styles = StyleSheet.create({
 
     descriptionContainer: {
         paddingHorizontal: 20,
-        marginVertical: 8,
+        marginVertical: 16,
+        borderRadius: 6,
+        paddingVertical: 4,
+        marginHorizontal: 42,
+        backgroundColor: COLORS.white,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
+        width: '80%',
     },
 
     descriptionText: {
@@ -393,7 +402,7 @@ const styles = StyleSheet.create({
 
     listOuterContainer: {
         alignItems: 'center',
-        marginTop: -80
+
     },
     listContainer: {
         width: '80%',
