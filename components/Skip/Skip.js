@@ -13,7 +13,7 @@ const { width } = Dimensions.get("window");
 const slides = [
     {
         color: "#39ffb4",
-        picture: require("../../assets/2.png"),
+        picture: require("../../assets/breakfast.png"),
         aspectRatio: 500.5 / 429.5,
         TitleText: "Healthy Foods",
         text:
@@ -21,20 +21,20 @@ const slides = [
     },
     {
         color: "#ff4a6a",
-        picture: require("../../assets/1.png"),
+        picture: require("../../assets/lunch.png"),
         aspectRatio: 479.75 / 440.5,
-        TitleText: "Dessert Recipes",
+        TitleText: "Delicious Meals",
         text:
-            "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
+            "Hot or cold, our recipes can turn an average meal into a memorable event",
 
     },
     {
         color: "#ffb439",
-        picture: require("../../assets/3.png"),
-        aspectRatio: 100 / 80,
-        TitleText: "Delicious Drinks",
+        picture: require("../../assets/dinner.png"),
+        aspectRatio: 450.75 / 440.5,
+        TitleText: "Tasty Dishes",
         text:
-            "Sip in style with our top chef-inspired, easy-to-make beverages that redefine the art of drink crafting",
+            "Sip in style with our top Chef-inspired, easy-to-make meals",
     },
 ];
 
