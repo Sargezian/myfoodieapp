@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native';
 import { getDishByType } from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
-import { addDishToCalendar } from '../../../API/MealPlan/MealPlanAPI'; // Update the import path accordingly
+import {addDishToCalendar, removeCalendarByUserIdAndDishId} from '../../../API/MealPlan/MealPlanAPI'; // Update the import path accordingly
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDate} from "../../../context/date-context"; // Update the import path accordingly
 
@@ -54,6 +54,19 @@ const LunchList = () => {
         }
     };
 
+    const handleRemoveDish = async (dishId) => {
+        try {
+
+            const userId = email;
+
+            await removeCalendarByUserIdAndDishId(userId, dishId);
+            console.log('removing bl ' + userId, dishId)
+        } catch (error) {
+            console.error('Error removing dish:', error.message);
+        }
+    };
+
+
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -74,6 +87,17 @@ const LunchList = () => {
                                 }}
                             >
                                 +
+                            </Text>
+                        </View>
+
+                        <View style={styles.trashContainer}>
+                            <Text
+                                style={styles.removeSymbol}
+                                onPress={() => {
+                                    handleRemoveDish(lunch.id);
+                                }}
+                            >
+                                trash
                             </Text>
                         </View>
                     </View>
@@ -119,9 +143,29 @@ const styles = StyleSheet.create({
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
 
+    trashContainer: {
+        width: 40,
+        height: 40,
+        borderRadius: 60,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
     addSymbol: {
         fontSize: 22,
         fontWeight: 'bold'
+    },
+
+    removeSymbol: {
+        fontSize: 10,
+
     },
 
     dishName: {

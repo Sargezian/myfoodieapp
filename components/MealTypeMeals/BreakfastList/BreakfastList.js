@@ -5,13 +5,15 @@ import COLORS from "../../../constants/colors";
 import {addDishToCalendar, removeCalendarByUserIdAndDishId} from '../../../API/MealPlan/MealPlanAPI';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDate} from "../../../context/date-context";
-import {removeDishByUserIdAndReviewId} from "../../../API/Review/ReviewAPI"; // Update the import path accordingly
+import {Ionicons} from "@expo/vector-icons"; // Update the import path accordingly
 
-const BreakfastList = () => {
+const BreakfastList = ({ dish }) => {
     const [breakfastData, setBreakfastData] = useState([]);
     const [email, setEmail] = useState('');
     const { selectedDate, setNewDate } = useDate();
-    
+
+
+
     useEffect(() => {
         const fetchDishByType = async () => {
             try {
@@ -46,7 +48,7 @@ const BreakfastList = () => {
             const userId = email;
 
             const currentDateSelected = selectedDate.toString();
-
+            console.log(' data return ' + userId, dishId, currentDateSelected)
             await addDishToCalendar(userId, dishId, currentDateSelected);
 
         } catch (error) {
@@ -85,8 +87,7 @@ const BreakfastList = () => {
                                 onPress={() => {
                                     handleAddToCalendar(breakfast.id);
                                 }}
-                            >
-                                +
+                            > <Ionicons name="add-circle" size={30} color="green" />
                             </Text>
                         </View>
 
@@ -97,7 +98,7 @@ const BreakfastList = () => {
                                     handleRemoveDish(breakfast.id);
                                 }}
                             >
-                                trash
+                                <Ionicons name="checkmark-circle" size={30} color="green" />
                             </Text>
                         </View>
                     </View>

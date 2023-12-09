@@ -14,7 +14,7 @@ import { useDate } from '../../context/date-context'; // Import the context hook
 
 const { width } = Dimensions.get('window');
 
-export default function DatePicker() {
+export default function DatePicker({ onDateChange }) {
     const { selectedDate, setNewDate } = useDate(); // Use the context hook
     const swiper = useRef();
     const [value, setValue] = useState(new Date());
@@ -38,8 +38,11 @@ export default function DatePicker() {
 
     useEffect(() => {
         const formattedDate = `${value.getFullYear()}-${(value.getMonth() + 1).toString().padStart(2, '0')}-${value.getDate().toString().padStart(2, '0')}`;
-        setNewDate(formattedDate); // Update the context when the date changes
-    }, [value, setNewDate]);
+        setNewDate(formattedDate);
+        if (onDateChange) {
+            onDateChange(formattedDate);
+        }
+    }, [value, setNewDate, onDateChange]);
 
 
     return (

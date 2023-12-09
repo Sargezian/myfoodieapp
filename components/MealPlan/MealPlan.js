@@ -110,6 +110,7 @@ function MealPlan() {
     );
 
 
+
     return (
 
         <View style={styles.Container}>
@@ -119,7 +120,7 @@ function MealPlan() {
                     <Text style={styles.title}>Manage {'\n'}your meals <Icon name="pencil-alt" size={30} color='#000' /></Text>
                 </View>
 
-                <DatePicker/>
+                <DatePicker onDateChange={onDateChange} />
 
             </View>
 
