@@ -38,7 +38,6 @@ import LunchListScreen from "./screens/tabs/LunchListScreen";
 import DinnerListScreen from "./screens/tabs/DinnerListScreen";
 import EditRatingScreen from "./screens/tabs/EditRatingScreen";
 import {DateProvider} from "./context/date-context";
-import {DishProvider} from "./context/calendarDish-context";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
