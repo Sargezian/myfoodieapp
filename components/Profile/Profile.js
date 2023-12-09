@@ -1,84 +1,126 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, Platform, Linking,Image} from 'react-native';
-import {AuthContext} from "../../context/auth-context";
-import COLORS from "../../constants/colors";
-import {Ionicons} from "@expo/vector-icons";
+import React, { useContext, useEffect, useState } from 'react';
+import {
+    View,
+    Text,
+    FlatList,
+    StyleSheet,
+    TouchableOpacity,
+    ActivityIndicator,
+    Image,
+    Linking,
+} from 'react-native';
+import { AuthContext } from '../../context/auth-context';
+import COLORS from '../../constants/colors';
+import { Ionicons } from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
-import FeatherIcon from 'react-native-vector-icons/Feather';
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
-
-
+import {
+    getFollowerByFollowerId,
+    getFollowerByUserId,
+} from '../../API/Followers/FollowersAPI';
+import {getReviewByUserIdAndDishId} from "../../API/Review/ReviewAPI";
 
 const settingsData = [
     { id: '1', title: 'Connect with Creator on Linkedin', subtitle: 'Lennart Sargezian' },
     { id: '2', title: 'Help', subtitle: 'Report technical issues or suggest new features' },
-    { id: '3', title: 'Signout', subtitle: 'Signout from you re account' },
+    { id: '3', title: 'Signout', subtitle: 'Signout from your account' },
     { id: '4', title: 'Dark Mode', subtitle: 'Dark Mode' },
-    { id: '5', title: 'userprofile', subtitle: 'user' },
-
-    // Add more settings options with titles and subtitles
+    { id: '5', title: 'User List', subtitle: 'Find all users and see there favorite list' },
 ];
 
 function Settings() {
-
     const AuthCxt = useContext(AuthContext);
-    const navigation = useNavigation(); // Use useNavigation hook to get the navigation object
+    const navigation = useNavigation();
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [following, setFollowing] = useState([]);
+    const [followers, setFollowers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const getEmailFromAsyncStorage = async () => {
+        try {
+            const storedEmail = await AsyncStorage.getItem('email');
+            setEmail(storedEmail || '');
+        } catch (error) {
+            console.error('Error retrieving email:', error);
+        }
+    };
 
     const getUsernameFromAsyncStorage = async () => {
         try {
             const storedUsername = await AsyncStorage.getItem('username');
-            setUsername(storedUsername || ''); // Set the username state
+            setUsername(storedUsername || '');
         } catch (error) {
             console.error('Error retrieving username:', error);
         }
     };
 
     useEffect(() => {
+        getEmailFromAsyncStorage();
         getUsernameFromAsyncStorage();
     }, []);
+
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchFollowing = async () => {
+                try {
+                    const data = await getFollowerByFollowerId(email);
+                    setFollowing(data);
+                } catch (error) {
+                    console.error('Error fetching following:', error);
+                }
+            };
+            fetchFollowing();
+        }, [email])
+    );
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchFollowers = async () => {
+                try {
+                    const data = await getFollowerByUserId(email);
+                    setFollowers(data);
+                } catch (error) {
+                    console.error('Error fetching followers:', error);
+                }
+            };
+            fetchFollowers();
+        }, [email])
+    );
+
+    useEffect(() => {
+        setLoading(false);
+    }, [username, email, following, followers]);
+
     const handleFollowersPress = () => {
-        // Navigate to FollowersListScreen.js
-        navigation.navigate('Followers');
+            navigation.navigate('Followers',{ id:email});
+
+
     };
 
     const handleFollowingsPress = () => {
-        // Navigate to FollowersListScreen.js
-        navigation.navigate('Following');
+        navigation.navigate('Following', { id: email });
     };
 
-
     const handleSettingsItemPress = (item) => {
-        // You can add navigation logic here to navigate to specific settings screens
-
         if (item.id === '1') {
             Linking.openURL('https://www.linkedin.com/in/sargezian/');
-        }
-
-        else if (item.id === '2') {
+        } else if (item.id === '2') {
             sendReportEmail();
-        }
-
-        else if (item.id === '3') {
+        } else if (item.id === '3') {
             AuthCxt.logout();
+        } else if (item.id === '4') {
+            // Handle Dark Mode
+        } else if (item.id === '5') {
+            navigation.navigate('UserList');
         }
-        else if (item.id === '4') {
-
-        }
-        else if (item.id === '5') {
-            navigation.navigate('UserProfile');
-        }
-
-        else {
-            // You can add navigation logic here for other items
-        }
-
     };
 
     function sendReportEmail() {
-        // Use MailComposer to open the email composer with a pre-filled email address
         MailComposer.composeAsync({
             recipients: ['279961@viauc.dk'],
             subject: 'Report',
@@ -96,7 +138,7 @@ function Settings() {
 
     const renderSettingsItem = ({ item }) => (
         <TouchableOpacity
-            style={[styles.settingItem, item.style]} // Apply custom styles if provided
+            style={[styles.settingItem, item.style]}
             onPress={() => handleSettingsItemPress(item)}
         >
             <View>
@@ -107,45 +149,41 @@ function Settings() {
     );
 
     return (
-
         <View style={styles.container}>
-
+            {loading && (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large" color={COLORS.primary} />
+                </View>
+            )}
 
             <View style={styles.profileContainer}>
-
                 <View style={styles.profileImage}>
                     <Image
-                        source={{ uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}
+                        source={{
+                            uri:
+                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                        }}
                         style={{ width: 100, height: 100, borderRadius: 50 }}
                     />
-
                 </View>
 
                 <View style={styles.nameContainer}>
-
                     <Text style={styles.name}> {username}</Text>
-
                 </View>
 
                 <View style={styles.followerContainer}>
-
                     <TouchableOpacity onPress={handleFollowersPress}>
-                        <Text> 0 followers </Text>
+                        <Text> {followers.length} followers </Text>
                     </TouchableOpacity>
                     <Text> · </Text>
                     <TouchableOpacity onPress={handleFollowingsPress}>
-                        <Text> 1 following</Text>
+                        <Text> {following.length} following</Text>
                     </TouchableOpacity>
-
                 </View>
 
-
                 <Text style={styles.email}>
-
-                    <Text> Email</Text>
-
+                    <Text>Email: {email}</Text>
                 </Text>
-
             </View>
 
             <View style={styles.profileIconContainer}>
@@ -167,7 +205,6 @@ function Settings() {
             </View>
 
             <View style={styles.listContainer}>
-
                 <FlatList
                     data={settingsData}
                     renderItem={renderSettingsItem}
@@ -175,7 +212,6 @@ function Settings() {
                     contentContainerStyle={styles.settingsList}
                 />
             </View>
-
         </View>
     );
 }
@@ -200,12 +236,10 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
 
-
     email: {
         flex: 1,
         marginVertical: 5,
     },
-
 
     profileIconContainer: {
         flex: 0.30,
@@ -230,9 +264,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffebeb',
         shadowColor: 'black',
         shadowOpacity: 0.10,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    },
+
+    loadingContainer: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
     },
 
     settingsList: {

@@ -1,23 +1,21 @@
 import { View, FlatList, StyleSheet } from 'react-native';
-import MealItem from '../UserProfile/MealFavoriteItem'
-import {FavoritesContext} from "../../context/favorites-context";
-import {useContext} from "react";
-import {FontAwesome, Ionicons} from "@expo/vector-icons";
+import MealItem from '../UserProfile/MealFavoriteItem';
+import { FavoritesContext } from "../../context/favorites-context";
+import { useContext } from "react";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 function MealFavoriteList({ items }) {
-
     const favoriteMealsCtx = useContext(FavoritesContext);
-
 
     function renderMealItem(itemData) {
         const item = itemData.item;
 
         const mealItemProps = {
-            id: item.id,
+            id: item.dishId.toString(),
             name: item.name,
-            imageUrl: item.imageUrl,
-            meal_type: item.meal_type,
-            time_estimate: item.time_estimate,
+            imageUrl: item.imageURL,
+            meal_type: item.mealType,
+            time_estimate: item.timeEstimate,
             rating: item.rating,
             review: item.review,
         };
@@ -29,7 +27,6 @@ function MealFavoriteList({ items }) {
         return (
             <View style={styles.card}>
                 <MealItem {...mealItemProps} />
-
             </View>
         );
     }
@@ -38,7 +35,7 @@ function MealFavoriteList({ items }) {
         <View style={styles.container}>
             <FlatList
                 data={items}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.dishId.toString()}
                 renderItem={renderMealItem}
             />
         </View>
@@ -56,12 +53,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-
     card: {
         position: 'relative',
         borderRadius: 8,
         backgroundColor: '#fff',
-        marginBottom: 16,
+        marginBottom: 20, // Add margin at the bottom
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -71,6 +67,4 @@ const styles = StyleSheet.create({
         shadowRadius: 1.41,
         elevation: 2,
     },
-
-
 });

@@ -26,7 +26,7 @@ export default function Search() {
 
     const fetchDishes = async () => {
         try {
-            const response = await fetch(`http://localhost:8181/api/dish?${searchQuery}`);
+            const response = await fetch(`http://10.0.2.2:8181/api/dish?${searchQuery}`);
             const json = await response.json();
             setData(json);
         } catch (error) {

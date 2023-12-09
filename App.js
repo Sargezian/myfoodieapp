@@ -38,6 +38,7 @@ import LunchListScreen from "./screens/tabs/LunchListScreen";
 import DinnerListScreen from "./screens/tabs/DinnerListScreen";
 import EditRatingScreen from "./screens/tabs/EditRatingScreen";
 import {DateProvider} from "./context/date-context";
+import UserListScreen from "./screens/tabs/UserListScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -514,6 +515,14 @@ function AuthenticatedStack() {
                     component={UserProfileScreen}
                     options={{
                         headerTitle: "",
+                    }}
+                />
+
+                <Stack.Screen
+                    name="UserList"
+                    component={UserListScreen}
+                    options={{
+                        headerTitle: "User List",
                     }}
                 />
 

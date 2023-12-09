@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8181/api';
+const API_BASE_URL = 'http://10.0.2.2:8181/api';
 
 export const getAllCategories = async () => {
     try {
