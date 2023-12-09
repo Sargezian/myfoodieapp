@@ -128,6 +128,10 @@ export default function UserProfile({ userId }) {
     };
     const handleFollowToggle = async () => {
         try {
+            if (email === userData.id) {
+                Alert.alert('Error', 'You cannot follow yourself.');
+                return;
+            }
             if (isFollowing) {
                 // Unfollow
                 await removeFollowerByFollowerIdAndUserId(email, userData.id);
