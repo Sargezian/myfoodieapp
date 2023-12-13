@@ -39,6 +39,7 @@ import DinnerListScreen from "./screens/tabs/DinnerListScreen";
 import EditRatingScreen from "./screens/tabs/EditRatingScreen";
 import {DateProvider} from "./context/date-context";
 import UserListScreen from "./screens/tabs/UserListScreen";
+import * as Notifications from 'expo-notifications';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -575,6 +576,13 @@ function Root() {
     return <Navigation />;
 }
 
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+});
 export default function App() {
 
     const [isLoading, setIsLoading] = useState(true);

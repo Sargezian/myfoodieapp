@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native';
-import { getDishByType } from '../../../API/Dish/DishAPI';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, ScrollView, Image, Platform, ActivityIndicator} from 'react-native';
+import {getDishByType} from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
-import {addDishToCalendar, removeCalendarByUserIdAndDishId} from '../../../API/MealPlan/MealPlanAPI'; // Update the import path accordingly
+import {
+    addDishToCalendar,
+    getCalendarByUserIdAndDate,
+    removeCalendarByUserIdAndDishId
+} from '../../../API/MealPlan/MealPlanAPI'; // Update the import path accordingly
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useDate} from "../../../context/date-context"; // Update the import path accordingly
+import {useDate} from "../../../context/date-context";
+import {Ionicons} from "@expo/vector-icons"; // Update the import path accordingly
 
 
-const DinnerList = () => {
+const DinnerList = ({route, navigation}) => {
     const [dinnerData, setDinnerData] = useState([]);
     const [email, setEmail] = useState('');
-    const { selectedDate, setNewDate } = useDate();
+    const {selectedDate, setNewDate} = useDate();
+    const [calendarData, setCalendarData] = useState([]);
+    const {date} = route.params;
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -25,6 +33,22 @@ const DinnerList = () => {
 
         fetchDishByType();
     }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getCalendarByUserIdAndDate(email, date);
+                setCalendarData(data);
+            } catch (error) {
+                console.error('Error fetching Calendar data:', error);
+            } finally {
+                setLoading(false); // Set loading to false when the data fetching is complete
+            }
+        };
+
+        fetchData();
+        console.log('calendarDta', calendarData);
+    }, [email, date]);
 
     const getEmailFromAsyncStorage = async () => {
         try {
@@ -42,12 +66,18 @@ const DinnerList = () => {
 
     const handleAddToCalendar = async (dishId) => {
         try {
+            if (calendarData.length >=  0) {
+                if (calendarData.filter((calendarData) => calendarData.mealType === 'Dinner').length >= 3) {
+                    alert('You can only have 3 Dinner meals per day!');
+                    return;
+                }
+                const userId = email;
 
-            const userId = email;
+                const currentDateSelected = selectedDate.toString();
 
-            const currentDateSelected = selectedDate.toString();
-
-            await addDishToCalendar(userId, dishId, currentDateSelected);
+                await addDishToCalendar(userId, dishId, currentDateSelected);
+                navigation.goBack();
+            }
 
         } catch (error) {
             console.error('Error adding dish to calendar:', error.message);
@@ -60,12 +90,20 @@ const DinnerList = () => {
             const userId = email;
 
             await removeCalendarByUserIdAndDishId(userId, dishId);
+            navigation.goBack();
             console.log('removing bl ' + userId, dishId)
         } catch (error) {
             console.error('Error removing dish:', error.message);
         }
     };
 
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={COLORS.darkMainColor} />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -79,30 +117,27 @@ const DinnerList = () => {
                             <Text style={styles.details}>Nutritional Content:</Text>
                             <Text style={styles.nutritionalContent}>{dinner.nutritionalContent}</Text>
                         </View>
-                        <View style={styles.TopRightContainer}>
-                            <Text
-                                style={styles.addSymbol}
-                                onPress={() => {
-                                    handleAddToCalendar(dinner.id);
-                                }}
-                            >
-                                +
-                            </Text>
+                        <View style={styles.buttonContainer}>
+                            {calendarData.length > 0 && calendarData.some((item) => item.dishId === dinner.id) ? (
+                                <Text
+                                    style={styles.removeSymbol}
+                                    onPress={() => {
+                                        handleRemoveDish(dinner.id);
+                                    }}
+                                >
+                                    <Ionicons name="trash-outline" size={30} />
+                                </Text>
+                            ) : (
+                                <Text
+                                    style={styles.addSymbol}
+                                    onPress={() => {
+                                        handleAddToCalendar(dinner.id);
+                                    }}
+                                >
+                                    <Ionicons name="add-outline" size={30} />
+                                </Text>
+                            )}
                         </View>
-
-
-                        <View style={styles.trashContainer}>
-                            <Text
-                                style={styles.removeSymbol}
-                                onPress={() => {
-                                    handleRemoveDish(dinner.id);
-                                }}
-                            >
-                                trash
-                            </Text>
-                        </View>
-
-
                     </View>
                 ))}
             </ScrollView>
@@ -141,7 +176,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },
@@ -156,7 +191,7 @@ const styles = StyleSheet.create({
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     },

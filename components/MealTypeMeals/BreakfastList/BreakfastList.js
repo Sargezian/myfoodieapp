@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, Platform} from 'react-native';
-import { getDishByType } from '../../../API/Dish/DishAPI';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, Image, Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {getDishByType} from '../../../API/Dish/DishAPI';
 import COLORS from "../../../constants/colors";
-import {addDishToCalendar, removeCalendarByUserIdAndDishId} from '../../../API/MealPlan/MealPlanAPI';
+import {
+    addDishToCalendar,
+    getCalendarByUserIdAndDate,
+    removeCalendarByUserIdAndDishId
+} from '../../../API/MealPlan/MealPlanAPI';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDate} from "../../../context/date-context";
 import {Ionicons} from "@expo/vector-icons"; // Update the import path accordingly
 
-const BreakfastList = ({ dish }) => {
+const BreakfastList = ({ route, navigation }) => {
     const [breakfastData, setBreakfastData] = useState([]);
     const [email, setEmail] = useState('');
-    const { selectedDate, setNewDate } = useDate();
-
+    const { selectedDate } = useDate();
+    const [calendarData, setCalendarData] = useState([]);
+    const { date } = route.params;
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -26,6 +32,26 @@ const BreakfastList = ({ dish }) => {
         fetchDishByType();
     }, []);
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getCalendarByUserIdAndDate(email, date);
+                setCalendarData(data);
+            } catch (error) {
+                console.error('Error fetching Calendar data:', error);
+            } finally {
+                setLoading(false); // Set loading to false when the data fetching is complete
+            }
+        };
+        fetchData();
+        console.log('calendarDta', calendarData)
+    }, [email, date]);
+
+    useEffect(() => {
+        getEmailFromAsyncStorage();
+    }, []);
+
     const getEmailFromAsyncStorage = async () => {
         try {
             const storedEmail = await AsyncStorage.getItem('email');
@@ -35,21 +61,19 @@ const BreakfastList = ({ dish }) => {
         }
     };
 
-    useEffect(() => {
-        getEmailFromAsyncStorage();
-    }, []);
-
-
-
-
     const handleAddToCalendar = async (dishId) => {
         try {
-
-            const userId = email;
-
-            const currentDateSelected = selectedDate.toString();
-            console.log(' data return ' + userId, dishId, currentDateSelected)
-            await addDishToCalendar(userId, dishId, currentDateSelected);
+            if (calendarData.length >= 0){
+                if (calendarData.filter((calendarData) => calendarData.mealType === 'Breakfast').length >= 3) {
+                    alert('You can only have 3 Breakfast meals per day!');
+                    return;
+                }
+                const userId = email;
+                const currentDateSelected = selectedDate.toString();
+                console.log('currentDateSelected', currentDateSelected);
+                await addDishToCalendar(userId, dishId, currentDateSelected);
+                navigation.goBack(); // Navigate back after adding the dish
+            }
 
         } catch (error) {
             console.error('Error adding dish to calendar:', error.message);
@@ -58,16 +82,21 @@ const BreakfastList = ({ dish }) => {
 
     const handleRemoveDish = async (dishId) => {
         try {
-
             const userId = email;
-
             await removeCalendarByUserIdAndDishId(userId, dishId);
-            console.log('removing bl ' + userId, dishId)
+            navigation.goBack(); // Navigate back after removing the dish
         } catch (error) {
             console.error('Error removing dish:', error.message);
         }
     };
 
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={COLORS.darkMainColor} />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -81,25 +110,26 @@ const BreakfastList = ({ dish }) => {
                             <Text style={styles.details}>Nutritional Content:</Text>
                             <Text style={styles.nutritionalContent}>{breakfast.nutritionalContent}</Text>
                         </View>
-                        <View style={styles.TopRightContainer}>
-                            <Text
-                                style={styles.addSymbol}
-                                onPress={() => {
-                                    handleAddToCalendar(breakfast.id);
-                                }}
-                            > <Ionicons name="add-circle" size={30} color="green" />
-                            </Text>
-                        </View>
-
-                        <View style={styles.trashContainer}>
-                            <Text
-                                style={styles.removeSymbol}
-                                onPress={() => {
-                                    handleRemoveDish(breakfast.id);
-                                }}
-                            >
-                                <Ionicons name="checkmark-circle" size={30} color="green" />
-                            </Text>
+                        <View style={styles.buttonContainer}>
+                            {calendarData.length > 0 && calendarData.some((item) => item.dishId === breakfast.id) ? (
+                                <Text
+                                    style={styles.removeSymbol}
+                                    onPress={() => {
+                                        handleRemoveDish(breakfast.id);
+                                    }}
+                                >
+                                    <Ionicons name="trash-outline" size={30} />
+                                </Text>
+                            ) : (
+                                <Text
+                                    style={styles.addSymbol}
+                                    onPress={() => {
+                                        handleAddToCalendar(breakfast.id);
+                                    }}
+                                >
+                                    <Ionicons name="add-outline" size={30} />
+                                </Text>
+                            )}
                         </View>
                     </View>
                 ))}
@@ -189,6 +219,11 @@ const styles = StyleSheet.create({
     nutritionalContent: {
         fontSize: 12,
         color: '#555',
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
